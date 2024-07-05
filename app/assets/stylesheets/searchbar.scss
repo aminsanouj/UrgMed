@@ -1,0 +1,35 @@
+body {
+  padding-top: 75px;
+}
+
+.search-container {
+  width: 490px;
+  display: block;
+  margin: 0 auto 20px auto;
+  position: relative;
+
+  input#search-bar {
+    width: 80%;
+    height: 45px;
+    padding: 0 60px 0 20px; // Espace laissé pour l'icône
+    font-size: 1rem;
+    border: 1px solid #D0CFCE;
+    outline: none;
+  }
+
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 15px; // Distance de l'icône depuis le bord droit de l'input
+    transform: translateY(-50%);
+    width: 75px;
+    height: 75px;
+  }
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
