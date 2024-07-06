@@ -13,5 +13,14 @@
  *= require_tree .
  *= require_self
  */
+
+ @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+/* Apply Inter font to all elements */
+body {
+  font-family: 'Inter', sans-serif;
+}
+
  @import "navbar";
  @import "searchbar";
+ @import "homepage";
