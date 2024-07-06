@@ -64,7 +64,7 @@ Professional.create([
     first_name: "Luc",
     last_name: "Martin",
     speciality: "Cardiologue",
-    address: "5 Place du Coeur, 31000 Toulouse",
+    address: "5 Place du Coeur, 31000 Paris",
     latitude: 43.603722,
     longitude: 1.441524,
     phone_number: "05 61 02 02 02",

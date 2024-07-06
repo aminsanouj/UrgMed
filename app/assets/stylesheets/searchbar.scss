@@ -11,15 +11,25 @@
     font-size: 1rem;
     border: 1px solid #D0CFCE;
     outline: none;
+    padding-right: 30px; /* Ajouter un rembourrage à droite pour faire de la place pour la croix */
   }
 
   .search-icon {
     position: absolute;
     top: 50%;
-    right: 15px; // Distance de l'icône depuis le bord droit de l'input
+    right: 30px; // Distance de l'icône depuis le bord droit de l'input
     transform: translateY(-50%);
     width: 75px;
     height: 75px;
+  }
+
+  .clear-icon {
+    position: absolute;
+    right: 105px; /* Positionner la croix à droite de l'input */
+    top: 50%; /* Centrer verticalement la croix */
+    transform: translateY(-50%); /* Centrer verticalement la croix */
+    cursor: pointer; /* Ajouter un curseur de pointeur pour indiquer que la croix est cliquable */
+    z-index: 1; /* Définir le z-index pour que la croix apparaisse au-dessus de l'input */
   }
 }
 
