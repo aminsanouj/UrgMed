@@ -77,7 +77,7 @@ Professional.create([
   {
     first_name: "Jean",
     last_name: "Duparc",
-    speciality: "Pédiatre",
+    speciality: "Médecin - Pédiatre",
     address: "15 Rue des Enfants, 31000 Toulouse",
     latitude: 43.601234,
     longitude: 1.449876,
@@ -89,7 +89,7 @@ Professional.create([
   {
     first_name: "Marie",
     last_name: "Durand",
-    speciality: "Gynécologue",
+    speciality: "Médecin - Gynécologue",
     address: "7 Rue de la Santé, 75015 Paris",
     latitude: 48.847334,
     longitude: 2.301944,
@@ -101,7 +101,7 @@ Professional.create([
   {
     first_name: "Luc",
     last_name: "Martin",
-    speciality: "Cardiologue",
+    speciality: "Médecin - Cardiologue",
     address: "21 Avenue du Coeur, 69003 Lyon",
     latitude: 45.764043,
     longitude: 4.835659,
@@ -113,7 +113,7 @@ Professional.create([
   {
     first_name: "Sophie",
     last_name: "Bernard",
-    speciality: "Dermatologue",
+    speciality: "Médecin - Dermatologue",
     address: "10 Boulevard de la Peau, 13001 Marseille",
     latitude: 43.296482,
     longitude: 5.369780,
@@ -125,7 +125,7 @@ Professional.create([
   {
     first_name: "Olivier",
     last_name: "Gauthier",
-    speciality: "ORL",
+    speciality: "Médecin - ORL",
     address: "6 Rue de l'Ouïe, 33000 Bordeaux",
     latitude: 44.837789,
     longitude: -0.579180,

@@ -1,0 +1,22 @@
+.container-wrapper {
+  display: flex;
+  justify-content: space-between; /* Pour ajouter de l'espace entre les deux containers */
+  gap: 20px; /* Espacement entre les colonnes */
+}
+
+.container-map {
+  background-color: #ffcccb; /* Rouge clair pour container-map */
+  padding: 20px;
+  flex: 1.5; /* Chaque container occupe une part égale de l'espace disponible */
+  margin-bottom: 20px;
+  margin-left: 20px; /* Si vous voulez conserver le margin-bottom */
+}
+
+.container-results {
+  background-color: #add8e6; /* Bleu clair pour container-results */
+  padding: 20px;
+  flex: 1; /* Chaque container occupe une part égale de l'espace disponible */
+  margin-bottom: 20px; /* Si vous voulez conserver le margin-bottom */
+   /* Margin à gauche de container-results */
+  margin-right: 20px;
+}
