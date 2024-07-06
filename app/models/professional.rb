@@ -1,4 +1,3 @@
-# app/models/professional.rb
 class Professional < ApplicationRecord
   include PgSearch::Model
 
