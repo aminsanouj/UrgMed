@@ -6,7 +6,7 @@ class PagesController < ApplicationController
 
   def search
     @search_query = params[:query]
-    @professionals = Professional.where("speciality LIKE ?", "%#{@search_query}%")
+    @professionals = Professional.search_by_speciality(@search_query)
   end
 
   def show

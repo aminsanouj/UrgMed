@@ -1,14 +1,13 @@
 <h1>Pages#search</h1>
 <p>Find me in app/views/pages/search.html.erb</p>
 
-<%= render partial: 'partials/searchbar_city' %>
 <%= render partial: 'partials/searchbar_pro' %>
 
 <% if @professionals.any? %>
   <h2>Search Results for "<%= @search_query %>":</h2>
   <ul>
     <% @professionals.each do |professional| %>
-      <li><%= professional.name %> - <%= professional.speciality %></li>
+      <li><%= professional.first_name %> <%= professional.last_name %> - <%= professional.speciality %></li>
     <% end %>
   </ul>
 <% else %>
