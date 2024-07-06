@@ -17,6 +17,7 @@ export default class extends Controller {
   connect() {
     this.inputTarget.addEventListener("click", this.handleClick.bind(this));
     this.inputTarget.addEventListener("input", this.handleInput.bind(this));
+    this.resultsTarget.addEventListener("click", this.handleResultClick.bind(this));
   }
 
   handleClick(event) {
@@ -28,6 +29,13 @@ export default class extends Controller {
     const filteredProfessions = professions.filter(profession => removeAccents(profession).startsWith(query));
 
     this.displaySuggestions(filteredProfessions);
+  }
+
+  handleResultClick(event) {
+    if (event.target.tagName === "LI") {
+      this.inputTarget.value = event.target.innerText;
+      this.submitForm();
+    }
   }
 
   displaySuggestions(professions) {
