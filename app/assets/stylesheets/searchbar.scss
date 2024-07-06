@@ -39,3 +39,10 @@ button {
   padding: 0;
   cursor: pointer;
 }
+
+.list-group {
+  position: absolute;
+  z-index: 1000;
+  max-height: 10rem;
+  overflow-y: scroll;
+}
