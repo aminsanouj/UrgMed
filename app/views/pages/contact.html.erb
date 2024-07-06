@@ -1,2 +1,32 @@
 <h1>Pages#contact</h1>
 <p>Find me in app/views/pages/contact.html.erb</p>
+
+<div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <%= form_with(url: contact_path, method: :post) do |form| %>
+      <div class="formbold-mb-5">
+        <%= form.label :name, class: "formbold-form-label" %>
+        <%= form.text_field :name, placeholder: "Full Name", class: "formbold-form-input" %>
+      </div>
+
+      <div class="formbold-mb-5">
+        <%= form.label :email, class: "formbold-form-label" %>
+        <%= form.email_field :email, placeholder: "Enter your email", class: "formbold-form-input" %>
+      </div>
+
+      <div class="formbold-mb-5">
+        <%= form.label :subject, class: "formbold-form-label" %>
+        <%= form.text_field :subject, placeholder: "Enter your subject", class: "formbold-form-input" %>
+      </div>
+
+      <div class="formbold-mb-5">
+        <%= form.label :message, class: "formbold-form-label" %>
+        <%= form.text_area :message, rows: 6, placeholder: "Type your message", class: "formbold-form-input" %>
+      </div>
+
+      <div>
+        <%= form.submit "Submit", class: "formbold-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
