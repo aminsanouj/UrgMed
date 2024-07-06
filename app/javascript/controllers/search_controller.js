@@ -12,23 +12,28 @@ const removeAccents = (str) => {
 };
 
 export default class extends Controller {
-  static targets = ["input", "results"];
+  static targets = ["input", "results", "clear"];
 
   connect() {
     this.inputTarget.addEventListener("click", this.handleClick.bind(this));
     this.inputTarget.addEventListener("input", this.handleInput.bind(this));
-    this.resultsTarget.addEventListener("click", this.handleResultClick.bind(this));
+    if (this.hasResultsTarget) {
+      this.resultsTarget.addEventListener("click", this.handleResultClick.bind(this));
+    }
   }
 
   handleClick(event) {
-    this.displaySuggestions(professions);
+    if (this.hasResultsTarget) {
+      this.displaySuggestions(professions);
+    }
   }
 
   handleInput(event) {
-    const query = removeAccents(event.target.value);
-    const filteredProfessions = professions.filter(profession => removeAccents(profession).startsWith(query));
-
-    this.displaySuggestions(filteredProfessions);
+    if (this.hasResultsTarget) {
+      const query = removeAccents(event.target.value);
+      const filteredProfessions = professions.filter(profession => removeAccents(profession).startsWith(query));
+      this.displaySuggestions(filteredProfessions);
+    }
   }
 
   handleResultClick(event) {
@@ -39,13 +44,18 @@ export default class extends Controller {
   }
 
   displaySuggestions(professions) {
-    const resultsHTML = professions.map(profession => `<li class="list-group-item" role="option">${profession}</li>`).join("");
-    this.resultsTarget.innerHTML = resultsHTML;
+    if (this.hasResultsTarget) {
+      const resultsHTML = professions.map(profession => `<li class="list-group-item" role="option">${profession}</li>`).join("");
+      this.resultsTarget.innerHTML = resultsHTML;
+    }
   }
 
   clear() {
     this.inputTarget.value = "";
-    this.resultsTarget.innerHTML = "";
+    if (this.hasResultsTarget) {
+      this.resultsTarget.innerHTML = "";
+    }
+    this.submitForm(); // Ajouter cette ligne pour soumettre le formulaire après avoir vidé le champ
   }
 
   submitForm() {
