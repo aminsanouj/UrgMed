@@ -21,7 +21,9 @@ class PagesController < ApplicationController
     @markers = @professionals.geocoded.map do |professional|
       {
         lat: professional.latitude,
-        lng: professional.longitude
+        lng: professional.longitude,
+        info_window_html: render_to_string(partial: "partials/info_window", locals: {professional: professional}),
+        marker_html: render_to_string(partial: "partials/marker", locals: {professional: professional})
       }
     end
   end

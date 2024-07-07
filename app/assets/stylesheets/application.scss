@@ -21,8 +21,7 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
- @import "navbar";
- @import "searchbar";
  @import "homepage";
  @import "contact";
  @import "search";
+ @import "components/*";
