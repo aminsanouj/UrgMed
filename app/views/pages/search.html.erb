@@ -2,7 +2,12 @@
 <%= render partial: 'partials/searchbar_pro', locals: { query_city: @search_query_city } %>
 
 <div class="container-wrapper">
-  <div class="container-map"></div>
+  <div class="container-map"
+    style="width: 100%; height: 480px;"
+    data-controller="map"
+    data-map-markers-value="<%= @markers.to_json %>"
+    data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
 
   <div class="container-results">
     <% if @professionals.any? %>

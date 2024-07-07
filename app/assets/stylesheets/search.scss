@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between; /* Pour ajouter de l'espace entre les deux containers */
   gap: 20px; /* Espacement entre les colonnes */
+  max-height: 500px;
 }
 
 .container-map {

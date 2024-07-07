@@ -17,6 +17,13 @@ class PagesController < ApplicationController
     if @search_query_city.present?
       @professionals = @professionals.search_by_city(@search_query_city)
     end
+
+    @markers = @professionals.geocoded.map do |professional|
+      {
+        lat: professional.latitude,
+        lng: professional.longitude
+      }
+    end
   end
 
   def show

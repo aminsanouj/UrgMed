@@ -15,4 +15,7 @@ class Professional < ApplicationRecord
                     tsearch: { prefix: true, any_word: true }
                   },
                   ignoring: :accents
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end
