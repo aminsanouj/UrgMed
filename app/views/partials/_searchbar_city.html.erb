@@ -1,6 +1,7 @@
 <form class="search-container" action="/search" method="get" data-controller="search">
-  <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-search-target="input">
-  <input type="hidden" name="query_pro" value="<%= params[:query_pro] %>">
-  <button type="submit"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></button>
-  <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", target: "search.clear" } %>
+  <%= simple_form_for :search, html: { class: 'form-inline' } do |f| %>
+    <%= f.input :address, label: false, input_html: { id: "search-bar", name: "query_city", value: params[:query_city], placeholder: "Dans quelle ville êtes-vous ?", data: { search_target: "input", address_autocomplete_target: "address" } }, wrapper: false, wrapper_html: { data: { controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"] } } %>
+    <button type="submit"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></button>
+    <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", target: "search.clear" } %>
+  <% end %>
 </form>

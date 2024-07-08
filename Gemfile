@@ -31,6 +31,8 @@ gem 'sassc-rails'
 gem "pg_search"
 
 gem 'geocoder'
+
+gem 'simple_form'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -55,7 +57,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mswin mswin64 mingw x64_mingw ]
 end
 
-group :development do
+group :development simple_form.rbdo
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 
