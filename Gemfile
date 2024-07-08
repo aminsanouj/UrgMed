@@ -31,6 +31,8 @@ gem 'sassc-rails'
 gem "pg_search"
 
 gem 'geocoder'
+
+gem 'simple_form'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
