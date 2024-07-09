@@ -17,8 +17,13 @@ export default class extends Controller {
 
   onPlaceChanged(autocomplete) {
     const place = autocomplete.getPlace();
+    if (place.formatted_address) {
+      this.inputTarget.value = place.formatted_address;
+      this.submitForm();
+    }
+  }
 
-    this.inputTarget.value = place.formatted_address;
+  handleSearch() {
     this.submitForm();
   }
 
