@@ -25,12 +25,12 @@ export default class extends Controller {
   }
 
   initAutocomplete() {
-    const input = this.inputTarget;
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-      componentRestrictions: { country: 'fr' }
-    });
-    autocomplete.addListener("place_changed", () => this.onPlaceChanged(autocomplete));
-  }
+  const input = this.inputTarget;
+  const autocomplete = new google.maps.places.Autocomplete(input, {
+    componentRestrictions: { country: 'fr' }
+  });
+  autocomplete.addListener("place_changed", () => this.onPlaceChanged(autocomplete));
+}
 
   onPlaceChanged(autocomplete) {
     const place = autocomplete.getPlace();

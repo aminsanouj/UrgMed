@@ -5,8 +5,8 @@ class PagesController < ApplicationController
   end
 
   def search
-    @search_query_pro = params[:query_pro]
-    @search_query_city = params[:query_city]
+    @search_query_pro = params[:query_pro].presence
+    @search_query_city = params[:query_city].presence
 
     @professionals = Professional.all
 
