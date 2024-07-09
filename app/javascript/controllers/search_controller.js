@@ -20,6 +20,27 @@ export default class extends Controller {
     if (this.hasResultsTarget) {
       this.resultsTarget.addEventListener("click", this.handleResultClick.bind(this));
     }
+
+    this.initAutocomplete();
+  }
+
+  initAutocomplete() {
+    const input = this.inputTarget;
+    const autocomplete = new google.maps.places.Autocomplete(input, {
+      componentRestrictions: { country: 'fr' }
+    });
+    autocomplete.addListener("place_changed", () => this.onPlaceChanged(autocomplete));
+  }
+
+  onPlaceChanged(autocomplete) {
+    const place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("Aucun résultat trouvé. Veuillez essayer une autre recherche.");
+      return;
+    }
+
+    this.inputTarget.value = place.formatted_address;
+    this.submitForm();
   }
 
   handleClick(event) {
