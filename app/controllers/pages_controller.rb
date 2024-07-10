@@ -7,6 +7,7 @@ class PagesController < ApplicationController
   def search
     @search_query_pro = params[:query_pro].presence
     @search_query_city = params[:query_city].presence
+    @search_query_coordinates = Geocoder.coordinates(@search_query_city)
 
     @professionals = Professional.all
 
@@ -15,10 +16,14 @@ class PagesController < ApplicationController
     end
 
     if @search_query_city.present?
-      @professionals = @professionals.search_by_city(@search_query_city)
+      if @search_query_coordinates.present?
+        @professionals = @professionals.near(@search_query_coordinates, 20) # 20 représente le rayon de recherche en kilomètres
+      else
+        @professionals = @professionals.search_by_city(@search_query_city)
+      end
     end
 
-    @markers = @professionals.geocoded.map do |professional|
+    @markers = @professionals.where.not(latitude: nil, longitude: nil).map do |professional|
       {
         lat: professional.latitude,
         lng: professional.longitude,
