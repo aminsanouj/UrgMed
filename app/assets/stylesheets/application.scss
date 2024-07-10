@@ -1,3 +1,6 @@
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -13,15 +16,13 @@
  *= require_tree .
  *= require_self
  */
- @import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
- @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
 /* Apply Inter font to all elements */
 body {
   font-family: 'Inter', sans-serif;
 }
 
- @import "homepage";
- @import "contact";
- @import "search";
- @import "components/*";
+@import "homepage";
+@import "contact";
+@import "search";
+@import "components/*";

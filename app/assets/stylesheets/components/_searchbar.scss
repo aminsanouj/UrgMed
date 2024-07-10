@@ -29,7 +29,16 @@
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
-    z-index: 1; 
+    z-index: 1;
+  }
+
+  .location-icon {
+    position: absolute;
+    top: 50%;
+    left: -35px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
   }
 }
 

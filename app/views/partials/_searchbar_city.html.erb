@@ -1,9 +1,14 @@
-<form class="search-container" action="/search" method="get" data-controller="autocomplete search" data-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+<form class="search-container" action="/search" method="get" data-controller="autocomplete search geolocation" data-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   <%= simple_form_for :search, html: { class: 'form-inline' } do |f| %>
     <%= f.input :address, label: false, input_html: { id: "search-bar", name: "query_city", value: params[:query_city], placeholder: "Dans quelle ville êtes-vous ?", data: { action: "input->autocomplete#initAutocomplete keyup->autocomplete#checkSubmit", autocomplete_target: "input", search_target: "input" } }, wrapper: false %>
     <%= hidden_field_tag :query_pro, params[:query_pro] %>
 
     <button type="button" data-action="click->autocomplete#handleSearch"><img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png"></button>
     <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", search_target: "clear" } %>
+
+    <!-- Nouvelle icône pour la géolocalisation -->
+    <button type="button" data-action="click->geolocation#getLocation">
+      <%= image_tag 'location.svg', class: 'location-icon', alt: 'Location' %>
+    </button>
   <% end %>
 </form>

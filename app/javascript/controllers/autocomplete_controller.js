@@ -30,4 +30,10 @@ export default class extends Controller {
   submitForm() {
     this.element.submit();
   }
+  
+  checkSubmit(event) {
+    if (event.key === "Enter") {
+      this.submitForm();
+    }
+  }
 }

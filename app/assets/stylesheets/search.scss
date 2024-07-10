@@ -6,7 +6,8 @@
 }
 
 .container-map {
-  background-color: #ffcccb; /* Rouge clair pour container-map */
+  background-image: url('container-map.png'); /* Remplacez par le chemin d'accès à votre image */
+  background-size: cover; /* L'image couvre tout l'espace disponible dans le conteneur */
   padding: 20px;
   flex: 1.5; /* Chaque container occupe une part égale de l'espace disponible */
   margin-bottom: 20px;
