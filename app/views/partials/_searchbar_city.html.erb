@@ -1,4 +1,7 @@
 <form class="search-container" action="/search" method="get" data-controller="autocomplete search geolocation" data-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  <div id="loader" style="display: none;">
+    <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
+  </div>
   <%= simple_form_for :search, html: { class: 'form-inline' } do |f| %>
     <%= f.input :address, label: false, input_html: { id: "search-bar", name: "query_city", value: params[:query_city], placeholder: "Dans quelle ville êtes-vous ?", data: { action: "input->autocomplete#initAutocomplete keyup->autocomplete#checkSubmit", autocomplete_target: "input", search_target: "input" } }, wrapper: false %>
     <%= hidden_field_tag :query_pro, params[:query_pro] %>

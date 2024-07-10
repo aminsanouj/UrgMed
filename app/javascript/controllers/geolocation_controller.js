@@ -2,13 +2,39 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
+  loaderTimeout = null;
+  loaderDelay = 500; // Afficher l'indicateur de chargement après 500ms
+
   connect() {
     document.querySelector('.location-icon').addEventListener("click", this.getLocation.bind(this));
   }
 
+  showLoader() {
+    document.querySelector('#loader').style.display = 'block';
+  }
+
+  hideLoader() {
+    document.querySelector('#loader').style.display = 'none';
+  }
+
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.showPosition.bind(this)); // Ajoutez bind(this) ici
+      this.loaderTimeout = setTimeout(() => {
+        this.showLoader();
+      }, this.loaderDelay);
+
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          clearTimeout(this.loaderTimeout);
+          this.showPosition(position);
+        },
+        (error) => {
+          clearTimeout(this.loaderTimeout);
+          this.hideLoader();
+          console.error("Erreur de géolocalisation : ", error);
+        },
+        { timeout: 10000 } // Définir un délai d'expiration de 10 secondes pour la géolocalisation
+      );
     } else {
       alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
     }
@@ -22,6 +48,8 @@ export default class extends Controller {
     const latlng = new google.maps.LatLng(lat, lon);
 
     geocoder.geocode({ 'latLng': latlng }, (results, status) => {
+      this.hideLoader();
+
       if (status === 'OK') {
         if (results[0]) {
           // Remplir le champ de saisie avec l'adresse correspondante
