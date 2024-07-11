@@ -9,14 +9,11 @@
     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-  <div class="container-results">
+  <div class="container-results" data-professional-target="details">
     <% if @professionals.any? %>
       <h2>Search Results:</h2>
-      <ul>
-        <% @professionals.each do |professional| %>
-          <li><%= professional.first_name %> <%= professional.last_name %> - <%= professional.speciality %></li>
-        <% end %>
-      </ul>
+      <%= render partial: 'professionals/professional_card', collection: @professionals, as: :professional %>
+      <%= will_paginate @professionals %>
     <% else %>
       <p>No professionals found.</p>
     <% end %>

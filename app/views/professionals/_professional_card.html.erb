@@ -1,0 +1,16 @@
+<div class="card" data-controller="professional">
+  <div class="card-body">
+    <h5 class="card-title"><%= professional.first_name %> <%= professional.last_name %></h5>
+    <p class="card-text"><strong>Spécialité:</strong> <%= professional.speciality %></p>
+    <p class="card-text"><strong>Horaires:</strong> <%= professional.hours %></p>
+    <% if professional.on_duty %>
+      <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-success">En service</span></p>
+    <% else %>
+      <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-secondary">Hors service</span></p>
+    <% end %>
+    <% if @search_query_coordinates %>
+      <p><%= distance_between(@search_query_coordinates, professional) %></p>
+    <% end %>
+    <%= link_to "Voir Détails", professional_details_path(professional), class: "btn btn-primary", data: { action: "click->professional#showDetails" } %>
+  </div>
+</div>

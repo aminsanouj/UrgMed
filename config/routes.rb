@@ -7,4 +7,6 @@ Rails.application.routes.draw do
   get 'search', to: 'pages#search'
   get 'contact', to: 'pages#contact'
   post 'contact', to: 'contact#create'
+  get 'professionals/:id/details', to: 'pages#professional_details', as: :professional_details
+
 end

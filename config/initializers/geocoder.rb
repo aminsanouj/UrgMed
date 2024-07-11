@@ -13,7 +13,7 @@ Geocoder.configure(
 
   # En-têtes HTTP personnalisés pour certains services de géocodage
   http_headers: {
-    "User-Agent" => "MyApp",
+    "User-Agent" => "UrgMed",
     "Referer" => "http://localhost:3000/"
   },
 

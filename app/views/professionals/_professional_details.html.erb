@@ -1,0 +1,18 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><%= @professional.first_name %> <%= @professional.last_name %></h5>
+    <p class="card-text"><strong>Spécialité:</strong> <%= @professional.speciality %></p>
+    <p class="card-text"><strong>Adresse Complète:</strong> <%= @professional.full_address %></p>
+    <p class="card-text"><strong>Horaires:</strong> <%= @professional.hours %></p>
+    <% if @professional.on_duty %>
+      <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-success">En service</span></p>
+    <% else %>
+      <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-secondary">Hors service</span></p>
+    <% end %>
+    <%# <p class="card-text"><strong>Description additionnelle:</strong> <%= @professional.additional_info %></p>
+    <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
+    <%# <%= image_tag(@professional.photo_url, class: "img-fluid", alt: "Image professionnel") if @professional.photo_url %>
+    <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary mt-3", target: "_blank" %>
+    <%= link_to "Appeler", "tel:#{@professional.phone_number}", class: "btn btn-primary mt-3" %>
+  </div>
+</div>
