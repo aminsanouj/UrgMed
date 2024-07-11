@@ -1,3 +1,4 @@
+# app/models/professional.rb
 class Professional < ApplicationRecord
   include PgSearch::Model
 
@@ -21,4 +22,16 @@ class Professional < ApplicationRecord
 
   geocoded_by :full_address
   after_validation :geocode, if: :will_save_change_to_street? || :will_save_change_to_postal_code? || :will_save_change_to_city?
+
+  private
+
+  def geocode
+    super.tap do |result|
+      if result
+        Rails.logger.info "Geocoded #{full_address} to #{latitude}, #{longitude}"
+      else
+        Rails.logger.warn "Failed to geocode #{full_address}"
+      end
+    end
+  end
 end
