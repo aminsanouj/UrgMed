@@ -2,22 +2,32 @@
   display: flex;
   justify-content: space-between; /* Pour ajouter de l'espace entre les deux containers */
   gap: 20px; /* Espacement entre les colonnes */
-  max-height: 500px;
+  max-height: 650px;
+}
+
+.container-left {
+  flex: 2; /* Le container de gauche prend 2/3 de l'espace disponible */
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.searchbars {
+  margin-bottom: 15px;
 }
 
 .container-map {
-  background-image: url('container-map.png'); /* Remplacez par le chemin d'accès à votre image */
+  width: 100%;
+  height: 480px;
   background-size: cover; /* L'image couvre tout l'espace disponible dans le conteneur */
   padding: 20px;
-  flex: 1.5; /* Chaque container occupe une part égale de l'espace disponible */
-  margin-bottom: 20px;
-  margin-left: 20px; /* Si vous voulez conserver le margin-bottom */
 }
 
-.container-results {
+.container-right {
+  flex: 1; /* Le container de droite prend 1/3 de l'espace disponible */
   background-color: #add8e6; /* Bleu clair pour container-results */
   padding: 20px;
-  flex: 1; /* Chaque container occupe une part égale de l'espace disponible */
   margin-bottom: 20px; /* Si vous voulez conserver le margin-bottom */
    /* Margin à gauche de container-results */
   margin-right: 20px;

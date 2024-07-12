@@ -1,6 +1,16 @@
-<div class="card">
+<div class="card" data-controller="professional">
   <div class="card-body">
-    <h5 class="card-title"><%= @professional.first_name %> <%= @professional.last_name %></h5>
+    <button class="close-button" data-action="click->professional#closeDetails">
+      <i class="fas fa-times"></i>
+    </button>
+    <h5 class="card-title">
+      <%= @professional.first_name %> <%= @professional.last_name %>
+      <% if @search_query_coordinates %>
+        <span class="distance">
+          <%= distance_between(@search_query_coordinates, @professional) %>
+        </span>
+      <% end %>
+    </h5>
     <p class="card-text"><strong>Spécialité:</strong> <%= @professional.speciality %></p>
     <p class="card-text"><strong>Adresse Complète:</strong> <%= @professional.full_address %></p>
     <p class="card-text"><strong>Horaires:</strong> <%= @professional.hours %></p>
@@ -10,9 +20,15 @@
       <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-secondary">Hors service</span></p>
     <% end %>
     <%# <p class="card-text"><strong>Description additionnelle:</strong> <%= @professional.additional_info %></p>
-    <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
     <%# <%= image_tag(@professional.photo_url, class: "img-fluid", alt: "Image professionnel") if @professional.photo_url %>
-    <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary mt-3", target: "_blank" %>
-    <%= link_to "Appeler", "tel:#{@professional.phone_number}", class: "btn btn-primary mt-3" %>
+    <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
+
+    <div class="button-group mt-3">
+      <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm", target: "_blank" %>
+      <%= link_to "Appeler", "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm" %>
+    </div>
   </div>
 </div>
+
+<%# <p class="card-text"><strong>Description additionnelle:</strong> <%= @professional.additional_info %></p>
+<%# <%= image_tag(@professional.photo_url, class: "img-fluid", alt: "Image professionnel") if @professional.photo_url %>

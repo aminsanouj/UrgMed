@@ -41,6 +41,7 @@ class PagesController < ApplicationController
 
   def professional_details
     @professional = Professional.find(params[:id])
+    @search_query_coordinates = Geocoder.coordinates(params[:query_city])
     render partial: 'professionals/professional_details', formats: [:html]
   end
 
