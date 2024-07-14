@@ -6,7 +6,7 @@
     <h5 class="card-title">
       <%= @professional.first_name %> <%= @professional.last_name %>
       <% if @search_query_coordinates %>
-        <span class="distance">
+        <span class="distance with-close-button">
           <%= distance_between(@search_query_coordinates, @professional) %>
         </span>
       <% end %>
@@ -19,8 +19,6 @@
     <% else %>
       <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-secondary">Hors service</span></p>
     <% end %>
-    <%# <p class="card-text"><strong>Description additionnelle:</strong> <%= @professional.additional_info %></p>
-    <%# <%= image_tag(@professional.photo_url, class: "img-fluid", alt: "Image professionnel") if @professional.photo_url %>
     <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
 
     <div class="button-group mt-3">

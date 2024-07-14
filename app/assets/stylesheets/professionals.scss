@@ -18,19 +18,25 @@
       margin-bottom: 10px;
       font-size: 1.2rem;
       font-weight: bold;
-      padding-right: 20px; // Add this line
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
       .distance {
-        float: right;
         font-size: 0.9rem;
         color: #777;
+
+        // Margin is applied only when .close-button is present
+        &.with-close-button {
+          margin-right: 20px;
+        }
       }
     }
 
     .close-button {
       position: absolute;
-      top: 10px; /* Adjust as needed */
-      right: 10px; /* Adjust as needed */
+      top: 13px;
+      right: 10px;
       background-color: transparent;
       border: none;
       font-size: 1.5rem;

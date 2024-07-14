@@ -15,6 +15,6 @@
     <% else %>
       <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-secondary">Hors service</span></p>
     <% end %>
-    <%= link_to "Voir Détails", professional_details_path(professional, query_city: @search_query_city), class: "btn btn-primary", data: { action: "click->professional#showDetails" } %>
+    <%= link_to "Voir Détails", professional_details_path(professional, query_city: @search_query_city), class: "btn btn-primary", data: { action: "click->professional#showDetails", remote: true } %>
   </div>
 </div>
