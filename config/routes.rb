@@ -8,5 +8,4 @@ Rails.application.routes.draw do
   get 'contact', to: 'pages#contact'
   post 'contact', to: 'contact#create'
   get 'professionals/:id/details', to: 'pages#professional_details', as: :professional_details, defaults: { format: :html }
-
 end

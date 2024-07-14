@@ -1,6 +1,8 @@
 # app/controllers/pages_controller.rb
 class PagesController < ApplicationController
   include ProfessionalsHelper
+  protect_from_forgery except: :search
+
   def home
     # Code pour récupérer les données nécessaires à afficher sur la page d'accueil
   end
