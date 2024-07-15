@@ -7,12 +7,16 @@ export default class extends Controller {
 
   showDetails(event) {
     event.preventDefault();
-
     const url = event.currentTarget.href;
-    const container = document.querySelector('.container-results');
+    const container = event.currentTarget.closest('.professional-card') || document.querySelector('.container-results');
 
     if (container) {
-      currentState = container.innerHTML; // Stocker l'état actuel dans la variable globale
+      // Enregistrer le contenu de la card ou du container avant de le remplacer
+      if (event.currentTarget.closest('.professional-card')) {
+        container.setAttribute('data-card-content', container.innerHTML);
+      } else {
+        currentState = container.innerHTML;
+      }
 
       fetch(url, { headers: { 'Accept': 'text/html' } })
         .then(response => response.text())
@@ -23,13 +27,21 @@ export default class extends Controller {
     }
   }
 
+
   closeDetails(event) {
     event.preventDefault();
+    const container = event.currentTarget.closest('.professional-card') || document.querySelector('.container-results');
 
-    const container = document.querySelector('.container-results');
+    if (container) {
+      const cardContent = container.getAttribute('data-card-content');
 
-    if (currentState && container) { // Vérifier si la variable globale currentState contient un état valide
-      container.innerHTML = currentState;
+      if (cardContent) {
+        container.innerHTML = cardContent;
+        container.removeAttribute('data-card-content');
+      } else if (currentState) {
+        container.innerHTML = currentState;
+      }
     }
   }
+
 }

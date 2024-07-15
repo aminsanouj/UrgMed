@@ -8,7 +8,9 @@
     <div class="professional-category">
       <h3>Médecins</h3>
       <% @professionals.search_by_speciality("Médecin").each do |professional| %>
-        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        <div class="professional-card">
+          <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        </div>
       <% end %>
     </div>
 
@@ -16,7 +18,9 @@
     <div class="professional-category">
       <h3>Dentistes</h3>
       <% @professionals.search_by_speciality("Dentiste").each do |professional| %>
-        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        <div class="professional-card">
+          <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        </div>
       <% end %>
     </div>
 
@@ -24,7 +28,9 @@
     <div class="professional-category">
       <h3>Pharmacies</h3>
       <% @professionals.search_by_speciality("Pharmacie").each do |professional| %>
-        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        <div class="professional-card">
+          <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        </div>
       <% end %>
     </div>
 
@@ -32,7 +38,9 @@
     <div class="professional-category">
       <h3>Urgences</h3>
       <% @professionals.search_by_speciality("Urgence").each do |professional| %>
-        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        <div class="professional-card">
+          <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+        </div>
       <% end %>
     </div>
   </div>
