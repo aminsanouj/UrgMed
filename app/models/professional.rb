@@ -9,7 +9,7 @@ class Professional < ApplicationRecord
                   ignoring: :accents
 
   pg_search_scope :search_by_city,
-                  against: [:city, :postal_code, :street],
+                  against: [:city, :postal_code],
                   using: {
                     tsearch: { prefix: true, any_word: true }
                   },
