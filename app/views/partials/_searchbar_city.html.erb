@@ -1,4 +1,4 @@
-<form class="search-container" action="/search" method="get" data-controller="autocomplete search geolocation" data-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+<form class="search-container" action="<%= request.path %>" method="get" data-controller="autocomplete search geolocation" data-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   <div id="loader" style="display: none;">
     <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
   </div>

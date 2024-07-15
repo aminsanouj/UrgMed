@@ -23,17 +23,13 @@ export default class extends Controller {
   }
 
   handleClick(event) {
-    if (this.hasResultsTarget) {
-      this.displaySuggestions(professions);
-    }
+    this.displaySuggestions(professions);
   }
 
   handleInput(event) {
-    if (this.hasResultsTarget) {
-      const query = removeAccents(event.target.value);
-      const filteredProfessions = professions.filter(profession => removeAccents(profession).startsWith(query));
-      this.displaySuggestions(filteredProfessions);
-    }
+    const query = removeAccents(event.target.value);
+    const filteredProfessions = professions.filter(profession => removeAccents(profession).startsWith(query));
+    this.displaySuggestions(filteredProfessions);
   }
 
   handleResultClick(event) {
@@ -55,7 +51,7 @@ export default class extends Controller {
     if (this.hasResultsTarget) {
       this.resultsTarget.innerHTML = "";
     }
-    this.submitForm(); // Ajouter cette ligne pour soumettre le formulaire après avoir vidé le champ
+    this.submitForm(); // Soumettre le formulaire après avoir vidé le champ
   }
 
   submitForm() {
