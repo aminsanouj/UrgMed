@@ -1,0 +1,16 @@
+.professionals-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Espacement entre les colonnes */
+  margin-left: 10px; /* Marge à gauche */
+  margin-right: 10px; /* Marge à droite */
+}
+
+.professional-category {
+  flex: 1 1 calc(25% - 20px); /* Chaque container occupe 25% de l'espace disponible moins l'espacement */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-sizing: border-box; /* Pour inclure le padding et la bordure dans la largeur calculée */
+}

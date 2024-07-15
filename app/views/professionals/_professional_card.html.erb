@@ -15,7 +15,7 @@
 
     </h5>
     <p class="card-text"><strong>Spécialité:</strong> <%= professional.speciality %></p>
-    <p class="card-text"><strong>Horaires:</strong> <%= professional.full_address %></p>
+    <p class="card-text"><strong>Adresse:</strong> <%= professional.full_address %></p>
     <%= link_to "Voir Détails", professional_details_path(professional, query_city: @search_query_city), class: "btn btn-primary", data: { action: "click->professional#showDetails", remote: true } %>
   </div>
 </div>

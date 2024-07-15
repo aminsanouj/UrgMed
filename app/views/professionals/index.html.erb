@@ -2,17 +2,38 @@
 
 <h2>Liste des professionnels autour de vous :</h2>
 
-<ul>
-  <% @professionals.each do |professional| %>
-    <li>
-      <strong><%= professional.first_name %> <%= professional.last_name %></strong>
-      <br>
-      Spécialité : <%= professional.speciality %>
-      <br>
-      Adresse : <%= professional.full_address %>
-      <br>
-      Téléphone : <%= professional.phone_number %>
-    </li>
-    <br>
-  <% end %>
-</ul>
+<div class="container-results">
+  <div class="professionals-grid">
+    <!-- Container pour les médecins -->
+    <div class="professional-category">
+      <h3>Médecins</h3>
+      <% @professionals.search_by_speciality("Médecin").each do |professional| %>
+        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+      <% end %>
+    </div>
+
+    <!-- Container pour les dentistes -->
+    <div class="professional-category">
+      <h3>Dentistes</h3>
+      <% @professionals.search_by_speciality("Dentiste").each do |professional| %>
+        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+      <% end %>
+    </div>
+
+    <!-- Container pour les pharmacies -->
+    <div class="professional-category">
+      <h3>Pharmacies</h3>
+      <% @professionals.search_by_speciality("Pharmacie").each do |professional| %>
+        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+      <% end %>
+    </div>
+
+    <!-- Container pour les urgences -->
+    <div class="professional-category">
+      <h3>Urgences</h3>
+      <% @professionals.search_by_speciality("Urgence").each do |professional| %>
+        <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+      <% end %>
+    </div>
+  </div>
+</div>
