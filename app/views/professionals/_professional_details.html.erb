@@ -4,6 +4,11 @@
       <i class="fas fa-times"></i>
     </button>
     <h5 class="card-title">
+      <% if @professional.open_now? %>
+        <span class="availability-badge bg-success float-end"></span>
+      <% else %>
+        <span class="availability-badge bg-secondary float-end"></span>
+      <% end %>
       <%= @professional.first_name %> <%= @professional.last_name %>
       <% if @search_query_coordinates %>
         <span class="distance with-close-button">
@@ -13,14 +18,14 @@
     </h5>
     <p class="card-text"><strong>Spécialité:</strong> <%= @professional.speciality %></p>
     <p class="card-text"><strong>Adresse Complète:</strong> <%= @professional.full_address %></p>
-    <p class="card-text"><strong>Horaires:</strong> <%= @professional.hours %></p>
-    <% if @professional.on_duty %>
-      <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-success">En service</span></p>
-    <% else %>
-      <p class="card-text"><strong>Indicateur de Garde:</strong> <span class="badge bg-secondary">Hors service</span></p>
-    <% end %>
+    <p class="card-text"><strong>Horaires:</strong><br>
+      <% sorted_opening_hours(@professional.opening_hours).each do |day, hours| %>
+        <% if hours.present? %>
+          <%= day %>: <%= hours %><br>
+        <% end %>
+      <% end %>
+    </p>
     <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
-
     <div class="button-group mt-3">
       <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm", target: "_blank" %>
       <%= link_to "Appeler", "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm" %>

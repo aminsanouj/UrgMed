@@ -19,17 +19,31 @@
       font-size: 1.2rem;
       font-weight: bold;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+
+      .availability-badge {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        margin-right: 10px;
+      }
+
+      .bg-success {
+        background-color: #28a745; /* Vert */
+      }
+
+      .bg-secondary {
+        background-color: #6c757d; /* Gris */
+      }
 
       .distance {
         font-size: 0.9rem;
         color: #777;
+        margin-left: auto; /* Aligne la distance à droite */
+      }
 
-        // Margin is applied only when .close-button is present
-        &.with-close-button {
-          margin-right: 20px;
-        }
+      .distance.with-close-button {
+        margin-right: 20px; /* Ajoute une marge à droite si .close-button est présent */
       }
     }
 

@@ -11,4 +11,15 @@ module ProfessionalsHelper
       "#{distance.round(1)} km"
     end
   end
+
+  def sorted_opening_hours(opening_hours)
+    order = %w(Lundi Mardi Mercredi Jeudi Vendredi Samedi Dimanche)
+    sorted_hours = Hash[order.zip(order.map { |day| opening_hours[day] })]
+    sorted_hours.map { |day, hours| [day, format_opening_hours(hours)] }.to_h
+  end
+
+  def format_opening_hours(hours)
+    hours.map { |h| "#{h.split('-')[0]} à #{h.split('-')[1]}" }.join(', ')
+  end
+
 end

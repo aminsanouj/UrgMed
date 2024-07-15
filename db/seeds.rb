@@ -73,8 +73,15 @@ Professional.create([
     longitude: 1.445632,
     phone_number: "05 61 04 04 04",
     website: "http://dr-pierre-lafont.fr",
-    hours: "Lundi à Vendredi: 8h-18h",
-    on_duty: false
+    opening_hours: {
+      "Lundi" => ["08:00-18:00"],
+      "Mardi" => ["08:00-18:00"],
+      "Mercredi" => ["08:00-18:00"],
+      "Jeudi" => ["08:00-18:00"],
+      "Vendredi" => ["08:00-18:00"],
+      "Samedi" => [],
+      "Dimanche" => []
+    },
   },
   {
     first_name: "Marie",
@@ -87,8 +94,15 @@ Professional.create([
     longitude: 2.301944,
     phone_number: "01 45 06 06 06",
     website: "http://dr-marie-durand.fr",
-    hours: "Lundi à Jeudi: 9h-18h",
-    on_duty: false
+    opening_hours: {
+      "Lundi" => ["09:00-18:00"],
+      "Mardi" => ["09:00-18:00"],
+      "Mercredi" => ["09:00-18:00"],
+      "Jeudi" => ["09:00-18:00"],
+      "Vendredi" => [],
+      "Samedi" => [],
+      "Dimanche" => []
+    },
   },
   {
     first_name: "Luc",
@@ -101,8 +115,15 @@ Professional.create([
     longitude: 4.835659,
     phone_number: "04 78 07 07 07",
     website: "http://dr-luc-martin.fr",
-    hours: "Mardi à Vendredi: 10h-17h",
-    on_duty: false
+    opening_hours: {
+      "Lundi" => [],
+      "Mardi" => ["10:00-17:00"],
+      "Mercredi" => ["10:00-17:00"],
+      "Jeudi" => ["10:00-17:00"],
+      "Vendredi" => ["10:00-17:00"],
+      "Samedi" => [],
+      "Dimanche" => []
+    },
   },
   {
     first_name: "Sophie",
@@ -115,8 +136,15 @@ Professional.create([
     longitude: 5.369780,
     phone_number: "04 91 08 08 08",
     website: "http://dr-sophie-bernard.fr",
-    hours: "Lundi à Vendredi: 8h30-16h30",
-    on_duty: false
+    opening_hours: {
+      "Lundi" => ["08:30-16:30"],
+      "Mardi" => ["08:30-16:30"],
+      "Mercredi" => ["08:30-16:30"],
+      "Jeudi" => ["08:30-16:30"],
+      "Vendredi" => ["08:30-16:30"],
+      "Samedi" => [],
+      "Dimanche" => []
+    },
   },
   {
     first_name: "Olivier",
@@ -129,8 +157,15 @@ Professional.create([
     longitude: -0.579180,
     phone_number: "05 56 09 09 09",
     website: "http://dr-olivier-gauthier.fr",
-    hours: "Lundi à Jeudi: 9h-18h",
-    on_duty: false
+    opening_hours: {
+      "Lundi" => ["09:00-18:00"],
+      "Mardi" => ["09:00-18:00"],
+      "Mercredi" => ["09:00-18:00"],
+      "Jeudi" => ["09:00-18:00"],
+      "Vendredi" => [],
+      "Samedi" => [],
+      "Dimanche" => []
+    },
   },
   # Dentistes
   {
@@ -144,8 +179,15 @@ Professional.create([
     longitude: 1.451256,
     phone_number: "05 61 05 05 05",
     website: "http://dr-anne-girard.fr",
-    hours: "Lundi à Vendredi: 9h-17h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["09:00-17:00"],
+      "Mardi": ["09:00-17:00"],
+      "Mercredi": ["09:00-17:00"],
+      "Jeudi": ["09:00-17:00"],
+      "Vendredi": ["09:00-17:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Marc",
@@ -158,8 +200,15 @@ Professional.create([
     longitude: 1.452222,
     phone_number: "05 61 09 09 09",
     website: "http://dr-marc-dubois.fr",
-    hours: "Lundi à Vendredi: 8h30-16h30",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["08:30-16:30"],
+      "Mardi": ["08:30-16:30"],
+      "Mercredi": ["08:30-16:30"],
+      "Jeudi": ["08:30-16:30"],
+      "Vendredi": ["08:30-16:30"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Sophie",
@@ -172,8 +221,15 @@ Professional.create([
     longitude: 2.287222,
     phone_number: "01 45 00 00 00",
     website: "http://dr-sophie-martin.fr",
-    hours: "Lundi à Jeudi: 9h-18h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["09:00-18:00"],
+      "Mardi": ["09:00-18:00"],
+      "Mercredi": ["09:00-18:00"],
+      "Jeudi": ["09:00-18:00"],
+      "Vendredi": ["09:00-18:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Olivier",
@@ -186,8 +242,15 @@ Professional.create([
     longitude: -0.578333,
     phone_number: "05 56 00 00 00",
     website: "http://dr-olivier-rousseau.fr",
-    hours: "Lundi à Vendredi: 10h-19h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["10:00-19:00"],
+      "Mardi": ["10:00-19:00"],
+      "Mercredi": ["10:00-19:00"],
+      "Jeudi": ["10:00-19:00"],
+      "Vendredi": ["10:00-19:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Laura",
@@ -200,8 +263,15 @@ Professional.create([
     longitude: 4.835667,
     phone_number: "04 72 00 00 00",
     website: "http://dr-laura-lambert.fr",
-    hours: "Lundi à Jeudi: 8h-17h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["08:00-17:00"],
+      "Mardi": ["08:00-17:00"],
+      "Mercredi": ["08:00-17:00"],
+      "Jeudi": ["08:00-17:00"],
+      "Vendredi": ["08:00-17:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "François",
@@ -214,8 +284,15 @@ Professional.create([
     longitude: 5.369780,
     phone_number: "04 91 00 00 00",
     website: "http://dr-francois-berger.fr",
-    hours: "Lundi à Vendredi: 9h-18h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["09:00-18:00"],
+      "Mardi": ["09:00-18:00"],
+      "Mercredi": ["09:00-18:00"],
+      "Jeudi": ["09:00-18:00"],
+      "Vendredi": ["09:00-18:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   # Pharmacies
   {
@@ -229,8 +306,15 @@ Professional.create([
     longitude: 1.448711,
     phone_number: "05 61 06 06 06",
     website: "http://pharmacie-garonne.fr",
-    hours: "Lundi à Samedi: 8h30-19h30",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["08:30-19:30"],
+      "Mardi": ["08:30-19:30"],
+      "Mercredi": ["08:30-19:30"],
+      "Jeudi": ["08:30-19:30"],
+      "Vendredi": ["08:30-19:30"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Pharmacie",
@@ -243,8 +327,15 @@ Professional.create([
     longitude: 1.444167,
     phone_number: "05 61 10 10 10",
     website: "http://pharmacie-capitole.fr",
-    hours: "Lundi à Samedi: 9h-19h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["09:00-19:00"],
+      "Mardi": ["09:00-19:00"],
+      "Mercredi": ["09:00-19:00"],
+      "Jeudi": ["09:00-19:00"],
+      "Vendredi": ["09:00-19:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Pharmacie",
@@ -257,8 +348,15 @@ Professional.create([
     longitude: 2.352222,
     phone_number: "01 42 33 44 55",
     website: "http://pharmacie-halles.fr",
-    hours: "Lundi à Samedi: 8h30-20h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["08:30-20:00"],
+      "Mardi": ["08:30-20:00"],
+      "Mercredi": ["08:30-20:00"],
+      "Jeudi": ["08:30-20:00"],
+      "Vendredi": ["08:30-20:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Pharmacie",
@@ -271,8 +369,15 @@ Professional.create([
     longitude: 5.369780,
     phone_number: "04 91 91 91 91",
     website: "http://pharmacie-vieuxport.fr",
-    hours: "Lundi à Samedi: 9h-19h30",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["09:00-19:30"],
+      "Mardi": ["09:00-19:30"],
+      "Mercredi": ["09:00-19:30"],
+      "Jeudi": ["09:00-19:30"],
+      "Vendredi": ["09:00-19:30"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Pharmacie",
@@ -285,8 +390,15 @@ Professional.create([
     longitude: 4.833333,
     phone_number: "04 72 77 88 99",
     website: "http://pharmacie-jacobins.fr",
-    hours: "Lundi à Samedi: 8h-20h",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["08:00-20:00"],
+      "Mardi": ["08:00-20:00"],
+      "Mercredi": ["08:00-20:00"],
+      "Jeudi": ["08:00-20:00"],
+      "Vendredi": ["08:00-20:00"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
   {
     first_name: "Pharmacie",
@@ -299,10 +411,16 @@ Professional.create([
     longitude: 3.8800735,
     phone_number: "04 67 67 88 99",
     website: "http://pharmacie-comedie.fr",
-    hours: "Lundi à Samedi: 8h30-19h30",
-    on_duty: false
+    opening_hours: {
+      "Lundi": ["08:30-19:30"],
+      "Mardi": ["08:30-19:30"],
+      "Mercredi": ["08:30-19:30"],
+      "Jeudi": ["08:30-19:30"],
+      "Vendredi": ["08:30-19:30"],
+      "Samedi": [],
+      "Dimanche": []
+    },
   },
-
   # Services d'urgence
   {
     first_name: "Hôpital",
@@ -315,8 +433,15 @@ Professional.create([
     longitude: 1.418056,
     phone_number: "05 61 07 07 07",
     website: "http://chu-toulouse.fr/purpan",
-    hours: "Ouvert 24h/24 et 7j/7",
-    on_duty: true
+    opening_hours: {
+      "Lundi": ["00:00-24:00"],
+      "Mardi": ["00:00-24:00"],
+      "Mercredi": ["00:00-24:00"],
+      "Jeudi": ["00:00-24:00"],
+      "Vendredi": ["00:00-24:00"],
+      "Samedi": ["00:00-24:00"],
+      "Dimanche": ["00:00-24:00"]
+    },
   },
   {
     first_name: "Hôpital",
@@ -329,8 +454,15 @@ Professional.create([
     longitude: 2.364485,
     phone_number: "01 42 16 00 00",
     website: "https://www.aphp.fr/hopitaux/pitie-salpetriere",
-    hours: "Ouvert 24h/24 et 7j/7",
-    on_duty: true
+    opening_hours: {
+      "Lundi": ["00:00-24:00"],
+      "Mardi": ["00:00-24:00"],
+      "Mercredi": ["00:00-24:00"],
+      "Jeudi": ["00:00-24:00"],
+      "Vendredi": ["00:00-24:00"],
+      "Samedi": ["00:00-24:00"],
+      "Dimanche": ["00:00-24:00"]
+    },
   },
   {
     first_name: "Hôpital",
@@ -343,8 +475,15 @@ Professional.create([
     longitude: 5.400556,
     phone_number: "04 91 96 11 11",
     website: "https://www.ap-hm.fr/fr/etablissements/hopital-nord",
-    hours: "Ouvert 24h/24 et 7j/7",
-    on_duty: true
+    opening_hours: {
+      "Lundi": ["00:00-24:00"],
+      "Mardi": ["00:00-24:00"],
+      "Mercredi": ["00:00-24:00"],
+      "Jeudi": ["00:00-24:00"],
+      "Vendredi": ["00:00-24:00"],
+      "Samedi": ["00:00-24:00"],
+      "Dimanche": ["00:00-24:00"]
+    },
   },
   {
     first_name: "CHU",
@@ -357,8 +496,15 @@ Professional.create([
     longitude: -1.553611,
     phone_number: "02 40 08 33 33",
     website: "https://www.chu-nantes.fr",
-    hours: "Ouvert 24h/24 et 7j/7",
-    on_duty: true
+    opening_hours: {
+      "Lundi": ["00:00-24:00"],
+      "Mardi": ["00:00-24:00"],
+      "Mercredi": ["00:00-24:00"],
+      "Jeudi": ["00:00-24:00"],
+      "Vendredi": ["00:00-24:00"],
+      "Samedi": ["00:00-24:00"],
+      "Dimanche": ["00:00-24:00"]
+    },
   },
   {
     first_name: "Hôpital",
@@ -371,8 +517,15 @@ Professional.create([
     longitude: 4.844444,
     phone_number: "04 72 11 61 11",
     website: "https://www.chu-lyon.fr/fr/les-hopitaux/hopital-edouard-herriot-heh",
-    hours: "Ouvert 24h/24 et 7j/7",
-    on_duty: true
+    opening_hours: {
+      "Lundi": ["00:00-24:00"],
+      "Mardi": ["00:00-24:00"],
+      "Mercredi": ["00:00-24:00"],
+      "Jeudi": ["00:00-24:00"],
+      "Vendredi": ["00:00-24:00"],
+      "Samedi": ["00:00-24:00"],
+      "Dimanche": ["00:00-24:00"]
+    },
   },
   {
     first_name: "CHU",
@@ -385,8 +538,15 @@ Professional.create([
     longitude: 3.066944,
     phone_number: "03 20 44 44 59",
     website: "https://www.chu-lille.fr",
-    hours: "Ouvert 24h/24 et 7j/7",
-    on_duty: true
+    opening_hours: {
+      "Lundi": ["00:00-24:00"],
+      "Mardi": ["00:00-24:00"],
+      "Mercredi": ["00:00-24:00"],
+      "Jeudi": ["00:00-24:00"],
+      "Vendredi": ["00:00-24:00"],
+      "Samedi": ["00:00-24:00"],
+      "Dimanche": ["00:00-24:00"]
+    },
   }
 ])
 
