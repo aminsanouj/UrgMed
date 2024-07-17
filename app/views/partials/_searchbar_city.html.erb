@@ -3,7 +3,7 @@
     <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
   </div>
   <div class="form-inline">
-    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-action="input->autocomplete#initAutocomplete keyup->autocomplete#checkSubmit" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-city-action="change->extract-city#extractCity">
+    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-action="input->autocomplete#initAutocomplete keyup->autocomplete#checkSubmit change->extract-city#extractCityFromInput" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input">
     <%= hidden_field_tag :query_pro, params[:query_pro] %>
 
     <button type="submit" data-action="click->autocomplete#handleSearch">

@@ -6,7 +6,7 @@ export default class extends Controller {
   static targets = ["input"];
 
   connect() {
-    this.extractCityFromInput(); // Appeler la méthode lors de la connexion
+    this.extractCityFromInput(); // Appeler la méthode lors de la connexion si nécessaire
   }
 
   extractCityFromInput() {

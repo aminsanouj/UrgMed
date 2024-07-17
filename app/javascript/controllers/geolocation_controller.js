@@ -81,10 +81,16 @@ export default class extends Controller {
 
       if (status === 'OK') {
         if (results[0]) {
+          const address = results[0].formatted_address;
           const addressInput = document.querySelector('#search-bar');
-          addressInput.value = results[0].formatted_address;
-          const searchForm = document.querySelector('.search-container');
-          searchForm.submit();
+          addressInput.value = address; // Mettre à jour le champ de recherche avec l'adresse complète
+
+          const extractCityController = this.application.getControllerForElementAndIdentifier(this.element, 'extract-city');
+          if (extractCityController) {
+            addressInput.dispatchEvent(new Event('change')); // Déclencher l'événement change pour ExtractCity
+          } else {
+            this.element.submit(); // Envoyer le formulaire avec l'adresse complète
+          }
         } else {
           alert('Aucun résultat trouvé pour ces coordonnées.');
         }
