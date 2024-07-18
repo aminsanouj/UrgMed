@@ -1,9 +1,9 @@
-<form class="search-container" action="<%= request.path %>" method="get" data-controller="<%= controller_attribute %>" data-autocomplete-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+<form class="search-container" action="<%= request.path %>" method="get" data-controller="<%= controller_attribute %>">
   <div id="loader" style="display: none;">
     <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
   </div>
   <div class="form-inline">
-    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-action="input->autocomplete#initAutocomplete keyup->autocomplete#checkSubmit change->extract-city#extractCityFromInput" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input">
+    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-action="input->autocomplete#initAutocomplete change->extract-city#extractCityFromInput" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input">
     <%= hidden_field_tag :query_pro, params[:query_pro] %>
 
     <button type="submit" data-action="click->autocomplete#handleSearch">
