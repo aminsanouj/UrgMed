@@ -1,0 +1,68 @@
+/* Conteneur principal pour les numéros d'urgence */
+.emergency-container {
+  display: flex;
+  justify-content: space-between; /* Place les enfants aux extrémités */
+  gap: 20px; /* Espacement entre les éléments */
+  margin-top: 20px;
+  margin-bottom: 20px; /* Marge en bas pour le conteneur */
+}
+
+/* Conteneur pour les numéros d'urgence à gauche */
+.emergency-container__left, .emergency-container__right {
+  flex: 1;
+  min-height: 200px;
+}
+
+/* Spécifique au conteneur de gauche */
+.emergency-container__left {
+  margin-left: 20px; /* Marge à droite pour le conteneur de gauche */
+}
+
+/* Spécifique au conteneur de droite */
+.emergency-container__right {
+  margin-right: 20px; /* Marge à gauche pour le conteneur de droite */
+}
+
+/* Style des blocs de numéros d'urgence (nationaux et locaux) */
+.emergency-container__numbers--national, .emergency-container__numbers--local {
+  background-color: #f2f2f2; /* Couleur de fond légère */
+  padding: 10px; /* Espace intérieur */
+  border-radius: 10px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée */
+  // Retire la marge pour éviter l'espace entre les éléments flexibles
+}
+
+/* Style des titres dans les blocs de numéros */
+.emergency-container__numbers-title {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Style des listes de numéros d'urgence */
+.emergency-container__numbers-list {
+  list-style-type: none; /* Supprime les puces */
+  padding: 0;
+}
+
+/* Style des éléments de la liste */
+.emergency-container__numbers-list-item {
+  margin-bottom: 10px; /* Espacement entre les éléments de la liste */
+  padding: 10px; /* Espace intérieur pour chaque élément de la liste */
+  background-color: #fff; /* Fond blanc pour chaque élément */
+  border-radius: 5px; /* Coins arrondis pour les éléments de la liste */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Légère ombre portée */
+}
+
+/* Style de la barre de recherche de la ville */
+.searchbar-city {
+  display: flex;
+  justify-content: center; /* Centre horizontalement */
+  align-items: center; /* Centre verticalement si la hauteur du conteneur parent est définie */
+  margin-left: 115px;
+  padding: 10px;
+  margin-top: 0px;
+}
+
+body.emergency-numbers-page {
+  margin-bottom: 0;
+}

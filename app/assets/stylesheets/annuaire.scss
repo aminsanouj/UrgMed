@@ -1,25 +1,40 @@
-.professionals-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px; /* Espacement entre les colonnes */
-  margin-left: 10px; /* Marge à gauche */
-  margin-right: 10px; /* Marge à droite */
+.annuaire-professionals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Utilisation de grid pour une disposition fluide */
+  gap: 10px; /* Espacement réduit entre les cartes */
+  padding: 20px; /* Padding pour le container global */
 }
 
-.professional-category {
-  flex: 1 1 calc(25% - 20px); /* Chaque container occupe 25% de l'espace disponible moins l'espacement */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-  box-sizing: border-box; /* Pour inclure le padding et la bordure dans la largeur calculée */
+.annuaire-professional-category {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Pour s'assurer que le contenu ne déborde pas */
+}
+
+.annuaire-professional-card {
+  padding: 1px 15px 1px 15px; /* Padding réduit en haut */
+  margin-bottom: 0px; /* Espacement réduit entre les cartes */
 }
 
 h2 {
-  font-size: 1.5em;
-  margin: 20px 0 10px 0;
+  font-size: 2em;
+  margin: 20px 0 0 20px;
+  text-align: left; /* Centrer le titre */
+  color: #333;
 }
 
-.searchbar-city {
-  margin-top: 20px;
+h3 {
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  color: #555;
+  text-align: center; /* Centrer les titres des catégories */
+  background-color: #f2f2f2; /* Couleur de fond pour les titres */
+  padding: 10px 0;
+  border-radius: 10px 10px 0 0; /* Arrondi les coins supérieurs */
+}
+
+.annuaire-searchbar-city {
+  margin-top: 30px;
 }

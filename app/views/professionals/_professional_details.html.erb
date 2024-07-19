@@ -27,8 +27,8 @@
     </p>
     <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
     <div class="button-group mt-3">
-      <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm", target: "_blank" %>
-      <%= link_to "Appeler", "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm" %>
+      <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm itineraire", target: "_blank" %>
+      <%= link_to @professional.phone_number, "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm appeler" %>
     </div>
   </div>
 </div>

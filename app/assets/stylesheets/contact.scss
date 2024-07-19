@@ -1,94 +1,67 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.contact-form-container {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px 20px 30px 20px;
+  background-color: #f0f4fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-body {
-  font-family: "Inter", sans-serif;
-}
-.formbold-mb-5 {
+
+.contact-form-header {
+  font-size: 2em;
   margin-bottom: 20px;
-}
-.formbold-pt-3 {
-  padding-top: 12px;
-}
-.formbold-main-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 48px;
-}
-
-.formbold-form-wrapper {
-  margin: 0 auto;
-  max-width: 550px;
-  width: 100%;
-  background: white;
-}
-.formbold-form-label {
-  display: block;
-  font-weight: 500;
-  font-size: 16px;
-  color: #07074d;
-  margin-bottom: 12px;
-}
-.formbold-form-label-2 {
-  font-weight: 600;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-
-.formbold-form-input {
-  width: 100%;
-  padding: 12px 24px;
-  border-radius: 6px;
-  border: 1px solid #e0e0e0;
-  background: white;
-  font-weight: 500;
-  font-size: 16px;
-  color: #6b7280;
-  outline: none;
-  resize: none;
-}
-.formbold-form-input:focus {
-  border-color: #6a64f1;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
-}
-
-.formbold-btn {
+  color: #333;
   text-align: center;
-  font-size: 16px;
-  border-radius: 6px;
-  padding: 14px 32px;
-  border: none;
-  font-weight: 600;
-  background-color: #6a64f1;
-  color: white;
-  cursor: pointer;
-}
-.formbold-btn:hover {
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
 
-.formbold--mx-3 {
-  margin-left: -12px;
-  margin-right: -12px;
+.contact-form-fields {
+  display: grid;
+  gap: 15px;
 }
-.formbold-px-3 {
-  padding-left: 12px;
-  padding-right: 12px;
-}
-.flex {
+
+.contact-form-group {
   display: flex;
+  flex-direction: column;
 }
-.flex-wrap {
-  flex-wrap: wrap;
+
+.contact-form-group label {
+  font-size: 1em;
+  margin-bottom: 5px;
+  color: #555;
+  font-weight: 600; /* Semi-bold */
 }
-.w-full {
-  width: 100%;
+
+.contact-form-control {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1em;
 }
-@media (min-width: 540px) {
-  .sm\:w-half {
-    width: 50%;
-  }
+
+.contact-form-control:focus {
+  border-color: #0056b3;
+  outline: none;
+}
+
+.contact-form-submit {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.contact-form-submit:hover {
+  background-color: #0056b3;
+}
+
+textarea.contact-form-control {
+  height: 80px;
+  resize: vertical;
+  font-family: Arial, sans-serif; // Remplacez par la police souhaitée
+  font-size: 1em;
 }
