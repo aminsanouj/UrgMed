@@ -5,12 +5,10 @@ export default class extends Controller {
 
   extractRegionFromInput() {
     const address = this.inputTarget.value;
-    console.log('Input:', this.inputTarget.value);
     this.extractRegion(address);
   }
 
   extractRegion(address) {
-    console.log('Extracting region from address:', address);
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'address': address }, (results, status) => {
       if (status === 'OK' && results[0]) {
@@ -19,6 +17,9 @@ export default class extends Controller {
           const region = regionComponent.long_name;
           this.inputTarget.value = region;
           console.log('Geocode was successful and found region: ' + region);
+
+          // Soumettre le formulaire après avoir mis à jour la valeur de la région
+          this.element.requestSubmit();
         } else {
           console.log('Region component not found.');
         }

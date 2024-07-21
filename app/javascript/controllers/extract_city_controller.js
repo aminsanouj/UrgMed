@@ -19,6 +19,9 @@ export default class extends Controller {
     if (city) {
       this.inputTarget.value = city;
       console.log("Updated input value with city:", this.inputTarget.value);
+
+      // Soumettre le formulaire après avoir mis à jour la valeur de la ville
+      this.element.requestSubmit();
     } else {
       console.log("No city extracted");
     }

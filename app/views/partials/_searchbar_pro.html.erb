@@ -2,7 +2,7 @@
   <input type="text" id="search-bar" name="query_pro" value="<%= params[:query_pro] %>" placeholder="Quel professionnel recherchez-vous ?" data-search-target="input">
   <%= hidden_field_tag :query_city, params[:query_city] %>
   <button type="submit" data-action="search->search#submitForm">
-    <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
+    <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>
   </button>
   <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", target: "search.clear" } %>
   <ul class="list-group" data-search-target="results"></ul>

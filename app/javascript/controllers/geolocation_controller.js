@@ -6,7 +6,7 @@ export default class extends Controller {
   locationPermissionDenied = false; // Ajouter un drapeau pour vérifier si l'accès à la position a été refusé
 
   connect() {
-    document.querySelector('.location-icon').addEventListener("click", this.handleLocationClick.bind(this));
+    this.element.querySelector('.location-icon').addEventListener("click", this.handleLocationClick.bind(this));
   }
 
   handleLocationClick() {
@@ -16,10 +16,19 @@ export default class extends Controller {
         return;
       }
 
+      this.loaderTimeout = setTimeout(() => this.showLoaderIfEmpty(), this.loaderDelay);
+
       navigator.geolocation.getCurrentPosition(
-        () => this.getLocation(),
-        (error) => this.handleGeolocationError(error),
-        { timeout: 10000 } // Définir un délai d'expiration de 10 secondes pour la géolocalisation
+        (position) => {
+          clearTimeout(this.loaderTimeout);
+          this.showPosition(position);
+        },
+        (error) => {
+          clearTimeout(this.loaderTimeout);
+          this.hideLoader();
+          this.handleGeolocationError(error);
+        },
+        { timeout: 10000 } // Définir un délai d'expiration de 10 secondes
       );
     } else {
       alert("La géolocalisation n'est pas prise en charge par ce navigateur.");
@@ -28,10 +37,8 @@ export default class extends Controller {
 
   handleGeolocationError(error) {
     if (error.code === error.PERMISSION_DENIED) {
-      if (!this.locationPermissionDenied) {
-        this.locationPermissionDenied = true;
-        alert("Vous avez refusé l'accès à votre position. Veuillez autoriser l'accès pour utiliser cette fonctionnalité.");
-      }
+      this.locationPermissionDenied = true;
+      alert("Vous avez refusé l'accès à votre position. Veuillez autoriser l'accès pour utiliser cette fonctionnalité.");
     } else {
       console.error("Erreur de géolocalisation : ", error);
     }
@@ -52,23 +59,6 @@ export default class extends Controller {
     document.querySelector('#loader').style.display = 'none';
   }
 
-  getLocation() {
-    this.loaderTimeout = setTimeout(() => this.showLoaderIfEmpty(), this.loaderDelay);
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        clearTimeout(this.loaderTimeout);
-        this.showPosition(position);
-      },
-      (error) => {
-        clearTimeout(this.loaderTimeout);
-        this.hideLoader();
-        this.handleGeolocationError(error);
-      },
-      { timeout: 10000 } // Définir un délai d'expiration de 10 secondes pour la géolocalisation
-    );
-  }
-
   showPosition(position) {
     const lat = position.coords.latitude;
     const lon = position.coords.longitude;
@@ -79,21 +69,17 @@ export default class extends Controller {
     geocoder.geocode({ 'latLng': latlng }, (results, status) => {
       this.hideLoader();
 
-      if (status === 'OK') {
-        if (results[0]) {
-          const address = results[0].formatted_address;
-          const addressInput = document.querySelector('#search-bar');
-          addressInput.value = address; // Mettre à jour le champ de recherche avec l'adresse complète
+      if (status === 'OK' && results[0]) {
+        const address = results[0].formatted_address;
+        const addressInput = document.querySelector('#search-bar');
+        addressInput.value = address; // Mettre à jour le champ de recherche avec l'adresse complète
 
-          // Appeler onPlaceChanged pour gérer le changement
-          this.onPlaceChanged(addressInput);
-        } else {
-          console.error('Aucun résultat trouvé pour ces coordonnées.');
-          alert('Aucun résultat trouvé pour ces coordonnées.');
-        }
+        // Appeler onPlaceChanged pour gérer le changement
+        this.onPlaceChanged(addressInput);
       } else {
-        console.error('Échec du géocodage inverse :', status);
-        alert('Échec du géocodage inverse : ' + status);
+        const errorMessage = status === 'OK' ? 'Aucun résultat trouvé pour ces coordonnées.' : `Échec du géocodage inverse : ${status}`;
+        console.error(errorMessage);
+        alert(errorMessage);
       }
     });
   }
