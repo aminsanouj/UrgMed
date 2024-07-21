@@ -33,3 +33,14 @@
    /* Margin à gauche de container-results */
   margin-right: 20px;
 }
+
+.mapboxgl-popup-close-button {
+  width: 30px; /* Ajustez cette valeur pour augmenter la largeur */
+  height: 30px; /* Ajustez cette valeur pour augmenter la hauteur */
+  font-size: 20px;
+}
+
+.mapboxgl-popup-content {
+  width: 200px; /* Ajustez cette valeur pour augmenter la largeur */
+}
+

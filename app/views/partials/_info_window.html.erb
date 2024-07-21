@@ -1,2 +1,7 @@
 <h2><%= professional.first_name %> <%= professional.last_name %></h2>
-<p><%= professional.speciality %></p>
+<p><strong>Spécialité:</strong> <%= professional.speciality %></p>
+<% if professional.open_now? %>
+  <p><span class="availability-badge bg-success"></span>Ouvert actuellement</p>
+<% else %>
+  <p><span class="availability-badge bg-secondary"></span>Fermé actuellement</p>
+<% end %>
