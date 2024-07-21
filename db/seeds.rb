@@ -11,8 +11,8 @@
 # db/seeds.rb
 
 # Emergency numbers for Toulouse
-
 EmergencyNumber.create([
+  # National emergency numbers
   {
     name: "Police",
     phone_number: "17",
@@ -44,20 +44,54 @@ EmergencyNumber.create([
     description: "Numéro d'urgence pour signaler des cas de maltraitance sur des enfants."
   },
   {
-    name: "Centre Antipoison",
-    phone_number: "01 40 05 48 48",
-    description: "Numéro d'urgence pour obtenir des conseils en cas d'intoxication."
-  },
-  {
-    name: "Urgence Médicale de Paris",
-    phone_number: "01 53 94 94 94",
-    description: "Numéro d'urgence pour contacter les urgences médicales à Paris."
-  },
-  {
     name: "Pharmacie de Garde",
     phone_number: "3237",
     description: "Numéro pour trouver une pharmacie de garde ouverte près de chez vous."
-  }
+  },
+  {
+    name: "SOS Femmes violences conjugales",
+    phone_number: "3919",
+    description: "Numéro d'urgence pour les femmes victimes de violences conjugales."
+  },
+  {
+    name: "Urgences sociales",
+    phone_number: "115",
+    description: "Numéro d'urgence pour les situations d'urgence sociale."
+  },
+  {
+    name: "Numéro d'urgence pour les personnes sourdes et malentendantes",
+    phone_number: "114",
+    description: "Numéro d'urgence pour les personnes sourdes et malentendantes."
+  },
+  # Regional emergency numbers
+  {
+    name: "Centre Antipoison de Toulouse",
+    phone_number: "05 61 77 74 47",
+    description: "Numéro d'urgence pour obtenir des conseils en cas d'intoxication.",
+    is_local: true,
+    region: "Occitanie"
+  },
+  {
+    name: "Permanence des soins dentaires Occitanie Est",
+    phone_number: "15",
+    description: "Numéro d'urgence pour les soins dentaires en Occitanie Est.",
+    is_local: true,
+    region: "Occitanie"
+  },
+  {
+    name: "Permanence des soins dentaires Occitanie Ouest",
+    phone_number: "3966",
+    description: "Numéro d'urgence pour les soins dentaires en Occitanie Ouest.",
+    is_local: true,
+    region: "Occitanie"
+  },
+  {
+    name: "Allo j'aide un proche",
+    phone_number: "0806 806 830",
+    description: "Numéro d'urgence pour aider un proche.",
+    is_local: true,
+    region: "Occitanie"
+  },
 ])
 
 Professional.create([
