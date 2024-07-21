@@ -3,10 +3,10 @@
     <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
   </div>
   <div class="form-inline">
-    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-action="input->autocomplete#initAutocomplete change->extract-city#extractCityFromInput" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input">
+    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-region-target="input">
     <%= hidden_field_tag :query_pro, params[:query_pro] %>
 
-    <button type="submit" data-action="click->autocomplete#handleSearch">
+    <button type="button" data-action="click->autocomplete#handleSearch">
       <img class="search-icon" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png">
     </button>
     <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", search_target: "clear" } %>

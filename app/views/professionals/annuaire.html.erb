@@ -1,14 +1,14 @@
 <div class="annuaire-searchbar-city">
-  <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "autocomplete search geolocation extract-city" } %>
+  <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "extract-city autocomplete search geolocation" } %>
 </div>
 
-<h2>Liste des professionnels autour de vous :</h2>
+<h2 class="annuaire-h2">Liste des professionnels autour de vous :</h2>
 
 <div class="annuaire-results-container">
   <div class="annuaire-professionals-grid">
     <!-- Container pour les médecins -->
     <div class="annuaire-professional-category">
-      <h3>Médecins</h3>
+      <h3 class="annuaire-h3">Médecins</h3>
       <% professionals = @query_city.present? ? Professional.search_by_speciality("Médecin").search_by_city(@query_city) : Professional.search_by_speciality("Médecin") %>
       <% professionals.each do |professional| %>
         <div class="annuaire-professional-card">
@@ -19,7 +19,7 @@
 
     <!-- Container pour les dentistes -->
     <div class="annuaire-professional-category">
-      <h3>Dentistes</h3>
+      <h3 class="annuaire-h3">Dentistes</h3>
       <% professionals = @query_city.present? ? Professional.search_by_speciality("Dentiste").search_by_city(@query_city) : Professional.search_by_speciality("Dentiste") %>
       <% professionals.each do |professional| %>
         <div class="annuaire-professional-card">
@@ -30,7 +30,7 @@
 
     <!-- Container pour les pharmacies -->
     <div class="annuaire-professional-category">
-      <h3>Pharmacies</h3>
+      <h3 class="annuaire-h3">Pharmacies</h3>
       <% professionals = @query_city.present? ? Professional.search_by_speciality("Pharmacie").search_by_city(@query_city) : Professional.search_by_speciality("Pharmacie") %>
       <% professionals.each do |professional| %>
         <div class="annuaire-professional-card">
@@ -41,7 +41,7 @@
 
     <!-- Container pour les urgences -->
     <div class="annuaire-professional-category">
-      <h3>Urgences</h3>
+      <h3 class="annuaire-h3">Urgences</h3>
       <% professionals = @query_city.present? ? Professional.search_by_speciality("Urgence").search_by_city(@query_city) : Professional.search_by_speciality("Urgence") %>
       <% professionals.each do |professional| %>
         <div class="annuaire-professional-card">

@@ -14,7 +14,7 @@
   </div>
   <div class="emergency-container__right">
     <div class="searchbar-city">
-      <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "autocomplete search geolocation extract-city" } %>
+      <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "extract-region search geolocation autocomplete" } %>
     </div>
     <div class="emergency-container__numbers--local">
       <h2 class="emergency-container__numbers-title">Numéros d'urgence locaux</h2>

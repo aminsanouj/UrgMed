@@ -84,16 +84,34 @@ export default class extends Controller {
           const address = results[0].formatted_address;
           const addressInput = document.querySelector('#search-bar');
           addressInput.value = address; // Mettre à jour le champ de recherche avec l'adresse complète
-          addressInput.dispatchEvent(new Event('change')); // Déclencher l'événement change pour ExtractCity
 
-          // Soumettre le formulaire de recherche
-          addressInput.form.submit();
+          // Appeler onPlaceChanged pour gérer le changement
+          this.onPlaceChanged(addressInput);
         } else {
+          console.error('Aucun résultat trouvé pour ces coordonnées.');
           alert('Aucun résultat trouvé pour ces coordonnées.');
         }
       } else {
+        console.error('Échec du géocodage inverse :', status);
         alert('Échec du géocodage inverse : ' + status);
       }
     });
+  }
+
+  onPlaceChanged(element) {
+    const extractCityController = this.application.getControllerForElementAndIdentifier(document.querySelector('.search-container'), "extract-city");
+    const extractRegionController = this.application.getControllerForElementAndIdentifier(document.querySelector('.search-container'), "extract-region");
+
+    if (extractCityController) {
+      extractCityController.extractCityFromInput();
+    }
+
+    if (extractRegionController) {
+      extractRegionController.extractRegionFromInput();
+    }
+
+    if (!extractCityController && !extractRegionController) {
+      element.form.submit();
+    }
   }
 }

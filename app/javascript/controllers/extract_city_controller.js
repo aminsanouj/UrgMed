@@ -6,20 +6,30 @@ export default class extends Controller {
   static targets = ["input"];
 
   connect() {
-    this.extractCityFromInput(); // Appeler la méthode lors de la connexion si nécessaire
+    console.log("Controller connected");
   }
 
   extractCityFromInput() {
     const address = this.inputTarget.value;
+    console.log("Extracting city from address:", address);
+
     const city = this.extractCity(address);
+    console.log("Extracted city:", city);
+
     if (city) {
       this.inputTarget.value = city;
-      this.element.submit(); // Soumettre le formulaire avec la ville extraite
+      console.log("Updated input value with city:", this.inputTarget.value);
+    } else {
+      console.log("No city extracted");
     }
   }
 
   extractCity(address) {
+    console.log("Matching address with regex:", address);
+
     const match = address.match(cityRegex);
+    console.log("Regex match result:", match);
+
     return match ? match[1] : null;
   }
 }
