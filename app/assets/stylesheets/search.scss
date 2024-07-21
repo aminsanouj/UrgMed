@@ -44,3 +44,7 @@
   width: 200px; /* Ajustez cette valeur pour augmenter la largeur */
 }
 
+.container-results {
+  height: 550px; /* fixer une hauteur pour l'élément */
+  overflow-y: auto; /* ajouter un défilement vertical */
+}

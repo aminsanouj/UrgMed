@@ -12,11 +12,10 @@
   </div>
 
   <div class="container-right">
-    <div class="container-results">
+    <h2>Search Results:</h2>
+    <div class="container-results" data-controller="infinite-scroll" data-infinite-scroll-results-target="results">
       <% if @professionals.any? %>
-        <h2>Search Results:</h2>
         <%= render partial: 'professionals/professional_card', collection: @professionals, as: :professional %>
-        <%= will_paginate @professionals %>
       <% else %>
         <p>No professionals found.</p>
       <% end %>

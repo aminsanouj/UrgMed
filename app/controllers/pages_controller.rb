@@ -1,7 +1,7 @@
-# app/controllers/pages_controller.rb
 class PagesController < ApplicationController
   include ProfessionalsHelper
   protect_from_forgery except: :search
+  respond_to? :html, :js
 
   def home
     # Code pour récupérer les données nécessaires à afficher sur la page d'accueil
@@ -25,19 +25,24 @@ class PagesController < ApplicationController
       end
     end
 
-    # Retirer la pagination pour récupérer tous les résultats
-    @all_professionals = @professionals
+    # Récupérer le paramètre 'skip' de la requête AJAX
+    skip = params[:skip].to_i
 
-    # Réappliquer la pagination pour les résultats affichés dans container-results
-    @professionals = @professionals.paginate(page: params[:page], per_page: 3)
+    # Récupérer les résultats en prenant en compte le paramètre 'skip'
+    @professionals = @professionals.order(:id).offset(skip)
 
-    @markers = @all_professionals.where.not(latitude: nil, longitude: nil).map do |professional|
+    @markers = @professionals.where.not(latitude: nil, longitude: nil).map do |professional|
       {
         lat: professional.latitude,
         lng: professional.longitude,
         info_window_html: render_to_string(partial: "partials/info_window", locals: { professional: professional }),
         marker_html: render_to_string(partial: "partials/marker", locals: { professional: professional })
       }
+    end
+
+    respond_to do |format|
+      format.html # rendre la page HTML complète
+      format.js { render partial: 'professionals/professional_card', collection: @professionals, as: :professional } # rendre la requête partielle
     end
   end
 
@@ -58,5 +63,4 @@ class PagesController < ApplicationController
       redirect_to contact_path
     end
   end
-
 end
