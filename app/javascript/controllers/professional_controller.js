@@ -10,15 +10,12 @@ export default class extends Controller {
 
     const url = event.currentTarget.href;
 
-    const container = event.currentTarget.closest('.annuaire-professional-card, .professional-card') || document.querySelector('.annuaire-results-container, .container-results');
+    // Cibler spécifiquement le conteneur 'search-professional-card'
+    const container = event.currentTarget.closest('.search-professional-card');
 
     if (container) {
         // Enregistrer le contenu de la card ou du container avant de le remplacer
-        if (event.currentTarget.closest('.professional-card')) {
-            container.setAttribute('data-card-content', container.innerHTML);
-        } else {
-            currentState = container.innerHTML;
-        }
+        currentState = container.innerHTML;
 
         fetch(url, { headers: { 'Accept': 'text/html' } })
             .then(response => response.text())
@@ -37,7 +34,7 @@ export default class extends Controller {
 
   closeDetails(event) {
     event.preventDefault();
-    const container = event.currentTarget.closest('.annuaire-professional-card, .professional-card') || document.querySelector('.annuaire-results-container, .container-results');
+    const container = event.currentTarget.closest('.annuaire-professional-card, .search-professional-card') || document.querySelector('.annuaire-results-container, .container-results');
 
     if (container) {
       const cardContent = container.getAttribute('data-card-content');

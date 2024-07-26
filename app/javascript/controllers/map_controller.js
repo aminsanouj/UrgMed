@@ -23,30 +23,29 @@ export default class extends Controller {
   }
 
   #addMarkersToMap() {
-  this.markersValue.forEach((marker) => {
-    const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+    this.markersValue.forEach((marker) => {
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
 
-    // Create a HTML element for your custom marker
-    const customMarker = document.createElement("div")
-    customMarker.innerHTML = marker.marker_html
+      // Create a HTML element for your custom marker
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
 
-    // Pass the element as an argument to the new marker
-    new mapboxgl.Marker(customMarker)
-      .setLngLat([marker.lng, marker.lat])
-      .setPopup(popup)
-      .addTo(this.map)
+      // Pass the element as an argument to the new marker
+      const mapMarker = new mapboxgl.Marker(customMarker)
+        .setLngLat([marker.lng, marker.lat])
+        .setPopup(popup)
+        .addTo(this.map)
 
-    // Delay enabling the close button
-    popup.on('open', () => {
-      const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-      closeButton.disabled = true; // Disable the button initially
-      setTimeout(() => {
-        closeButton.disabled = false; // Enable it after a short delay
-      }, 100); // Adjust the delay as needed
+      // Delay enabling the close button
+      popup.on('open', () => {
+        const closeButton = document.querySelector('.mapboxgl-popup-close-button');
+        closeButton.disabled = true; // Disable the button initially
+        setTimeout(() => {
+          closeButton.disabled = false; // Enable it after a short delay
+        }, 100); // Adjust the delay as needed
+      })
     })
-  })
-}
-
+  }
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()

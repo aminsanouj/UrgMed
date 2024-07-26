@@ -1,4 +1,4 @@
-<div class="card" data-controller="professional">
+<div class="card search-professional-card" data-controller="professional" data-professional-id="<%= professional.id %>">
   <div class="card-body">
     <h5 class="card-title">
       <% if professional.open_now? %>
@@ -12,10 +12,9 @@
           <%= distance_between(@search_query_coordinates, professional) %>
         </span>
       <% end %>
-
     </h5>
     <p class="card-text"><strong>Spécialité:</strong> <%= professional.speciality %></p>
     <p class="card-text"><strong>Adresse:</strong> <%= professional.full_address %></p>
-    <%= link_to "Voir Détails", professional_details_path(professional, query_city: @search_query_city), class: "btn btn-primary btn-sm details", data: { action: "click->professional#showDetails", target: "professional.details" } %>
+    <%= link_to "Voir Détails", professional_details_path(professional, query_city: @search_query_city), class: "btn btn-primary btn-sm details", data: { action: "click->professional#showDetails", target: "professional.details", professional_id: professional.id } %>
   </div>
 </div>

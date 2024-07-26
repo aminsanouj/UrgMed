@@ -1,34 +1,32 @@
-<div class="card professional-details d-none" data-controller="professional">
-  <div class="card-body">
-    <button class="close-button" data-action="click->professional#closeDetails">
-      <i class="fas fa-times"></i>
-    </button>
-    <h5 class="card-title">
-      <% if @professional.open_now? %>
-        <span class="availability-badge bg-success float-end"></span>
-      <% else %>
-        <span class="availability-badge bg-secondary float-end"></span>
+<div class="card-body" data-controller="professional">
+  <button class="close-button" data-action="click->professional#closeDetails">
+    <i class="fas fa-times"></i>
+  </button>
+  <h5 class="card-title">
+    <% if @professional.open_now? %>
+      <span class="availability-badge bg-success float-end"></span>
+    <% else %>
+      <span class="availability-badge bg-secondary float-end"></span>
+    <% end %>
+    <%= @professional.first_name %> <%= @professional.last_name %>
+    <% if @search_query_coordinates %>
+      <span class="distance with-close-button">
+        <%= distance_between(@search_query_coordinates, @professional) %>
+      </span>
+    <% end %>
+  </h5>
+  <p class="card-text"><strong>Spécialité:</strong> <%= @professional.speciality %></p>
+  <p class="card-text"><strong>Adresse Complète:</strong> <%= @professional.full_address %></p>
+  <p class="card-text"><strong>Horaires:</strong><br>
+    <% sorted_opening_hours(@professional.opening_hours).each do |day, hours| %>
+      <% if hours.present? %>
+        <%= day %>: <%= hours %><br>
       <% end %>
-      <%= @professional.first_name %> <%= @professional.last_name %>
-      <% if @search_query_coordinates %>
-        <span class="distance with-close-button">
-          <%= distance_between(@search_query_coordinates, @professional) %>
-        </span>
-      <% end %>
-    </h5>
-    <p class="card-text"><strong>Spécialité:</strong> <%= @professional.speciality %></p>
-    <p class="card-text"><strong>Adresse Complète:</strong> <%= @professional.full_address %></p>
-    <p class="card-text"><strong>Horaires:</strong><br>
-      <% sorted_opening_hours(@professional.opening_hours).each do |day, hours| %>
-        <% if hours.present? %>
-          <%= day %>: <%= hours %><br>
-        <% end %>
-      <% end %>
-    </p>
-    <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
-    <div class="button-group mt-3">
-      <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm itineraire", target: "_blank" %>
-      <%= link_to @professional.phone_number, "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm appeler" %>
-    </div>
+    <% end %>
+  </p>
+  <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
+  <div class="button-group mt-3">
+    <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm itineraire", target: "_blank" %>
+    <%= link_to @professional.phone_number, "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm appeler" %>
   </div>
 </div>
