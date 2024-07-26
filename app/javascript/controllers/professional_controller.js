@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-let currentState = null; // Variable globale pour stocker l'état actuel
+let currentState = null;
 
 export default class extends Controller {
   static targets = ["details"];
@@ -9,28 +9,26 @@ export default class extends Controller {
     event.preventDefault();
 
     const url = event.currentTarget.href;
+    const professionalId = event.currentTarget.dataset.professionalId;
 
-    // Cibler spécifiquement le conteneur 'search-professional-card'
     const container = event.currentTarget.closest('.search-professional-card');
 
     if (container) {
-        // Enregistrer le contenu de la card ou du container avant de le remplacer
-        currentState = container.innerHTML;
+      currentState = container.innerHTML;
+      container.setAttribute('data-card-content', currentState);
 
-        fetch(url, { headers: { 'Accept': 'text/html' } })
-            .then(response => response.text())
-            .then(html => {
-                container.innerHTML = html;
-            })
-            .catch(error => {
-                console.error('Erreur lors du fetch des détails:', error);
-                console.log('Erreur:', error);
-            });
+      fetch(url, { headers: { 'Accept': 'text/html' } })
+        .then(response => response.text())
+        .then(html => {
+          container.innerHTML = html;
+        })
+        .catch(error => {
+          console.error('Erreur lors du fetch des détails:', error);
+        });
     } else {
-        console.log('Aucun conteneur trouvé.');
+      console.log('Aucun conteneur trouvé.');
     }
   }
-
 
   closeDetails(event) {
     event.preventDefault();
@@ -46,6 +44,14 @@ export default class extends Controller {
         container.innerHTML = currentState;
       }
     }
+
+    this.#triggerClosePopupInMapController();
   }
 
+  #triggerClosePopupInMapController() {
+    const closeButton = document.querySelector('.mapboxgl-popup-close-button');
+    if (closeButton) {
+      closeButton.click(); // Trigger close popup in map controller
+    }
+  }
 }
