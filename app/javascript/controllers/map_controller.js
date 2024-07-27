@@ -36,6 +36,10 @@ export default class extends Controller {
         customMarker.setAttribute('data-professional-id', professionalId);
 
         customMarker.addEventListener('click', () => {
+          if (this.currentPopup && this.currentPopup.getLngLat().lng === marker.lng && this.currentPopup.getLngLat().lat === marker.lat) {
+            return;
+          }
+
           if (this.currentPopup) {
             this.#closeCurrentPopup();
           }
@@ -61,12 +65,11 @@ export default class extends Controller {
         this.currentPopup = popup;
         this.#addPopupCloseButtonListener();
 
-        // Delay enabling the close button
         const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-        closeButton.disabled = true; // Disable the button initially
+        closeButton.disabled = true;
         setTimeout(() => {
-          closeButton.disabled = false; // Enable it after a short delay
-        }, 100); // Adjust the delay as needed
+          closeButton.disabled = false;
+        }, 100);
       });
     });
   }
@@ -82,7 +85,7 @@ export default class extends Controller {
 
   #closeCurrentPopup() {
     if (this.currentPopup) {
-      this.currentPopup.remove(); // Close the popup
+      this.currentPopup.remove();
       this.currentPopup = null;
       this.#triggerCloseDetailsInProfessionalController();
     }
@@ -91,7 +94,7 @@ export default class extends Controller {
   #triggerCloseDetailsInProfessionalController() {
     const closeButton = document.querySelector('.search-professional-card .close-button');
     if (closeButton) {
-      closeButton.click(); // Trigger close details in professional controller
+      closeButton.click();
     }
   }
 
@@ -129,4 +132,18 @@ export default class extends Controller {
       this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
     }
   }
+
+  openMarker(professionalId) {
+    console.log('openMarker called with professionalId:', professionalId);
+
+    const markerElement = document.querySelector(`.mapboxgl-marker[data-professional-id="${professionalId}"]`);
+
+    if (markerElement) {
+      console.log('Marker found, triggering click event for professionalId:', professionalId);
+      markerElement.click();
+    } else {
+      console.error(`No marker found for professional ID: ${professionalId}`);
+    }
+  }
+
 }

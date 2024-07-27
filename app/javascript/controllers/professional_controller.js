@@ -6,6 +6,7 @@ export default class extends Controller {
   static targets = ["details"];
 
   showDetails(event) {
+    console.log('showDetails');
     event.preventDefault();
 
     const url = event.currentTarget.href;
@@ -27,6 +28,15 @@ export default class extends Controller {
         });
     } else {
       console.log('Aucun conteneur trouvé.');
+    }
+
+    // Open the marker on the map
+    const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector('[data-controller="map"]'), 'map');
+    if (mapController) {
+      console.log('Opening marker for professionalId:', professionalId);
+      mapController.openMarker(professionalId);
+    } else {
+      console.error('Map controller not found');
     }
   }
 
