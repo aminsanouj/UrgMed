@@ -67,6 +67,8 @@ export default class extends Controller {
 
   // Handle marker click event
   #handleMarkerClick(professionalId, marker) {
+    console.log('Handling marker click for professionalId:', professionalId);
+
     if (this.#isCurrentPopup(marker)) return;
 
     this.#closeCurrentPopup();
@@ -75,6 +77,8 @@ export default class extends Controller {
     const cardElement = document.getElementById(`professional-${professionalId}`);
     if (cardElement) {
       this.scrollToCard(cardElement);
+    } else {
+      console.error('No card found for professional ID:', professionalId);
     }
   }
 
@@ -87,14 +91,23 @@ export default class extends Controller {
 
   // Handle popup open event
   #handlePopupOpen(popup) {
+    console.log('Popup opened:', popup);
     this.currentPopup = popup;
     this.#addPopupCloseButtonListener();
 
-    const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-    closeButton.disabled = true;
     setTimeout(() => {
-      closeButton.disabled = false;
-    }, 100);
+      const closeButton = document.querySelector('.mapboxgl-popup-close-button');
+      console.log('Checking for close button...');
+      if (closeButton) {
+        console.log('Adding close button listener');
+        closeButton.disabled = true;
+        setTimeout(() => {
+          closeButton.disabled = false;
+        }, 100);
+      } else {
+        console.error('Close button not found.');
+      }
+    }, 100); // Ajustez le délai si nécessaire
   }
 
   // Add event listener to popup close button
@@ -108,9 +121,14 @@ export default class extends Controller {
   // Close the current popup
   #closeCurrentPopup() {
     if (this.currentPopup) {
+      console.log('Closing current popup:', this.currentPopup);
       this.currentPopup.remove();
       this.currentPopup = null;
-      this.#triggerCloseDetailsInProfessionalController();
+
+      // Attendre un court instant avant de déclencher la fermeture des détails
+      setTimeout(() => {
+        this.#triggerCloseDetailsInProfessionalController();
+      }, 100);
     }
   }
 
@@ -172,7 +190,7 @@ export default class extends Controller {
       console.log('Marker found, triggering click event for professionalId:', professionalId);
       markerElement.click();
     } else {
-      console.error(`No marker found for professional ID: ${professionalId}`);
+      console.error('No marker found for professional ID:', professionalId);
     }
   }
 }

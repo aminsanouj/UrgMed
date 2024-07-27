@@ -13,6 +13,8 @@ export default class extends Controller {
     const professionalId = event.currentTarget.dataset.professionalId;
     const container = event.currentTarget.closest('.search-professional-card');
 
+    console.log('Showing details for professionalId:', professionalId);
+
     if (container) {
       this.#saveCurrentState(container);
       this.#fetchAndDisplayDetails(url, container);
@@ -22,6 +24,7 @@ export default class extends Controller {
 
     this.#openMarkerOnMap(professionalId);
   }
+
 
   // Méthode pour fermer les détails d'un professionnel
   closeDetails(event) {
@@ -64,6 +67,7 @@ export default class extends Controller {
     }
   }
 
+
   // Méthode privée pour trouver le conteneur
   #findContainer(event) {
     return event.currentTarget.closest('.annuaire-professional-card, .search-professional-card') ||
@@ -87,6 +91,10 @@ export default class extends Controller {
     const closeButton = document.querySelector('.mapboxgl-popup-close-button');
     if (closeButton) {
       closeButton.click(); // Trigger close popup in map controller
+    } else {
+      console.error('No close button found to trigger.');
     }
   }
+
+
 }
