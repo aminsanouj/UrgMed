@@ -1,5 +1,6 @@
-import { Controller } from "@hotwired/stimulus";
-import mapboxgl from 'mapbox-gl';
+// Map JS
+import { Controller } from "@hotwired/stimulus"
+import mapboxgl from 'mapbox-gl'
 
 export default class extends Controller {
   static values = {
@@ -8,153 +9,94 @@ export default class extends Controller {
   }
 
   connect() {
-    // Set Mapbox access token
-    mapboxgl.accessToken = this.apiKeyValue;
-    this.element.innerHTML = '';
+    mapboxgl.accessToken = this.apiKeyValue
 
-    // Initialize the map
+    // Ensure the container is empty before initializing the map
+    this.element.innerHTML = ''
+
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
-    });
-
-    // Initialize current popup tracker
-    this.currentPopup = null;
-
-    // Add markers to the map
-    this.#addMarkersToMap();
-
-    // Fit the map to the markers
-    this.#fitMapToMarkers();
+    })
+    this.#addMarkersToMap()
+    this.#fitMapToMarkers()
   }
 
-  // Add markers to the map
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
-      const customMarker = this.#createCustomMarker(marker);
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
 
+      // Create a HTML element for your custom marker
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+
+      // Pass the element as an argument to the new marker
       const mapMarker = new mapboxgl.Marker(customMarker)
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
-        .addTo(this.map);
+        .addTo(this.map)
 
-      popup.on('open', () => this.#handlePopupOpen(popup));
-    });
-  }
-
-  // Create a custom marker element
-  #createCustomMarker(marker) {
-    const customMarker = document.createElement("div");
-    customMarker.innerHTML = marker.marker_html;
-
-    const professionalId = this.#getProfessionalId(marker.info_window_html);
-    if (professionalId) {
-      customMarker.setAttribute('data-professional-id', professionalId);
-      customMarker.addEventListener('click', () => this.#handleMarkerClick(professionalId, marker));
-    } else {
-      console.error(`No professional ID found in marker info window HTML: ${marker.info_window_html}`);
-    }
-
-    return customMarker;
-  }
-
-  // Extract professional ID from info window HTML
-  #getProfessionalId(infoWindowHtml) {
-    const professionalIdMatch = infoWindowHtml.match(/data-professional-id="(\d+)"/);
-    return professionalIdMatch ? professionalIdMatch[1] : null;
-  }
-
-  // Handle marker click event
-  #handleMarkerClick(professionalId, marker) {
-    console.log('Handling marker click for professionalId:', professionalId);
-
-    if (this.#isCurrentPopup(marker)) return;
-
-    this.#closeCurrentPopup();
-    this.showProfessionalDetails(professionalId);
-
-    const cardElement = document.getElementById(`professional-${professionalId}`);
-    if (cardElement) {
-      this.scrollToCard(cardElement);
-    } else {
-      console.error('No card found for professional ID:', professionalId);
-    }
-  }
-
-  // Check if the current popup is the same as the clicked marker
-  #isCurrentPopup(marker) {
-    return this.currentPopup &&
-           this.currentPopup.getLngLat().lng === marker.lng &&
-           this.currentPopup.getLngLat().lat === marker.lat;
-  }
-
-  // Handle popup open event
-  #handlePopupOpen(popup) {
-    console.log('Popup opened:', popup);
-    this.currentPopup = popup;
-    this.#addPopupCloseButtonListener();
-
-    setTimeout(() => {
-      const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-      console.log('Checking for close button...');
-      if (closeButton) {
-        console.log('Adding close button listener');
-        closeButton.disabled = true;
+      // Listen for the 'open' event on the popup
+      popup.on('open', () => {
+        this.#onMarkerOpen(marker);
+        const closeButton = document.querySelector('.mapboxgl-popup-close-button');
+        closeButton.disabled = true; // Disable the button initially
         setTimeout(() => {
-          closeButton.disabled = false;
-        }, 100);
-      } else {
-        console.error('Close button not found.');
+          closeButton.disabled = false; // Enable it after a short delay
+        }, 100); // Adjust the delay as needed
+      })
+
+      // Listen for the 'close' event on the popup
+      popup.on('close', () => {
+        this.#onMarkerClose(marker);
+      })
+    })
+  }
+
+  #fitMapToMarkers() {
+    const bounds = new mapboxgl.LngLatBounds()
+    this.markersValue.forEach(marker => {
+      if (marker.lng && marker.lat) {
+        bounds.extend([marker.lng, marker.lat])
       }
-    }, 100); // Ajustez le délai si nécessaire
-  }
-
-  // Add event listener to popup close button
-  #addPopupCloseButtonListener() {
-    const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-    if (closeButton) {
-      closeButton.addEventListener('click', () => this.#closeCurrentPopup());
+    })
+    if (bounds.getNorthEast() && bounds.getSouthWest()) {
+      this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
     }
   }
 
-  // Close the current popup
-  #closeCurrentPopup() {
-    if (this.currentPopup) {
-      console.log('Closing current popup:', this.currentPopup);
-      this.currentPopup.remove();
-      this.currentPopup = null;
+  #onMarkerOpen(marker) {
+    const professionalId = marker.info_window_html.match(/data-professional-id="(\d+)"/)?.[1];
+    console.log('Marker opened:', marker);
+    console.log('Professional ID:', professionalId);
 
-      // Attendre un court instant avant de déclencher la fermeture des détails
-      setTimeout(() => {
-        this.#triggerCloseDetailsInProfessionalController();
-      }, 100);
-    }
-  }
+    // Find the "Voir Détails" link for the corresponding professional
+    const detailsLink = document.querySelector(`#professional-${professionalId} .details`);
+    if (detailsLink) {
+      // Trigger a click event on the link to show details
+      detailsLink.click();
 
-  // Trigger close details in professional controller
-  #triggerCloseDetailsInProfessionalController() {
-    const closeButton = document.querySelector('.search-professional-card .close-button');
-    if (closeButton) {
-      closeButton.click();
-    }
-  }
-
-  // Show professional details
-  showProfessionalDetails(professionalId) {
-    const button = document.querySelector(`.card[data-professional-id="${professionalId}"] .details`);
-    if (button) {
-      if (!this.isFromOpenMarker) {
-        button.click();
+      // Center the card in the container results
+      const cardElement = document.querySelector(`#professional-${professionalId}`);
+      if (cardElement) {
+        this.#scrollToCard(cardElement);
       }
-      this.isFromOpenMarker = false; // Reset the flag
     } else {
-      console.error(`No button found for professional ID: ${professionalId}`);
+      console.error('Details link not found for professional ID:', professionalId);
     }
   }
 
-  // Scroll to the card element
-  scrollToCard(cardElement) {
+  #onMarkerClose(marker) {
+    const professionalId = marker.info_window_html.match(/data-professional-id="(\d+)"/)?.[1];
+    if (professionalId) {
+      const closeButton = document.querySelector(`#professional-${professionalId} .close-button`);
+      if (closeButton) {
+        closeButton.click();
+      }
+    }
+  }
+
+  #scrollToCard(cardElement) {
     const container = document.querySelector('.container-results');
     const containerRect = container.getBoundingClientRect();
     const cardRect = cardElement.getBoundingClientRect();
@@ -165,32 +107,5 @@ export default class extends Controller {
       top: scrollTop,
       behavior: 'smooth'
     });
-  }
-
-  // Fit the map to the markers
-  #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds();
-    this.markersValue.forEach(marker => {
-      if (marker.lng && marker.lat) {
-        bounds.extend([marker.lng, marker.lat]);
-      }
-    });
-    if (bounds.getNorthEast() && bounds.getSouthWest()) {
-      this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
-    }
-  }
-
-  // Open a marker by professional ID
-  openMarker(professionalId) {
-    console.log('openMarker called with professionalId:', professionalId);
-    this.isFromOpenMarker = true; // Set the flag
-
-    const markerElement = document.querySelector(`.mapboxgl-marker[data-professional-id="${professionalId}"]`);
-    if (markerElement) {
-      console.log('Marker found, triggering click event for professionalId:', professionalId);
-      markerElement.click();
-    } else {
-      console.error('No marker found for professional ID:', professionalId);
-    }
   }
 }
