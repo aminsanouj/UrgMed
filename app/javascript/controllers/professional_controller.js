@@ -16,6 +16,9 @@ export default class extends Controller {
     if (container) {
       const professionalId = container.getAttribute('data-professional-id');
 
+      // Fermer toutes les autres cartes ouvertes
+      this.closeAllDetails();
+
       // Ouvrir la pop-up du marker associé
       const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller='map']"), "map");
       mapController.openMarkerPopup(professionalId);
@@ -53,6 +56,25 @@ export default class extends Controller {
         container.innerHTML = cardStates[professionalId];
         delete cardStates[professionalId]; // Supprimer l'état après restauration
       }
+    }
+  }
+
+  closeAllDetails() {
+    // Fermer toutes les cartes de détails ouvertes
+    document.querySelectorAll('.search-professional-card').forEach(card => {
+      const professionalId = card.getAttribute('data-professional-id');
+      if (professionalId && cardStates[professionalId]) {
+        card.innerHTML = cardStates[professionalId];
+        delete cardStates[professionalId]; // Supprimer l'état après restauration
+      }
+    });
+
+    // Fermer tous les popups ouverts
+    const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller='map']"), "map");
+    if (mapController) {
+      Object.keys(mapController.markersMap).forEach(professionalId => {
+        mapController.closeMarkerPopup(professionalId);
+      });
     }
   }
 }

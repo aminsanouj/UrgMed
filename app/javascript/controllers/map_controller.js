@@ -40,30 +40,24 @@ export default class extends Controller {
       // Store the marker with its professional ID
       this.markersMap[marker.professional_id] = mapMarker;
 
-      // Use a flag to ensure the event is only added once
-      let popupOpenEventAdded = false;
-
       // Listen for the popup open event
       mapMarker.getElement().addEventListener('click', () => {
         this.#onMarkerOpen(marker.professional_id);
       });
 
       popup.on('open', () => {
-        if (!popupOpenEventAdded) {
-          popupOpenEventAdded = true;
+        console.log('Popup opened');
+        const closeButton = document.querySelector('.mapboxgl-popup-close-button');
+        closeButton.disabled = true; // Disable the button initially
+        setTimeout(() => {
+          closeButton.disabled = false; // Enable it after a short delay
+        }, 50); // Adjust the delay as needed
 
-          const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-          closeButton.disabled = true; // Désactive le bouton initialement
-
-          setTimeout(() => {
-            closeButton.disabled = false; // Réactive le bouton après un court délai
-          }, 50); // Ajustez le délai si nécessaire
-
-          closeButton.addEventListener('click', () => {
-            this.#onMarkerClose(marker.professional_id);
-          }, { once: true }); // Assurez-vous qu'il ne s'exécute qu'une seule fois
-        }
-      });
+        // Add event listener to the close button for manual close action
+        closeButton.addEventListener('click', () => {
+          this.#onMarkerClose(marker.professional_id);
+        }, { once: true }); // Ensure it runs only once
+      })
     })
   }
 
