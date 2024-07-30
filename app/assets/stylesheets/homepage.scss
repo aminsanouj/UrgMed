@@ -94,6 +94,12 @@ $card-background: #fff;
           width: calc(50% - 20px); // Modifiez cette valeur
           text-align: left;
           margin-bottom: 20px; // Ajoutez cette ligne
+          cursor: pointer;
+
+          .service-item-link {
+            text-decoration: none; /* Supprime la décoration de texte par défaut des liens */
+            color: inherit;
+          }
 
           .service-icon {
               float: left; // Ajoutez cette ligne
