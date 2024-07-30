@@ -36,7 +36,8 @@ class PagesController < ApplicationController
         lat: professional.latitude,
         lng: professional.longitude,
         info_window_html: render_to_string(partial: "partials/info_window", locals: { professional: professional }),
-        marker_html: render_to_string(partial: "partials/marker", locals: { professional: professional })
+        marker_html: render_to_string(partial: "partials/marker", locals: { professional: professional }),
+        professional_id: professional.id # Ajoutez cette ligne pour inclure l'ID du professionnel
       }
     end
 
