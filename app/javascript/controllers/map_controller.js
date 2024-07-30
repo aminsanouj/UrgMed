@@ -23,7 +23,6 @@ export default class extends Controller {
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
   }
-
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
@@ -41,25 +40,33 @@ export default class extends Controller {
       // Store the marker with its professional ID
       this.markersMap[marker.professional_id] = mapMarker;
 
+      // Use a flag to ensure the event is only added once
+      let popupOpenEventAdded = false;
+
       // Listen for the popup open event
       mapMarker.getElement().addEventListener('click', () => {
         this.#onMarkerOpen(marker.professional_id);
       });
 
       popup.on('open', () => {
-        const closeButton = document.querySelector('.mapboxgl-popup-close-button');
-        closeButton.disabled = true; // Disable the button initially
-        setTimeout(() => {
-          closeButton.disabled = false; // Enable it after a short delay
-        }, 50); // Adjust the delay as needed
+        if (!popupOpenEventAdded) {
+          popupOpenEventAdded = true;
 
-        // Add event listener to the close button for manual close action
-        closeButton.addEventListener('click', () => {
-          this.#onMarkerClose(marker.professional_id);
-        }, { once: true }); // Ensure it runs only once
-      })
+          const closeButton = document.querySelector('.mapboxgl-popup-close-button');
+          closeButton.disabled = true; // Désactive le bouton initialement
+
+          setTimeout(() => {
+            closeButton.disabled = false; // Réactive le bouton après un court délai
+          }, 50); // Ajustez le délai si nécessaire
+
+          closeButton.addEventListener('click', () => {
+            this.#onMarkerClose(marker.professional_id);
+          }, { once: true }); // Assurez-vous qu'il ne s'exécute qu'une seule fois
+        }
+      });
     })
   }
+
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
@@ -113,7 +120,6 @@ export default class extends Controller {
     const card = document.querySelector(`.search-professional-card[data-professional-id='${professionalId}']`);
     if (card) {
       const closeButton = card.querySelector('.close-button');
-      console.log("closeButton", closeButton);
       if (closeButton) {
         closeButton.click();
       } else {
