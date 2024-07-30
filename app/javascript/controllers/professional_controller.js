@@ -1,6 +1,6 @@
 import { Controller } from "@hotwired/stimulus";
 
-let currentState = null; // Variable globale pour stocker l'état actuel
+let cardStates = {}; // Objet pour stocker les états des cartes
 
 export default class extends Controller {
   static targets = ["details"];
@@ -14,17 +14,14 @@ export default class extends Controller {
     const container = event.currentTarget.closest('.search-professional-card');
 
     if (container) {
-      // Extraire l'ID du professionnel et le loguer dans la console
       const professionalId = container.getAttribute('data-professional-id');
-      console.log('Professional ID:', professionalId);
 
       // Ouvrir la pop-up du marker associé
       const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller='map']"), "map");
       mapController.openMarkerPopup(professionalId);
-      console.log('Ouvrir la pop-up du marker associé');
 
-      // Enregistrer le contenu de la card ou du container avant de le remplacer
-      currentState = container.innerHTML;
+      // Enregistrer le contenu de la carte ou du conteneur avant de le remplacer
+      cardStates[professionalId] = container.innerHTML;
 
       fetch(url, { headers: { 'Accept': 'text/html' } })
         .then(response => response.text())
@@ -52,13 +49,9 @@ export default class extends Controller {
         mapController.closeMarkerPopup(professionalId);
       }
 
-      const cardContent = container.getAttribute('data-card-content');
-
-      if (cardContent) {
-        container.innerHTML = cardContent;
-        container.removeAttribute('data-card-content');
-      } else if (currentState) {
-        container.innerHTML = currentState;
+      if (professionalId && cardStates[professionalId]) {
+        container.innerHTML = cardStates[professionalId];
+        delete cardStates[professionalId]; // Supprimer l'état après restauration
       }
     }
   }

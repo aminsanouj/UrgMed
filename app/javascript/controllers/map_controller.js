@@ -1,4 +1,3 @@
-// app/javascript/controllers/map_controller.js
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl'
 
@@ -39,17 +38,26 @@ export default class extends Controller {
         .setPopup(popup)
         .addTo(this.map)
 
-      // Delay enabling the close button
+      // Store the marker with its professional ID
+      this.markersMap[marker.professional_id] = mapMarker;
+
+      // Listen for the popup open event
+      mapMarker.getElement().addEventListener('click', () => {
+        this.#onMarkerOpen(marker.professional_id);
+      });
+
       popup.on('open', () => {
         const closeButton = document.querySelector('.mapboxgl-popup-close-button');
         closeButton.disabled = true; // Disable the button initially
         setTimeout(() => {
           closeButton.disabled = false; // Enable it after a short delay
-        }, 100); // Adjust the delay as needed
-      })
+        }, 50); // Adjust the delay as needed
 
-      // Store the marker with its professional ID
-      this.markersMap[marker.professional_id] = mapMarker;
+        // Add event listener to the close button for manual close action
+        closeButton.addEventListener('click', () => {
+          this.#onMarkerClose(marker.professional_id);
+        }, { once: true }); // Ensure it runs only once
+      })
     })
   }
 
@@ -81,5 +89,51 @@ export default class extends Controller {
     } else {
       console.error(`Marker with professional ID ${professionalId} not found.`);
     }
+  }
+
+  #onMarkerOpen(professionalId) {
+    // Trigger the showDetails method on the associated card
+    const card = document.querySelector(`.search-professional-card[data-professional-id='${professionalId}']`);
+    if (card) {
+      const detailsLink = card.querySelector('.details');
+      if (detailsLink) {
+        detailsLink.click();
+      } else {
+        console.error(`Details link not found for professional ID ${professionalId}.`);
+      }
+      // Scroll to the card
+      this.#scrollToCard(card);
+    } else {
+      console.error(`Card not found for professional ID ${professionalId}.`);
+    }
+  }
+
+  #onMarkerClose(professionalId) {
+    // Trigger the closeDetails method on the associated card
+    const card = document.querySelector(`.search-professional-card[data-professional-id='${professionalId}']`);
+    if (card) {
+      const closeButton = card.querySelector('.close-button');
+      console.log("closeButton", closeButton);
+      if (closeButton) {
+        closeButton.click();
+      } else {
+        console.error(`Close button not found for professional ID ${professionalId}.`);
+      }
+    } else {
+      console.error(`Card not found for professional ID ${professionalId}.`);
+    }
+  }
+
+  #scrollToCard(cardElement) {
+    const container = document.querySelector('.container-results');
+    const containerRect = container.getBoundingClientRect();
+    const cardRect = cardElement.getBoundingClientRect();
+
+    const scrollTop = container.scrollTop + cardRect.top - containerRect.top - (containerRect.height - cardRect.height) / 2;
+
+    container.scrollTo({
+      top: scrollTop,
+      behavior: 'smooth'
+    });
   }
 }
