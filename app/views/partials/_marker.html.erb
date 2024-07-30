@@ -1,1 +1,2 @@
-<%= image_tag svg_for_speciality(professional.speciality), height: 30, width: 30, alt: professional.speciality %>
+<span style="display:none;" data-professional-id="<%= professional.id %>"></span>
+<%= image_tag svg_for_speciality(professional.speciality), height: 30, width: 30, alt: professional.speciality, class: "marker", data: { professional_id: professional.id } %>
