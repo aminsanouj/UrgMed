@@ -16,7 +16,6 @@ export default class extends Controller {
 
   connect() {
     this.inputTarget.addEventListener("click", this.handleClick.bind(this));
-    this.inputTarget.addEventListener("input", this.handleInput.bind(this));
     if (this.hasResultsTarget) {
       this.resultsTarget.addEventListener("click", this.handleResultClick.bind(this));
     }
@@ -24,12 +23,6 @@ export default class extends Controller {
 
   handleClick(event) {
     this.displaySuggestions(professions);
-  }
-
-  handleInput(event) {
-    const query = removeAccents(event.target.value);
-    const filteredProfessions = professions.filter(profession => removeAccents(profession).startsWith(query));
-    this.displaySuggestions(filteredProfessions);
   }
 
   handleResultClick(event) {

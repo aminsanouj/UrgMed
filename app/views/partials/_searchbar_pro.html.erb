@@ -1,5 +1,5 @@
 <form class="search-container" action="/search" method="get" data-controller="search">
-  <input type="text" id="search-bar" name="query_pro" value="<%= params[:query_pro] %>" placeholder="Quel professionnel recherchez-vous ?" data-search-target="input">
+  <input type="text" id="search-bar" name="query_pro" value="<%= params[:query_pro] %>" placeholder="Quel professionnel recherchez-vous ?" data-search-target="input" readonly>
   <%= hidden_field_tag :query_city, params[:query_city] %>
   <button type="submit" data-action="search->search#submitForm">
     <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>
