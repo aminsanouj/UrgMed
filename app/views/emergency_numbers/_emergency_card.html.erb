@@ -1,0 +1,12 @@
+<li class="emergency-item">
+  <div class="emergency-item__details">
+    <strong class="emergency-item__name"><%= number.name %></strong>
+    <a href="tel:<%= number.phone_number %>" class="emergency-item__phone"><%= number.phone_number %></a>
+  </div>
+  <div class="emergency-item__footer">
+    <p class="emergency-item__description"><%= number.description %></p>
+    <% if number.call_price.present? %>
+      <p class="emergency-item__price">(<%= number.call_price %>)</p>
+    <% end %>
+  </div>
+</li>

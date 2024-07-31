@@ -1,0 +1,53 @@
+.emergency-item {
+  margin-bottom: 15px; /* Espacement entre les éléments de la liste */
+  padding: 15px; /* Espace intérieur pour chaque élément de la liste */
+  background-color: #f9f9f9; /* Fond gris clair pour chaque élément */
+  border-radius: 8px; /* Coins arrondis pour les éléments de la liste */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre portée plus marquée */
+  transition: all 0.3s ease; /* Effet de transition pour les interactions */
+
+  /* Ajout d'un effet au survol */
+  &:hover {
+    background-color: #f6f6f6; /* Changement de couleur au survol */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Ombre plus marquée au survol */
+  }
+}
+
+.emergency-item__details {
+  display: flex;
+  justify-content: space-between; /* Espacement entre les éléments */
+  align-items: flex-start; /* Aligner les éléments au début du conteneur */
+  margin-bottom: 10px; /* Espacement entre les détails */
+}
+
+.emergency-item__name {
+  font-weight: 600; /* Poids de police un peu plus fort */
+  font-size: 1.1rem; /* Taille de police légèrement plus grande */
+  color: #333; /* Couleur du texte pour un bon contraste */
+}
+
+.emergency-item__phone {
+  color: #007bff; /* Couleur bleue pour le numéro de téléphone */
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column; /* Disposer le numéro de téléphone et le prix en colonne */
+  align-items: flex-end;
+}
+
+.emergency-item__price {
+  font-size: 0.8rem; /* Taille de police pour le prix */
+  color: #888; /* Couleur plus claire pour le prix */
+  margin-top: -8px; /* Espacement au-dessus du prix pour séparer du numéro de téléphone */
+}
+
+.emergency-item__footer {
+  display: flex;
+  justify-content: space-between; /* Espacer la description du prix */
+  align-items: flex-start; /* Alignement vertical */
+}
+
+.emergency-item__description {
+  margin: 0; /* Supprime le marging par défaut pour plus de contrôle */
+  color: #555; /* Couleur du texte légèrement plus foncée pour la description */
+  font-size: 0.9rem; /* Taille de police plus petite pour la description */
+}

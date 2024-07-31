@@ -46,7 +46,8 @@ EmergencyNumber.create([
   {
     name: "Pharmacie de Garde",
     phone_number: "3237",
-    description: "Numéro pour trouver une pharmacie de garde ouverte près de chez vous."
+    description: "Numéro pour trouver une pharmacie de garde ouverte près de chez vous.",
+    call_price: "0,35€/min"
   },
   {
     name: "SOS Femmes violences conjugales",

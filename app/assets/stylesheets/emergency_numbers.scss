@@ -42,6 +42,12 @@
 .emergency-container__numbers-list {
   list-style-type: none; /* Supprime les puces */
   padding: 0;
+  height: 550px;
+  overflow-y: auto;
+}
+
+.emergency-container__numbers-list-local {
+  list-style-type: none;
 }
 
 /* Style des éléments de la liste */
@@ -63,6 +69,3 @@
   margin-top: 0px;
 }
 
-body.emergency-numbers-page {
-  margin-bottom: 0;
-}
