@@ -11,9 +11,22 @@
     </div>
   </div>
 
-  <div class="container-right" data-controller="filter">
-    <h2>Search Results:</h2>
-    <button id="filter-open-now" data-action="click->filter#filterOpenNow">Open Now</button>
+  <div class="container-right">
+    <div class="header">
+      <h2>Search Results:</h2>
+      <form data-controller="search" data-action="submit->search#submitForm">
+        <div class="filter-toggle">
+          <input type="checkbox" id="filter-open-now" data-action="change->search#toggleFilter" data-search-target="input" <%= 'checked' if params[:open_now] == 'true' %>>
+          <label for="filter-open-now">
+            <span class="slider"></span>
+            <span class="label-text">Open Now</span>
+          </label>
+        </div>
+        <input type="hidden" name="query_pro" value="<%= @search_query_pro %>">
+        <input type="hidden" name="query_city" value="<%= @search_query_city %>">
+        <!-- Ajoutez d'autres champs cachés si nécessaires -->
+      </form>
+    </div>
     <div class="container-results" data-filter-target="results">
       <% if @professionals.any? %>
         <div class="search-professional-card">

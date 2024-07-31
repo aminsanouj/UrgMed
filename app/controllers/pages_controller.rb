@@ -10,40 +10,47 @@ class PagesController < ApplicationController
   def search
     @search_query_pro = params[:query_pro].presence
     @search_query_city = params[:query_city].presence
-    @search_query_coordinates = Geocoder.coordinates(@search_query_city)
+    @open_now = params[:open_now] == 'true'
 
     @professionals = Professional.all
 
+    # Filtrer par spécialité
     if @search_query_pro.present?
       @professionals = @professionals.search_by_speciality(@search_query_pro)
     end
 
+    # Filtrer par ville et coordonnée
     if @search_query_city.present?
+      @search_query_coordinates = Geocoder.coordinates(@search_query_city)
       if @search_query_coordinates.present?
         @professionals = @professionals.near(@search_query_coordinates, 100)
         @professionals = @professionals.search_by_city(@search_query_city)
       end
     end
 
-    # Récupérer le paramètre 'skip' de la requête AJAX
+    # Appliquer l'offset et l'ordre avant de récupérer les résultats
     skip = params[:skip].to_i
-
-    # Récupérer les résultats en prenant en compte le paramètre 'skip'
     @professionals = @professionals.order(:id).offset(skip)
 
-    @markers = @professionals.where.not(latitude: nil, longitude: nil).map do |professional|
+    # Filtrer par "Open Now" en Ruby après avoir récupéré les résultats si @open_now est vrai
+    if @open_now
+      @professionals = @professionals.to_a.select(&:open_now?) # Convertir en tableau pour filtrer
+    end
+
+    # Ne pas utiliser where sur un tableau
+    @markers = @professionals.reject { |p| p.latitude.nil? || p.longitude.nil? }.map do |professional|
       {
         lat: professional.latitude,
         lng: professional.longitude,
         info_window_html: render_to_string(partial: "partials/info_window", locals: { professional: professional }),
         marker_html: render_to_string(partial: "partials/marker", locals: { professional: professional }),
-        professional_id: professional.id # Ajoutez cette ligne pour inclure l'ID du professionnel
+        professional_id: professional.id
       }
     end
 
     respond_to do |format|
-      format.html # rendre la page HTML complète
-      format.js { render partial: 'professionals/professional_card', collection: @professionals, as: :professional } # rendre la requête partielle
+      format.html
+      format.js { render partial: 'professionals/professional_card', collection: @professionals, as: :professional }
     end
   end
 
