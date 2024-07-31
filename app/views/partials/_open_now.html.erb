@@ -1,0 +1,13 @@
+<form data-controller="search" data-action="submit->search#submitForm">
+  <div class="filter-toggle">
+    <input type="checkbox" id="filter-open-now" data-action="change->search#toggleFilter" data-search-target="input" <%= 'checked' if params[:open_now] == 'true' %>>
+    <label for="filter-open-now">
+      <span class="slider"></span>
+      <span class="label-text">Open Now</span>
+    </label>
+  </div>
+  <input type="hidden" name="query_pro" value="<%= params[:query_pro] %>">
+  <input type="hidden" name="query_city" value="<%= params[:query_city] %>">
+  <input type="hidden" name="open_now" value="<%= params[:open_now] %>">
+  <!-- Ajoutez d'autres champs cachés si nécessaires -->
+</form>
