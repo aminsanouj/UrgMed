@@ -74,4 +74,21 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:              'live.smtp.mailtrap.io',
+    port:                 587, # Utilisez 2525 ou 25 si nécessaire
+    domain:               'localhost',
+    user_name:            ENV['MAILTRAP_USERNAME'], # Assurez-vous de définir cette variable d'environnement
+    password:             ENV['MAILTRAP_PASSWORD'], # Assurez-vous de définir cette variable d'environnement
+    authentication:       'plain', # ou 'login' selon la configuration de Mailtrap
+    enable_starttls_auto: true
+  }
+
+  # Activer les erreurs de livraison pour le débogage
+  config.action_mailer.raise_delivery_errors = true
+
+  # Pour afficher les e-mails dans la console (facultatif, pour le débogage)
+  config.action_mailer.perform_deliveries = true
 end

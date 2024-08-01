@@ -1,6 +1,12 @@
 <div class="contact-form-container">
   <h2 class="contact-form-header">Contactez-nous</h2>
 
+  <% if flash[:notice] %>
+    <div id="notification" class="notification">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
   <%= form_with url: contact_path, local: true, html: { class: 'contact-form-fields' } do |form| %>
     <div class="contact-form-group">
       <%= form.label :name, "Prénom et Nom" %>
