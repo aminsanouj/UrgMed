@@ -1,3 +1,4 @@
+// tags_controller.js
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
@@ -8,16 +9,24 @@ export default class extends Controller {
   }
 
   filter(event) {
-    const tag = event.target.dataset.tag;
-    // Obtenir query_city de l'URL
+    const tagButton = event.target;
+    const tag = tagButton.dataset.tag;
+
+    // Toggle selection
+    tagButton.classList.toggle('selected');
+
+    // Get query_city from the URL
     const urlParams = new URLSearchParams(window.location.search);
     const queryCity = urlParams.get('query_city') || '';
 
     console.log(`Tag clicked: ${tag}`);
     console.log(`Query city: ${queryCity}`);
 
-    // Envoyer une requête AJAX avec le tag et la query_city
-    fetch(`/search?tags=${encodeURIComponent(tag)}&query_city=${encodeURIComponent(queryCity)}`, {
+    // Get selected tags
+    const selectedTags = Array.from(document.querySelectorAll('.tag.selected')).map(tagEl => tagEl.dataset.tag);
+
+    // Send AJAX request with selected tags and query_city
+    fetch(`/search?tags=${encodeURIComponent(selectedTags.join(','))}&query_city=${encodeURIComponent(queryCity)}`, {
       method: 'GET',
       headers: {
         'Accept': 'text/javascript',
@@ -25,7 +34,7 @@ export default class extends Controller {
     })
     .then(response => response.text())
     .then(data => {
-      // Mettre à jour la partie des résultats avec la réponse du serveur
+      // Update the results part with the server response
       if (this.hasResultsTarget) {
         this.resultsTarget.innerHTML = data;
       } else {

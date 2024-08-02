@@ -1,0 +1,38 @@
+// _tags.scss
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.tag {
+  background-color: $card-background; // Couleur de fond initiale
+  color: $primary-color; // Couleur du texte initiale
+  border: 1px solid #ddd; // Bordure légère
+  border-radius: 12px;
+  padding: 6px 14px;
+  font-size: 0.9em;
+  font-family: 'Asap', sans-serif;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    background-color: $background-color; // Couleur de fond au survol
+    border-color: $primary-color; // Changement de bordure au survol
+  }
+
+  &:active {
+    background-color: $secondary-color; // Couleur de fond au clic
+    color: #fff; // Changement de couleur du texte au clic
+  }
+
+  &.selected {
+    background-color: #007bff; // Couleur de fond lorsque sélectionné
+    color: #fff; // Couleur du texte lorsque sélectionné
+    border-color: #0056b3; // Bordure lorsque sélectionné
+  }
+}
