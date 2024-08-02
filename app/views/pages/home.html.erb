@@ -7,7 +7,9 @@
             <div class="hero-text">
                 <h1>Une urgence médicale ? <span>Trouvez un professionnel</span></h1>
                 <div class="searchbar-pro">
-                    <%= render partial: 'partials/searchbar_pro' %>
+                    <%= form_tag search_path, method: :get, class: "search-container", data: { controller: "autocomplete search geolocation" } do %>
+                        <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "autocomplete search geolocation" } %>
+                    <% end %>
                 </div>
                 <p>UrgMed géolocalise en temps réel les médecins, dentistes, pharmacies de garde et services d'urgence les plus proches.</p>
             </div>

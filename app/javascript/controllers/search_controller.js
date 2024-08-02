@@ -1,23 +1,9 @@
 import { Controller } from "@hotwired/stimulus";
 
-const professions = [
-  "Médecin",
-  "Pharmacie",
-  "Dentiste",
-  "Urgences"
-];
-
 export default class extends Controller {
   static targets = ["input", "results", "clear"];
 
   connect() {
-    if (this.hasInputTarget) {
-      this.inputTarget.addEventListener("click", this.handleClick.bind(this));
-    }
-    if (this.hasResultsTarget) {
-      this.resultsTarget.addEventListener("click", this.handleResultClick.bind(this));
-    }
-
     // Initialiser l'état du toggle en fonction de l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const openNow = urlParams.get('open_now') === 'true';
@@ -25,27 +11,6 @@ export default class extends Controller {
       this.inputTarget.checked = openNow;
     }
   }
-
-  handleClick(event) {
-    this.displaySuggestions(professions);
-  }
-
-  handleResultClick(event) {
-    if (event.target.tagName === "LI") {
-      this.inputTarget.value = event.target.innerText;
-      this.submitForm();
-    }
-  }
-
-  displaySuggestions(professions) {
-    if (this.hasResultsTarget) {
-      const resultsHTML = professions.map(profession =>
-        `<li class="list-group-item" role="option">${profession}</li>`
-      ).join("");
-      this.resultsTarget.innerHTML = resultsHTML;
-    }
-  }
-
 
   clear() {
     if (this.hasInputTarget) {
@@ -63,22 +28,32 @@ export default class extends Controller {
 
   // Méthode pour gérer l'événement de changement de la case à cocher
   toggleFilter(event) {
-    const isOpenNow = event.target.checked;
-    const form = this.element;
+    // Obtenir la valeur de la case à cocher (vérifier si elle est cochée ou non)
+    const openNow = event.target.checked;
 
-    // Ajouter ou supprimer le paramètre open_now dans le formulaire
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = 'open_now';
-    input.value = isOpenNow;
+    // Obtenir query_city de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const queryCity = urlParams.get('query_city') || '';
 
-    // Assurez-vous de supprimer l'ancien champ hidden si présent
-    const existingInput = form.querySelector('input[name="open_now"]');
-    if (existingInput) {
-      form.removeChild(existingInput);
-    }
+    // Créer l'URL avec les paramètres
+    const url = `/search?query_city=${encodeURIComponent(queryCity)}&open_now=${encodeURIComponent(openNow)}`;
 
-    form.appendChild(input);
-    this.submitForm(); // Soumettre le formulaire après avoir ajouté ou supprimé le champ
+    // Envoyer une requête AJAX
+    fetch(url, {
+      method: 'GET',
+      headers: {
+        'Accept': 'text/javascript',
+      },
+    })
+    .then(response => response.text())
+    .then(data => {
+      // Mettre à jour la partie des résultats avec la réponse du serveur
+      if (this.hasResultsTarget) {
+        this.resultsTarget.innerHTML = data;
+      } else {
+        console.error('Search Results target element is missing.');
+      }
+    })
+    .catch(error => console.error('Error fetching search results:', error));
   }
 }

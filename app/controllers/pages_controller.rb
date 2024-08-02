@@ -8,16 +8,11 @@ class PagesController < ApplicationController
   end
 
   def search
-    @search_query_pro = params[:query_pro].presence
     @search_query_city = params[:query_city].presence
     @open_now = params[:open_now] == 'true'
+    @tags = params[:tags]&.split(',') || []
 
     @professionals = Professional.all
-
-    # Filtrer par spécialité
-    if @search_query_pro.present?
-      @professionals = @professionals.search_by_speciality(@search_query_pro)
-    end
 
     # Filtrer par ville et coordonnée
     if @search_query_city.present?
@@ -26,6 +21,11 @@ class PagesController < ApplicationController
         @professionals = @professionals.near(@search_query_coordinates, 100)
         @professionals = @professionals.search_by_city(@search_query_city)
       end
+    end
+
+    # Filtrer par tags
+    if @tags.any?
+      @professionals = @professionals.search_by_speciality(@tags)
     end
 
     # Appliquer l'offset et l'ordre avant de récupérer les résultats
@@ -37,7 +37,6 @@ class PagesController < ApplicationController
       @professionals = @professionals.to_a.select(&:open_now?) # Convertir en tableau pour filtrer
     end
 
-    # Ne pas utiliser where sur un tableau
     @markers = @professionals.reject { |p| p.latitude.nil? || p.longitude.nil? }.map do |professional|
       {
         lat: professional.latitude,
