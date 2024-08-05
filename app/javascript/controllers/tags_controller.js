@@ -40,11 +40,15 @@ export default class extends Controller {
         'Accept': 'text/javascript',
       },
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
       // Update the results part with the server response
       if (this.hasResultsTarget) {
-        this.resultsTarget.innerHTML = data;
+        this.resultsTarget.innerHTML = data.partials;
+
+        // Emit a custom event to update the map
+        const event = new CustomEvent('resultsUpdated', { detail: { markers: data.markers } });
+        document.dispatchEvent(event);
       } else {
         console.error('Tag Results target element is missing.');
       }

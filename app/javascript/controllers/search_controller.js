@@ -52,11 +52,15 @@ export default class extends Controller {
         'Accept': 'text/javascript',
       },
     })
-    .then(response => response.text())
+    .then(response => response.json())
     .then(data => {
       // Mettre à jour la partie des résultats avec la réponse du serveur
       if (this.hasResultsTarget) {
-        this.resultsTarget.innerHTML = data;
+        this.resultsTarget.innerHTML = data.partials;
+
+        // Emettre un événement personnalisé pour mettre à jour la carte
+        const event = new CustomEvent('resultsUpdated', { detail: { markers: data.markers } });
+        document.dispatchEvent(event);
       } else {
         console.error('Search Results target element is missing.');
       }

@@ -49,7 +49,12 @@ class PagesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.js { render partial: 'professionals/professional_card', collection: @professionals, as: :professional }
+      format.js {
+        render json: {
+          markers: @markers,
+          partials: render_to_string(partial: 'professionals/professional_card', collection: @professionals, as: :professional)
+        }
+      }
     end
   end
 

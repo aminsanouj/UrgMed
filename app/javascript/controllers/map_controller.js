@@ -1,3 +1,4 @@
+// map_controller.js
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl'
 
@@ -22,7 +23,11 @@ export default class extends Controller {
 
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
+
+    // Listen for the custom event
+    document.addEventListener('resultsUpdated', this.#updateMarkers.bind(this));
   }
+
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
@@ -61,7 +66,6 @@ export default class extends Controller {
     })
   }
 
-
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => {
@@ -72,6 +76,18 @@ export default class extends Controller {
     if (bounds.getNorthEast() && bounds.getSouthWest()) {
       this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
     }
+  }
+
+  #updateMarkers(event) {
+    const newMarkers = event.detail.markers;
+
+    // Remove existing markers
+    Object.values(this.markersMap).forEach(marker => marker.remove());
+    this.markersMap = {};
+
+    // Add new markers
+    this.markersValue = newMarkers;
+    this.#addMarkersToMap();
   }
 
   openMarkerPopup(professionalId) {
