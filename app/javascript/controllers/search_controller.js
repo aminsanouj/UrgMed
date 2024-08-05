@@ -1,3 +1,4 @@
+// search_controller.js
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
@@ -35,8 +36,14 @@ export default class extends Controller {
     const urlParams = new URLSearchParams(window.location.search);
     const queryCity = urlParams.get('query_city') || '';
 
+    // Obtenir les tags sélectionnés
+    const selectedTags = Array.from(document.querySelectorAll('.tag.selected')).map(tagEl => tagEl.dataset.tag);
+
     // Créer l'URL avec les paramètres
-    const url = `/search?query_city=${encodeURIComponent(queryCity)}&open_now=${encodeURIComponent(openNow)}`;
+    const url = `/search?query_city=${encodeURIComponent(queryCity)}&tags=${encodeURIComponent(selectedTags.join(','))}&open_now=${openNow}`;
+
+    // Mettre à jour l'URL du navigateur
+    window.history.pushState({}, '', url);
 
     // Envoyer une requête AJAX
     fetch(url, {
