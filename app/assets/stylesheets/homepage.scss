@@ -3,9 +3,9 @@
   margin: 75px auto;
 }
 
-.inter-font  {
-  font-weight: normal;  /* Removes bold styling */
-  padding-left: 20px;   /* Adds left spacing */
+.inter-font {
+  font-weight: normal; /* Removes bold styling */
+  padding-left: 20px; /* Adds left spacing */
   padding-top: 10px;
 }
 
@@ -26,46 +26,47 @@ $card-background: #fff;
   text-align: center;
 
   .hero-content {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-      .hero-image {
-          max-width: 55%; /* Réduction de la taille de l'image */
-          margin-right: 20px; /* Espace à droite de l'image */
-          float: left;
+    .hero-image {
+      max-width: 55%; /* Réduction de la taille de l'image */
+      margin-right: 20px; /* Espace à droite de l'image */
+      float: left;
+    }
+
+    .hero-text {
+      padding: 20px;
+      text-align: left; /* Alignement du texte à gauche */
+
+      h1 {
+        font-size: 3.5em;
+        color: $primary-color;
+        font-family: 'Outfit', sans-serif;
+        margin-bottom: 10px;
+        margin-top: -100px;
+
+        span {
+          font-size: 0.75em;
+          color: $secondary-color;
+          display: block;
+        }
       }
 
-      .hero-text {
-          padding: 20px;
-          text-align: left; /* Alignement du texte à gauche */
-
-          h1 {
-              font-size: 3.5em;
-              color: $primary-color;
-              font-family: 'Outfit', sans-serif;
-              margin-bottom: 10px;
-              margin-top: -100px;
-
-              span {
-                  font-size: 0.75em;
-                  color: $secondary-color;
-                  display: block;
-              }
-          }
-
-          .searchbar-pro {
-              margin-top: 20px; /* Espace au-dessus de la barre de recherche */
-              margin-bottom: 20px;
-          }
-
-          p {
-              font-size: 1.1em;
-              margin-top: 10px; /* Espace au-dessus du paragraphe */
-              margin-bottom: 20px; /* Espace en dessous du paragraphe */
-              font-family: 'Asap', sans-serif;
-          }
+      .home-searchbar-city {
+        margin-left: 40px; /* Espace à droite de la barre de recherche */
+        margin-top: 20px; /* Espace au-dessus de la barre de recherche */
+        margin-bottom: 20px;
       }
+
+      p {
+        font-size: 1.1em;
+        margin-top: 10px; /* Espace au-dessus du paragraphe */
+        margin-bottom: 20px; /* Espace en dessous du paragraphe */
+        font-family: 'Asap', sans-serif;
+      }
+    }
   }
 }
 
@@ -75,56 +76,56 @@ $card-background: #fff;
   text-align: center;
 
   h2 {
-      font-size: 2em;
-      margin-bottom: 40px;
-      font-family: 'Outfit', sans-serif;
+    font-size: 2em;
+    margin-bottom: 40px;
+    font-family: 'Outfit', sans-serif;
   }
 
   .service-items {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 
-      .service-item {
-          background-color: $card-background;
-          border-radius: 10px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          padding: 30px; // Augmentez cette valeur
-          width: calc(50% - 20px); // Modifiez cette valeur
-          text-align: left;
-          margin-bottom: 20px; // Ajoutez cette ligne
-          cursor: pointer;
+    .service-item {
+      background-color: $card-background;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 30px; // Augmentez cette valeur
+      width: calc(50% - 20px); // Modifiez cette valeur
+      text-align: left;
+      margin-bottom: 20px; // Ajoutez cette ligne
+      cursor: pointer;
 
-          .service-item-link {
-            text-decoration: none; /* Supprime la décoration de texte par défaut des liens */
-            color: inherit;
-          }
-
-          .service-icon {
-              float: left; // Ajoutez cette ligne
-              margin-right: 20px; // Ajoutez cette ligne
-
-              img {
-                  max-width: 95%;
-              }
-          }
-
-          h3, p {
-              overflow: hidden; // Ajoutez cette ligne
-          }
-
-          h3 {
-              font-size: 1.5em;
-              color: $primary-color;
-              margin-bottom: 10px;
-              font-family: 'Outfit', sans-serif;
-          }
-
-          p {
-              font-size: 1em;
-              font-family: 'Asap', sans-serif;
-          }
+      .service-item-link {
+        text-decoration: none; /* Supprime la décoration de texte par défaut des liens */
+        color: inherit;
       }
+
+      .service-icon {
+        float: left; // Ajoutez cette ligne
+        margin-right: 20px; // Ajoutez cette ligne
+
+        img {
+          max-width: 95%;
+        }
+      }
+
+      h3, p {
+        overflow: hidden; // Ajoutez cette ligne
+      }
+
+      h3 {
+        font-size: 1.5em;
+        color: $primary-color;
+        margin-bottom: 10px;
+        font-family: 'Outfit', sans-serif;
+      }
+
+      p {
+        font-size: 1em;
+        font-family: 'Asap', sans-serif;
+      }
+    }
   }
 }

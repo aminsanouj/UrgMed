@@ -30,6 +30,7 @@
     transform: translateY(-50%);
     cursor: pointer;
     z-index: 1;
+    display: none; // Masquer par défaut
   }
 
   .location-icon {

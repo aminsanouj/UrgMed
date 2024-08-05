@@ -1,4 +1,3 @@
-// search_controller.js
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
@@ -11,6 +10,12 @@ export default class extends Controller {
     if (this.hasInputTarget) {
       this.inputTarget.checked = openNow;
     }
+
+    // Ajouter un écouteur d'événements pour surveiller les changements dans l'input
+    this.inputTarget.addEventListener('input', this.toggleClearIcon.bind(this));
+
+    // Appeler la méthode pour initialiser l'état de l'icône de croix
+    this.toggleClearIcon();
   }
 
   clear() {
@@ -20,7 +25,7 @@ export default class extends Controller {
     if (this.hasResultsTarget) {
       this.resultsTarget.innerHTML = "";
     }
-    this.submitForm(); // Soumettre le formulaire après avoir vidé le champ
+    this.toggleClearIcon();
   }
 
   submitForm() {
@@ -66,5 +71,12 @@ export default class extends Controller {
       }
     })
     .catch(error => console.error('Error fetching search results:', error));
+  }
+
+  // Méthode pour afficher ou masquer l'icône de croix en fonction de la valeur de l'input
+  toggleClearIcon() {
+    if (this.hasClearTarget) {
+      this.clearTarget.style.display = this.inputTarget.value.trim() ? 'block' : 'none';
+    }
   }
 }

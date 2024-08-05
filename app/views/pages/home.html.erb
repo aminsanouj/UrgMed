@@ -6,7 +6,7 @@
             <%= image_tag 'home-demo.png', class: 'Home hero-image', alt: 'Home-demo' %>
             <div class="hero-text">
                 <h1>Une urgence médicale ? <span>Trouvez un professionnel</span></h1>
-                <div class="searchbar-pro">
+                <div class="home-searchbar-city">
                     <%= form_tag search_path, method: :get, class: "search-container", data: { controller: "autocomplete search geolocation" } do %>
                         <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "autocomplete search geolocation" } %>
                     <% end %>
