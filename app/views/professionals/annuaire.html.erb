@@ -11,60 +11,19 @@
 
 <div class="annuaire-results-container">
   <div class="annuaire-professionals-grid">
-    <!-- Container pour les médecins -->
-    <div class="annuaire-professional-category">
-      <% professionals = @query_city.present? ? Professional.search_by_speciality("Médecin").search_by_city(@query_city) : Professional.search_by_speciality("Médecin") %>
-      <% professionals = professionals.select(&:open_now?) if @open_now %>
-      <h3 class="annuaire-h3">Médecins <span class="annuaire-count"><%= professionals.count %></span></h3>
-      <div class="annuaire-professional-scroll">
-        <% professionals.each do |professional| %>
-          <div class="annuaire-professional-card">
-            <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
-          </div>
-        <% end %>
+    <% specialities = ["Médecin", "Dentiste", "Pharmacie", "Urgence"] %>
+    <% specialities.each do |speciality| %>
+      <div class="annuaire-professional-category">
+        <% professionals = fetch_professionals(speciality) %>
+        <h3 class="annuaire-h3"><%= speciality.pluralize %> <span class="annuaire-count"><%= professionals.count %></span></h3>
+        <div class="annuaire-professional-scroll">
+          <% professionals.each do |professional| %>
+            <div class="annuaire-professional-card">
+              <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
-
-    <!-- Container pour les dentistes -->
-    <div class="annuaire-professional-category">
-      <% professionals = @query_city.present? ? Professional.search_by_speciality("Dentiste").search_by_city(@query_city) : Professional.search_by_speciality("Dentiste") %>
-      <% professionals = professionals.select(&:open_now?) if @open_now %>
-      <h3 class="annuaire-h3">Dentistes <span class="annuaire-count"><%= professionals.count %></span></h3>
-      <div class="annuaire-professional-scroll">
-        <% professionals.each do |professional| %>
-          <div class="annuaire-professional-card">
-            <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <!-- Container pour les pharmacies -->
-    <div class="annuaire-professional-category">
-      <% professionals = @query_city.present? ? Professional.search_by_speciality("Pharmacie").search_by_city(@query_city) : Professional.search_by_speciality("Pharmacie") %>
-      <% professionals = professionals.select(&:open_now?) if @open_now %>
-      <h3 class="annuaire-h3">Pharmacies <span class="annuaire-count"><%= professionals.count %></span></h3>
-      <div class="annuaire-professional-scroll">
-        <% professionals.each do |professional| %>
-          <div class="annuaire-professional-card">
-            <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <!-- Container pour les urgences -->
-    <div class="annuaire-professional-category">
-      <% professionals = @query_city.present? ? Professional.search_by_speciality("Urgence").search_by_city(@query_city) : Professional.search_by_speciality("Urgence") %>
-      <% professionals = professionals.select(&:open_now?) if @open_now %>
-      <h3 class="annuaire-h3">Urgences <span class="annuaire-count"><%= professionals.count %></span></h3>
-      <div class="annuaire-professional-scroll">
-        <% professionals.each do |professional| %>
-          <div class="annuaire-professional-card">
-            <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
-          </div>
-        <% end %>
-      </div>
-    </div>
+    <% end %>
   </div>
 </div>

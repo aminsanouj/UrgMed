@@ -22,4 +22,9 @@ module ProfessionalsHelper
     hours.map { |h| "#{h.split('-')[0]} à #{h.split('-')[1]}" }.join(', ')
   end
 
+  def fetch_professionals(speciality)
+    professionals = @query_city.present? ? Professional.search_by_speciality(speciality).search_by_city(@query_city) : Professional.search_by_speciality(speciality)
+    professionals = professionals.select(&:open_now?) if @open_now
+    professionals
+  end
 end
