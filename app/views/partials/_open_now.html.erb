@@ -3,10 +3,8 @@
     <input type="checkbox" id="filter-open-now" data-action="change->search#toggleFilter" data-search-target="input" <%= 'checked' if params[:open_now] == 'true' %>>
     <label for="filter-open-now">
       <span class="slider"></span>
-      <span class="label-text">Open Now</span>
+      <span class="label-text">Ouvert</span>
     </label>
   </div>
   <input type="hidden" name="query_city" value="<%= params[:query_city] %>">
-
-  <!-- Supprimer l'ancien champ caché pour open_now car il sera géré par AJAX -->
 </form>

@@ -1,11 +1,10 @@
 // _tags.scss
 
-.tags {
+.searchtags {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 20px;
-  padding: 0 10px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  gap: 4px;
 }
 
 .tag {
@@ -13,7 +12,7 @@
   color: $primary-color; // Couleur du texte initiale
   border: 1px solid #ddd; // Bordure légère
   border-radius: 12px;
-  padding: 6px 14px;
+  padding: 8px 16px; // Augmentation du padding pour plus de confort
   font-size: 0.9em;
   font-family: 'Asap', sans-serif;
   text-align: center;
@@ -31,8 +30,23 @@
   }
 
   &.selected {
-    background-color: #007bff; // Couleur de fond lorsque sélectionné
     color: #fff; // Couleur du texte lorsque sélectionné
     border-color: #0056b3; // Bordure lorsque sélectionné
+  }
+
+  &[data-tag="Médecin"].selected {
+    background-color: #42a5f5; /* Couleur bleue légèrement atténuée pour Médecin */
+  }
+
+  &[data-tag="Pharmacie"].selected {
+    background-color: #81c784; /* Couleur verte légèrement atténuée pour Pharmacie */
+  }
+
+  &[data-tag="Dentiste"].selected {
+    background-color: #ba68c8; /* Couleur violet légèrement atténuée pour Dentiste */
+  }
+
+  &[data-tag="Urgences"].selected {
+    background-color: #ffa726; /* Couleur orange légèrement atténuée pour Urgences */
   }
 }

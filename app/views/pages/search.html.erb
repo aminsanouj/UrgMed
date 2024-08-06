@@ -1,12 +1,14 @@
 <div class="container-wrapper" data-controller="tags search">
   <div class="container-left">
-    <div class="searchbars">
-      <%= render partial: 'partials/searchbar_city', locals: { query_city: @search_query_city, controller_attribute: "autocomplete search geolocation" } %>
-      <div class="tags">
-        <button class="tag" data-tag="Médecin" data-action="click->tags#filter">Médecin</button>
-        <button class="tag" data-tag="Pharmacie" data-action="click->tags#filter">Pharmacie</button>
-        <button class="tag" data-tag="Dentiste" data-action="click->tags#filter">Dentiste</button>
-        <button class="tag" data-tag="Urgences" data-action="click->tags#filter">Urgences</button>
+    <div class="search-header">
+      <div class="search-searchbar-city">
+        <%= render partial: 'partials/searchbar_city', locals: { query_city: @search_query_city, controller_attribute: "autocomplete search geolocation" } %>
+      </div>
+      <div class="searchtags">
+        <button class="tag medecin" data-tag="Médecin" data-action="click->tags#filter">Médecin</button>
+        <button class="tag pharmacie" data-tag="Pharmacie" data-action="click->tags#filter">Pharmacie</button>
+        <button class="tag dentiste" data-tag="Dentiste" data-action="click->tags#filter">Dentiste</button>
+        <button class="tag urgences" data-tag="Urgences" data-action="click->tags#filter">Urgences</button>
       </div>
     </div>
     <div class="container-map"
@@ -18,7 +20,7 @@
 
   <div class="container-right">
     <div class="header">
-      <h2>Search Results:</h2>
+      <h2>Résultats :</h2>
       <%= render 'partials/open_now' %>
     </div>
     <div class="container-results" data-tags-target="results" data-search-target="results">

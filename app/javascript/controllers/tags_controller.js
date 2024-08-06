@@ -6,6 +6,34 @@ export default class extends Controller {
 
   connect() {
     console.log('Tag controller Connected!');
+    this.updateTagSelection();
+  }
+
+  updateTagSelection() {
+    // Définir tous les tags disponibles
+    const allTags = ['Médecin', 'Pharmacie', 'Dentiste', 'Urgences'];
+
+    // Récupérer les paramètres de l'URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const tagsParam = urlParams.get('tags');
+
+    if (tagsParam) {
+      const tags = tagsParam.split(',').map(tag => tag.trim());
+
+      // Vérifier si tous les tags sont présents
+      const allTagsInUrl = allTags.every(tag => tags.includes(tag));
+
+      // Cocher ou décocher les tags en fonction des paramètres
+      this.element.querySelectorAll('.tag').forEach(tagButton => {
+        if (allTagsInUrl) {
+          tagButton.classList.remove('selected');
+        } else if (tags.includes(tagButton.dataset.tag)) {
+          tagButton.classList.add('selected');
+        } else {
+          tagButton.classList.remove('selected');
+        }
+      });
+    }
   }
 
   filter(event) {
@@ -15,25 +43,21 @@ export default class extends Controller {
     // Toggle selection
     tagButton.classList.toggle('selected');
 
-    // Get query_city and open_now from the URL
+    // Récupérer les paramètres de l'URL
     const urlParams = new URLSearchParams(window.location.search);
     const queryCity = urlParams.get('query_city') || '';
     const openNow = urlParams.get('open_now') === 'true';
 
-    console.log(`Tag clicked: ${tag}`);
-    console.log(`Query city: ${queryCity}`);
-    console.log(`Open now: ${openNow}`);
-
-    // Get selected tags
+    // Obtenir les tags sélectionnés
     const selectedTags = Array.from(document.querySelectorAll('.tag.selected')).map(tagEl => tagEl.dataset.tag);
 
-    // Create the new URL with parameters
+    // Créer la nouvelle URL avec les paramètres
     const newUrl = `/search?query_city=${encodeURIComponent(queryCity)}&tags=${encodeURIComponent(selectedTags.join(','))}&open_now=${openNow}`;
 
-    // Update the browser URL
+    // Mettre à jour l'URL du navigateur
     window.history.pushState({}, '', newUrl);
 
-    // Send AJAX request with selected tags and query_city
+    // Envoyer la requête AJAX avec les tags sélectionnés et la query_city
     fetch(newUrl, {
       method: 'GET',
       headers: {
@@ -42,11 +66,10 @@ export default class extends Controller {
     })
     .then(response => response.json())
     .then(data => {
-      // Update the results part with the server response
       if (this.hasResultsTarget) {
         this.resultsTarget.innerHTML = data.partials;
 
-        // Emit a custom event to update the map
+        // Émettre un événement personnalisé pour mettre à jour la carte
         const event = new CustomEvent('resultsUpdated', { detail: { markers: data.markers } });
         document.dispatchEvent(event);
       } else {

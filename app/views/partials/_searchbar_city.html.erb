@@ -2,17 +2,13 @@
   <div id="loader" style="display: none;">
     <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
   </div>
-  <div class="form-inline">
-    <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-region-target="input">
-    <%= hidden_field_tag :open_now, params[:open_now] %>
-    <button type="button" data-action="click->autocomplete#handleSearch">
-      <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>
-    </button>
-    <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", search_target: "clear" } %>
-
-    <!-- Nouvelle icône pour la géolocalisation -->
-    <button type="button">
-      <%= image_tag 'location.svg', class: 'location-icon', alt: 'Location' %>
-    </button>
-  </div>
+  <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-region-target="input">
+  <%= hidden_field_tag :open_now, params[:open_now] %>
+  <button type="button" data-action="click->autocomplete#handleSearch click->search#submitForm">
+    <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>
+  </button>
+  <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", search_target: "clear" } %>
+  <button type="button">
+    <%= image_tag 'location.svg', class: 'location-icon', alt: 'Location' %>
+  </button>
 </form>
