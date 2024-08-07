@@ -80,8 +80,11 @@ export default class extends Controller {
 
     // Vérifiez si les deux contrôleurs n'existent pas avant de soumettre le formulaire
     if (!extractCityController && !extractRegionController) {
-        console.log("No controllers found. Submitting the form.");
-        this.element.submit();
+      console.log("No controllers found. Submitting the form.");
+      // Émettre un événement personnalisé
+      const event = new CustomEvent('submitFormRequested');
+      console.log("Dispatching submitFormRequested event:", event);
+      document.dispatchEvent(event);
     }
   }
 }

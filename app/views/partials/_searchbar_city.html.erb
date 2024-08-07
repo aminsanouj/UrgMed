@@ -8,7 +8,7 @@
     <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>
   </button>
   <%= image_tag 'cross_search.svg', class: 'clear-icon', alt: 'Clear', data: { action: "click->search#clear", search_target: "clear" } %>
-  <button type="button">
+  <button type="button" data-action="click->geolocation#handleLocationClick">
     <%= image_tag 'location.svg', class: 'location-icon', alt: 'Location' %>
   </button>
 </form>

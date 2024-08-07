@@ -78,6 +78,22 @@ export default class extends Controller {
     }
   }
 
+  #fitMapToNewMarkers(newMarkers) {
+    const newBounds = new mapboxgl.LngLatBounds();
+    newMarkers.forEach(marker => {
+      if (marker.lng && marker.lat) {
+        newBounds.extend([marker.lng, marker.lat]);
+      }
+    });
+
+    if (newBounds.getNorthEast() && newBounds.getSouthWest()) {
+      const currentBounds = this.map.getBounds();
+      if (!currentBounds.contains(newBounds.getNorthEast()) || !currentBounds.contains(newBounds.getSouthWest())) {
+        this.map.fitBounds(newBounds, { padding: 70, maxZoom: 15, duration: 0 });
+      }
+    }
+  }
+
   #updateMarkers(event) {
     const newMarkers = event.detail.markers;
 
@@ -88,6 +104,9 @@ export default class extends Controller {
     // Add new markers
     this.markersValue = newMarkers;
     this.#addMarkersToMap();
+
+    // Fit map to new markers if they are outside current bounds
+    this.#fitMapToNewMarkers(newMarkers);
   }
 
   openMarkerPopup(professionalId) {

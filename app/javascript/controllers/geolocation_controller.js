@@ -5,10 +5,6 @@ export default class extends Controller {
   loaderDelay = 500; // Afficher l'indicateur de chargement après 500ms
   locationPermissionDenied = false; // Ajouter un drapeau pour vérifier si l'accès à la position a été refusé
 
-  connect() {
-    this.element.querySelector('.location-icon').addEventListener("click", this.handleLocationClick.bind(this));
-  }
-
   handleLocationClick() {
     if (navigator.geolocation) {
       if (this.locationPermissionDenied) {
@@ -97,7 +93,11 @@ export default class extends Controller {
     }
 
     if (!extractCityController && !extractRegionController) {
-      element.form.submit();
+      console.log("No extract controllers found. Emitting submitFormRequested event.");
+      // Émettre un événement personnalisé
+      const event = new CustomEvent('submitFormRequested');
+      console.log("Dispatching submitFormRequested event:", event);
+      document.dispatchEvent(event);
     }
   }
 }
