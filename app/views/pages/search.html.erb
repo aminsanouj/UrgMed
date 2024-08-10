@@ -1,4 +1,4 @@
-<div class="container-wrapper" data-controller="tags search">
+<div class="container-wrapper" data-controller="tags search open-now">
   <div class="container-left">
     <div class="search-header">
       <div class="search-searchbar-city">
@@ -23,7 +23,7 @@
       <h2>Résultats :</h2>
       <%= render 'partials/open_now' %>
     </div>
-    <div class="container-results" data-tags-target="results" data-search-target="results">
+    <div class="container-results" data-tags-target="results" data-open-now-target="results">
       <% if @professionals.any? %>
         <div class="search-professional-card">
           <%= render partial: 'professionals/professional_card', collection: @professionals, as: :professional %>

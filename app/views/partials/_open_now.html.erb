@@ -1,6 +1,6 @@
 <form>
   <div class="filter-toggle">
-    <input type="checkbox" id="filter-open-now" data-action="change->search#toggleFilter" data-search-target="input" <%= 'checked' if params[:open_now] == 'true' %>>
+    <input type="checkbox" id="filter-open-now" data-action="change->open-now#toggleFilter" data-open-now-target="input" <%= 'checked' if params[:open_now] == 'true' %>>
     <label for="filter-open-now">
       <span class="slider"></span>
       <span class="label-text">Ouvert</span>
