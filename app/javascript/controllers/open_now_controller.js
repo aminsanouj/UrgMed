@@ -52,9 +52,31 @@ export default class extends Controller {
 
     window.history.pushState({}, '', url);
 
-    document.querySelectorAll('.search-professional-card').forEach(card => {
-      const isOpenNow = card.getAttribute('data-open-now') === 'true';
-      card.style.display = openNow ? (isOpenNow ? 'block' : 'none') : 'block';
+    // Itérer sur chaque catégorie
+    document.querySelectorAll('.annuaire-professional-category').forEach(category => {
+        const categoryName = category.getAttribute('data-speciality');
+        const cards = category.querySelectorAll('.search-professional-card');
+        const countSpan = category.querySelector('.annuaire-count');
+
+        // Compteur pour les cartes visibles
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+            const isOpenNow = card.getAttribute('data-open-now') === 'true';
+            if (openNow ? isOpenNow : true) {
+                card.style.display = 'block';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        if (countSpan) {
+            countSpan.textContent = visibleCount;
+        }
+
+        console.log(`Category: ${categoryName}, Visible cards: ${visibleCount}`);
     });
   }
+
 }

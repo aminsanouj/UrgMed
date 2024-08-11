@@ -2,7 +2,7 @@
   <div class="annuaire-header-container">
     <h2 class="annuaire-h2">Liste des professionnels autour de vous :</h2>
     <div class="annuaire-searchbar-city">
-      <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "extract-city autocomplete geolocation" } %>
+      <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "extract-city autocomplete search geolocation" } %>
     </div>
     <div class="annuaire-open-now">
       <%= render 'partials/open_now' %>
@@ -13,12 +13,14 @@
     <div class="annuaire-professionals-grid">
       <% specialities = ["Médecin", "Dentiste", "Pharmacie", "Urgence"] %>
       <% specialities.each do |speciality| %>
-        <div class="annuaire-professional-category">
+        <div class="annuaire-professional-category" data-speciality="<%= speciality %>">
           <% professionals = fetch_professionals(speciality) %>
-          <h3 class="annuaire-h3"><%= speciality.pluralize %> <span class="annuaire-count"><%= professionals.count %></span></h3>
+            <h3 class="annuaire-h3"><%= speciality.pluralize %>
+            <span class="annuaire-count"><%= professionals.count %></span>
+          </h3>
           <div class="annuaire-professional-scroll">
             <% professionals.each do |professional| %>
-              <div class="annuaire-professional-card" data-open-now-target="results">
+              <div class="annuaire-professional-card">
                 <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
               </div>
             <% end %>
