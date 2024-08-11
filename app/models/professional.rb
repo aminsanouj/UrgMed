@@ -1,6 +1,8 @@
 class Professional < ApplicationRecord
   include PgSearch::Model
 
+  SPECIALITIES = ['Médecin', 'Pharmacie', 'Dentiste', 'Urgences'].freeze
+
   pg_search_scope :search_by_speciality,
                   against: :speciality,
                   using: {

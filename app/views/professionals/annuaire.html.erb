@@ -11,11 +11,11 @@
 
   <div class="annuaire-results-container">
     <div class="annuaire-professionals-grid">
-      <% specialities = ["Médecin", "Dentiste", "Pharmacie", "Urgence"] %>
+      <% specialities = Professional::SPECIALITIES %>
       <% specialities.each do |speciality| %>
         <div class="annuaire-professional-category" data-speciality="<%= speciality %>">
           <% professionals = fetch_professionals(speciality) %>
-            <h3 class="annuaire-h3"><%= speciality.pluralize %>
+          <h3 class="annuaire-h3"><%= speciality.pluralize %>
             <span class="annuaire-count"><%= professionals.count %></span>
           </h3>
           <div class="annuaire-professional-scroll">

@@ -5,11 +5,11 @@
         <%= render partial: 'partials/searchbar_city', locals: { query_city: @search_query_city, controller_attribute: "autocomplete geolocation" } %>
       </div>
       <div class="searchtags">
-        <button class="tag medecin" data-tag="Médecin" data-action="click->tags#filter">Médecin</button>
-        <button class="tag pharmacie" data-tag="Pharmacie" data-action="click->tags#filter">Pharmacie</button>
-        <button class="tag dentiste" data-tag="Dentiste" data-action="click->tags#filter">Dentiste</button>
-        <button class="tag urgences" data-tag="Urgences" data-action="click->tags#filter">Urgences</button>
+        <% Professional::SPECIALITIES.each do |speciality| %>
+          <button class="tag <%= speciality.downcase %>" data-tag="<%= speciality %>" data-action="click->tags#filter"><%= speciality %></button>
+        <% end %>
       </div>
+
     </div>
     <div class="container-map"
       data-controller="map"
