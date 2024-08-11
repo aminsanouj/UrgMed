@@ -42,25 +42,32 @@ export default class extends Controller {
     }
   }
 
-  submitForm() {
-    console.log('submitForm');
+  submitForm = () => {
+    const currentPath = window.location.pathname;
 
+    if (currentPath === '/search') {
+      this.searchEmptyQueryCity();
+    } else {
+      document.querySelector('form.search-container').submit();
+    }
+  }
+
+  searchEmptyQueryCity() {
     const urlParams = new URLSearchParams(window.location.search);
     const queryCity = urlParams.get('query_city') || '';
 
     if (queryCity === '') {
-        console.log('queryCity is empty, queryCity:', queryCity);
+      console.log('queryCity is empty, queryCity:', queryCity);
 
-        const openNow = urlParams.get('open_now') || 'false';
-        const tags = urlParams.get('tags') || '';
+      const openNow = urlParams.get('open_now') || 'false';
+      const tags = urlParams.get('tags') || '';
+      const newQueryCity = document.getElementById('search-bar').value;
 
-        const newQueryCity = document.getElementById('search-bar').value;
+      const newUrl = `/search?query_city=${encodeURIComponent(newQueryCity)}&tags=${encodeURIComponent(tags)}&open_now=${encodeURIComponent(openNow)}`;
+      console.log('newUrl', newUrl);
 
-        const newUrl = `/search?query_city=${encodeURIComponent(newQueryCity)}&tags=${encodeURIComponent(tags)}&open_now=${encodeURIComponent(openNow)}`;
-        console.log('newUrl', newUrl);
-
-        window.history.pushState({}, '', newUrl);
-        window.location.href = newUrl;
+      window.history.pushState({}, '', newUrl);
+      window.location.href = newUrl;
     } else {
       console.log('queryCity is not empty');
       document.querySelector('form.search-container').submit();
