@@ -54,13 +54,13 @@ export default class extends Controller {
 
   searchEmptyQueryCity() {
     const urlParams = new URLSearchParams(window.location.search);
-    const queryCity = urlParams.get('query_city') || '';
+    const queryCity = decodeURIComponent(urlParams.get('query_city') || '');
 
     if (queryCity === '') {
       console.log('queryCity is empty, queryCity:', queryCity);
 
       const openNow = urlParams.get('open_now') || 'false';
-      const tags = urlParams.get('tags') || '';
+      const tags = decodeURIComponent(urlParams.get('tags') || '');
       const newQueryCity = document.getElementById('search-bar').value;
 
       const newUrl = `/search?query_city=${encodeURIComponent(newQueryCity)}&tags=${encodeURIComponent(tags)}&open_now=${encodeURIComponent(openNow)}`;
