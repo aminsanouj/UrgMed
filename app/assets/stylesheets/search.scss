@@ -17,13 +17,13 @@
 .search-header {
   display: flex;
   align-items: center; /* Centrer verticalement les éléments */
+  justify-content: space-between;
   margin-bottom: 10px;
   margin-top: 5px;
 }
 
 .search-searchbar-city {
   flex: 1;
-  margin-right: -50px;
   margin-left: 50px;
 }
 
