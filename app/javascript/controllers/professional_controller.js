@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   showDetails(event) {
-    event.preventDefault();
+    event.preventDefault(); // Empêche le comportement par défaut du lien
 
     const url = event.currentTarget.href;
     console.log('URL:', url); // Ajoutez ce log pour vérifier l'URL
