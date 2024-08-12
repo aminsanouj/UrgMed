@@ -1,3 +1,15 @@
+.hidden-admin-button {
+  position: absolute;
+  top: 296px;         /* Décalage du haut */
+  left: 308px;        /* Décalage de la gauche */
+  width: 50px;        /* Largeur du bouton */
+  height: 50px;       /* Hauteur du bouton */
+  background-color: #ff0000; /* Couleur de fond rouge */
+  border-radius: 50%; /* Rend le bouton rond */
+  z-index: 1000;      /* S'assurer que le bouton est au-dessus du reste du contenu */
+  opacity: 0;       /* Opacité à 50% */
+}
+
 .centered-image {
   display: block;
   margin: 75px auto;

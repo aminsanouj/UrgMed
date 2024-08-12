@@ -91,4 +91,8 @@ Rails.application.configure do
 
   # Pour afficher les e-mails dans la console (facultatif, pour le débogage)
   config.action_mailer.perform_deliveries = true
+
+  # Configuration du mailer pour Devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
 end

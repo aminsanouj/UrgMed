@@ -3,6 +3,16 @@ class Professional < ApplicationRecord
 
   SPECIALITIES = ['Médecin', 'Pharmacie', 'Dentiste', 'Urgences'].freeze
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :speciality, presence: true
+  validate :speciality_inclusion
+  validates :phone_number, presence: true, format: { with: /\A0[1-9](?:[\s.-]?\d{2}){4}\z/, message: "doit être un numéro de téléphone français valide" }
+  validates :street, presence: true
+  validates :postal_code, presence: true, format: { with: /\A\d{5}\z/, message: "doit être un code postal français valide" }
+  validates :city, presence: true
+  validates :opening_hours, presence: true
+
   pg_search_scope :search_by_speciality,
                   against: :speciality,
                   using: {
@@ -49,5 +59,14 @@ class Professional < ApplicationRecord
     end
 
     false
+  end
+
+  private
+
+  # Méthode de validation personnalisée
+  def speciality_inclusion
+    return if SPECIALITIES.any? { |s| speciality.include?(s) }
+
+    errors.add(:speciality, "doit contenir une des spécialités de base : #{SPECIALITIES.join(', ')}")
   end
 end

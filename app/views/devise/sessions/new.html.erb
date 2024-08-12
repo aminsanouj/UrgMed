@@ -1,0 +1,19 @@
+<div class="admin-login-container">
+  <h2 class="admin-login-header">Admin</h2>
+
+  <%= form_with scope: :admin, url: session_path(:admin), local: true, html: { class: 'admin-login-fields' } do |form| %>
+    <div class="admin-login-group">
+      <%= form.label :email, "Email" %>
+      <%= form.email_field :email, placeholder: "Entrez votre email", class: 'admin-login-control' %>
+    </div>
+
+    <div class="admin-login-group">
+      <%= form.label :password, "Mot de passe" %>
+      <%= form.password_field :password, placeholder: "Entrez votre mot de passe", class: 'admin-login-control' %>
+    </div>
+
+    <div class="admin-login-group">
+      <%= form.submit "Connexion", class: 'admin-login-submit' %>
+    </div>
+  <% end %>
+</div>

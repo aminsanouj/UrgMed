@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
+  # Routes Devise pour la connexion seulement avec Admin
+  devise_for :admins, only: [:sessions]
+
   root 'pages#home'
 
   resources :professionals, only: [:index, :show]
