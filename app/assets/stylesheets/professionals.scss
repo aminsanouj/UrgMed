@@ -61,9 +61,37 @@
     }
 
     .card-text {
+      margin-bottom: 2px;
+
       strong {
         font-weight: bold;
         margin-right: 5px;
+      }
+
+      .opening-hours-day {
+        display: inline-block;
+        width: 100px; /* Ajustez cette valeur selon vos besoins */
+        margin-left: 85px;
+      }
+
+      .opening-hours-hours {
+        margin-left: -20px;
+      }
+
+      .first-day {
+        margin-left: 0;
+      }
+
+      .first-hours {
+        margin-left: -20px;
+      }
+
+      .site-web-link {
+        color: #000000;
+        text-decoration: underline;
+        &:hover {
+          text-decoration: none;
+        }
       }
     }
 

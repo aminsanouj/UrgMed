@@ -2,7 +2,7 @@
   <div id="loader" style="display: none;">
     <%= image_tag 'loading.gif', class: 'loading-icon', alt: 'Chargement...' %>
   </div>
-  <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Dans quelle ville êtes-vous ?" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-region-target="input">
+  <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Entrez votre adresse actuelle" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-region-target="input">
   <%= hidden_field_tag :open_now, params[:open_now] %>
   <button type="button" data-action="click->autocomplete#handleSearch click->search#submitForm">
     <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>

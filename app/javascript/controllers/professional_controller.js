@@ -14,28 +14,28 @@ export default class extends Controller {
     event.preventDefault();
 
     const url = event.currentTarget.href;
+    console.log('URL:', url); // Ajoutez ce log pour vérifier l'URL
 
-    // Cibler spécifiquement le conteneur 'search-professional-card'
-    const container = event.currentTarget.closest('.annuaire-professional-card, .search-professional-card') || document.querySelector('.annuaire-results-container, .container-results');
+    const container = event.currentTarget.closest('.search-professional-card') || document.querySelector('.container-results');
+    console.log('Container:', container); // Ajoutez ce log pour vérifier le conteneur
 
     if (container) {
       const professionalId = container.getAttribute('data-professional-id');
+      console.log('Professional ID:', professionalId); // Ajoutez ce log pour vérifier l'ID du professionnel
 
-      // Fermer toutes les autres cartes ouvertes
       this.closeAllDetails();
 
-      // Ouvrir la pop-up du marker associé si le contrôleur de carte est présent
       if (this.hasMapController()) {
         const mapController = this.application.getControllerForElementAndIdentifier(document.querySelector("[data-controller='map']"), "map");
         mapController.openMarkerPopup(professionalId);
       }
 
-      // Enregistrer le contenu de la carte ou du conteneur avant de le remplacer
       cardStates[professionalId] = container.innerHTML;
 
       fetch(url, { headers: { 'Accept': 'text/html' } })
         .then(response => response.text())
         .then(html => {
+          console.log('HTML:', html); // Ajoutez ce log pour vérifier le contenu HTML
           container.innerHTML = html;
         })
         .catch(error => {

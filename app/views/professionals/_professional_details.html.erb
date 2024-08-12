@@ -15,16 +15,27 @@
       </span>
     <% end %>
   </h5>
-  <p class="card-text"><strong>Spécialité:</strong> <%= @professional.speciality %></p>
-  <p class="card-text"><strong>Adresse Complète:</strong> <%= @professional.full_address %></p>
-  <p class="card-text"><strong>Horaires:</strong><br>
-    <% sorted_opening_hours(@professional.opening_hours).each do |day, hours| %>
+  <p class="card-text">
+    <strong>Spécialité :</strong> <%= @professional.speciality %>
+  </p>
+  <p class="card-text">
+    <strong>Adresse :</strong> <%= @professional.full_address %>
+  </p>
+  <p class="card-text">
+    <strong>Horaires :</strong>
+    <% first_work_day_found = false %>
+    <% sorted_opening_hours(@professional.opening_hours).each do |(day, hours)| %>
       <% if hours.present? %>
-        <%= day %>: <%= hours %><br>
+        <span class="opening-hours-day <%= 'first-day' unless first_work_day_found %>"><%= day %> :</span>
+        <span class="opening-hours-hours <%= 'first-hours' unless first_work_day_found %>"><%= hours %></span><br>
+        <% first_work_day_found = true %>
       <% end %>
     <% end %>
   </p>
-  <p class="card-text"><strong>Site Web:</strong> <%= link_to @professional.website, @professional.website, target: "_blank" if @professional.website %></p>
+  <p class="card-text">
+    <strong>Site Web:</strong>
+    <%= link_to @professional.website, @professional.website, target: "_blank", title: "Visitez le site web", class: "btn btn-link site-web-link" if @professional.website %>
+  </p>
   <div class="button-group mt-3">
     <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm itineraire", target: "_blank" %>
     <%= link_to @professional.phone_number, "tel:#{@professional.phone_number}", class: "btn btn-primary btn-sm appeler" %>

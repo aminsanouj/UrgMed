@@ -13,7 +13,7 @@ class ContactController < ApplicationController
     # Envoi de l'e-mail via le mailer
     ContactMailer.contact_email(name, email, subject, message).deliver_now
 
-    flash[:notice] = "Votre message a bien été envoyé."
+    flash[:contact_notice] = "Votre message a bien été envoyé."
     redirect_to contact_path
   end
 end
