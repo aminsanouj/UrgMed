@@ -5,16 +5,43 @@ export default class extends Controller {
 
   connect() {
     console.log('OpenNow controller connected!');
+    this.initializeAnnuaire();
+  }
+
+  getCurrentPage() {
+    if (document.querySelector('.annuaire-wrapper')) {
+      return 'annuaire';
+    } else if (document.querySelector('.container-wrapper')) {
+      return 'search';
+    }
+    return null;
+  }
+
+  initializeAnnuaire() {
+    if (this.getCurrentPage() === 'annuaire') {
+      const urlParams = new URLSearchParams(window.location.search);
+      const openNowParam = urlParams.get('open_now') === 'true';
+
+      if (openNowParam) {
+        this.handleAnnuairePage(true);
+        // Mettre à jour la case à cocher pour refléter l'état actuel
+        this.inputTarget.checked = true;
+      }
+
+      // Retirer la classe 'hidden' après l'application de la logique
+      document.querySelectorAll('.annuaire-professional-card.hidden, .annuaire-count.hidden').forEach(element => {
+        element.classList.remove('hidden');
+      });
+    }
   }
 
   toggleFilter(event) {
-    const isSearchPage = document.querySelector('.container-wrapper');
-    const isAnnuairePage = document.querySelector('.annuaire-wrapper');
     const openNow = event.target.checked;
+    const currentPage = this.getCurrentPage();
 
-    if (isSearchPage) {
+    if (currentPage === 'search') {
       this.handleSearchPage(openNow);
-    } else if (isAnnuairePage) {
+    } else if (currentPage === 'annuaire') {
       this.handleAnnuairePage(openNow);
     }
   }
@@ -54,29 +81,25 @@ export default class extends Controller {
 
     // Itérer sur chaque catégorie
     document.querySelectorAll('.annuaire-professional-category').forEach(category => {
-        const categoryName = category.getAttribute('data-speciality');
-        const cards = category.querySelectorAll('.search-professional-card');
-        const countSpan = category.querySelector('.annuaire-count');
+      const categoryName = category.getAttribute('data-speciality');
+      const cards = category.querySelectorAll('.search-professional-card');
+      const countSpan = category.querySelector('.annuaire-count');
 
-        // Compteur pour les cartes visibles
-        let visibleCount = 0;
+      let visibleCount = 0;
 
-        cards.forEach(card => {
-            const isOpenNow = card.getAttribute('data-open-now') === 'true';
-            if (openNow ? isOpenNow : true) {
-                card.style.display = 'block';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-            }
-        });
-
-        if (countSpan) {
-            countSpan.textContent = visibleCount;
+      cards.forEach(card => {
+        const isOpenNow = card.getAttribute('data-open-now') === 'true';
+        if (openNow ? isOpenNow : true) {
+            card.style.display = 'block';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
         }
+      });
 
-        console.log(`Category: ${categoryName}, Visible cards: ${visibleCount}`);
+      if (countSpan) {
+        countSpan.textContent = visibleCount;
+      }
     });
   }
-
 }

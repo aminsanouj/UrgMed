@@ -16,11 +16,11 @@
         <div class="annuaire-professional-category" data-speciality="<%= speciality %>">
           <% professionals = fetch_professionals(speciality) %>
           <h3 class="annuaire-h3"><%= speciality.pluralize %>
-            <span class="annuaire-count"><%= professionals.count %></span>
+            <span class="annuaire-count hidden"><%= professionals.count %></span>
           </h3>
           <div class="annuaire-professional-scroll">
             <% professionals.each do |professional| %>
-              <div class="annuaire-professional-card">
+              <div class="annuaire-professional-card hidden">
                 <%= render partial: 'professionals/professional_card', locals: { professional: professional } %>
               </div>
             <% end %>
