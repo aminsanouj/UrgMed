@@ -1,18 +1,18 @@
 <section class="hero">
     <div class="container">
-        <div class="hero-content">
-            <a href="http://localhost:3000/admin/" class="hidden-admin-button"></a>
-            <%= image_tag 'home-demo.png', class: 'Home hero-image', alt: 'Home-demo' %>
-            <div class="hero-text">
-                <h1>Une urgence médicale ? <span>Trouvez un professionnel</span></h1>
-                <div class="home-searchbar-city">
-                    <%= form_tag search_path, method: :get, class: "search-container", data: { controller: "autocomplete search geolocation" } do %>
-                        <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "autocomplete search geolocation" } %>
-                    <% end %>
-                </div>
-                <p>UrgMed géolocalise en temps réel les médecins, dentistes, pharmacies de garde et services d'urgence les plus proches.</p>
-            </div>
-        </div>
+      <div class="hero-content">
+          <div class="hero-text">
+              <h1>Une urgence médicale ? <span>Trouvez un professionnel</span></h1>
+              <div class="home-searchbar-city">
+                  <%= form_tag search_path, method: :get, class: "search-container", data: { controller: "autocomplete search geolocation" } do %>
+                      <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "autocomplete search geolocation" } %>
+                  <% end %>
+              </div>
+              <p>UrgMed géolocalise en temps réel les médecins, dentistes, pharmacies de garde et services d'urgence les plus proches.</p>
+          </div>
+          <a href="http://localhost:3000/admin/" class="hidden-admin-button"></a>
+          <%= image_tag 'home-demo.png', class: 'Home hero-image', alt: 'Home-demo' %>
+      </div>
     </div>
 </section>
 

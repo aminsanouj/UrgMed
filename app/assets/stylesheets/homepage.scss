@@ -1,7 +1,7 @@
 .hidden-admin-button {
   position: absolute;
   top: 296px;         /* Décalage du haut */
-  left: 308px;        /* Décalage de la gauche */
+  right: 390px;        /* Décalage de la droite */
   width: 50px;        /* Largeur du bouton */
   height: 50px;       /* Hauteur du bouton */
   background-color: #ff0000; /* Couleur de fond rouge */
@@ -40,17 +40,20 @@ $card-background: #fff;
   .hero-content {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end; /* Aligne le contenu à droite */
+    margin-left: 20px;
+    gap: 40px;
 
     .hero-image {
-      max-width: 55%; /* Réduction de la taille de l'image */
-      margin-right: 20px; /* Espace à droite de l'image */
-      float: left;
-    }
+      margin-left: 20px; /* Espace à gauche de l'image */
+      margin-right: 50px;
+      float: right;
+  }
 
-    .hero-text {
-      padding: 20px;
-      text-align: left; /* Alignement du texte à gauche */
+  .hero-text {
+    padding: 20px;
+    text-align: left; /* Alignement du texte à gauche */
+    margin-right: 30px;
 
       h1 {
         font-size: 3.5em;
