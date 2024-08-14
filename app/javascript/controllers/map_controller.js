@@ -1,34 +1,45 @@
-// map_controller.js
 import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl'
 
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    markerQueryCity: Object
   }
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue
 
-    // Ensure the container is empty before initializing the map
-    this.element.innerHTML = ''
+    this.element.innerHTML = '' // Assurez-vous que le conteneur est vide
 
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v10"
     })
 
-    this.markersMap = {}; // Initialize the markers map
+    this.markersMap = {}
 
-    this.#addMarkersToMap()
+    this.#addMarkersToMap() 
     this.#fitMapToMarkers()
 
-    // Listen for the custom event
-    document.addEventListener('resultsUpdated', this.#updateMarkers.bind(this));
+    document.addEventListener('resultsUpdated', this.#updateMarkers.bind(this))
+  }
+
+  #addCityMarker() {
+    if (this.markerQueryCityValue) {
+      const cityMarkerElement = document.createElement("div")
+      cityMarkerElement.innerHTML = this.markerQueryCityValue.marker_city_html
+
+      const cityMarker = new mapboxgl.Marker(cityMarkerElement)
+        .setLngLat([this.markerQueryCityValue.lng, this.markerQueryCityValue.lat])
+        .addTo(this.map)
+    }
   }
 
   #addMarkersToMap() {
+    this.#addCityMarker()
+
     this.markersValue.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
 
@@ -67,14 +78,22 @@ export default class extends Controller {
   }
 
   #fitMapToMarkers() {
-    const bounds = new mapboxgl.LngLatBounds()
+    const bounds = new mapboxgl.LngLatBounds();
+
+    // Ajouter les marqueurs existants aux limites
     this.markersValue.forEach(marker => {
       if (marker.lng && marker.lat) {
-        bounds.extend([marker.lng, marker.lat])
+        bounds.extend([marker.lng, marker.lat]);
       }
-    })
+    });
+
+    // Ajouter markerQueryCity aux limites
+    if (this.markerQueryCityValue && this.markerQueryCityValue.lng && this.markerQueryCityValue.lat) {
+      bounds.extend([this.markerQueryCityValue.lng, this.markerQueryCityValue.lat]);
+    }
+
     if (bounds.getNorthEast() && bounds.getSouthWest()) {
-      this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
+      this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 });
     }
   }
 
@@ -85,6 +104,11 @@ export default class extends Controller {
         newBounds.extend([marker.lng, marker.lat]);
       }
     });
+
+    // Ajouter markerQueryCity aux limites
+    if (this.markerQueryCityValue && this.markerQueryCityValue.lng && this.markerQueryCityValue.lat) {
+      newBounds.extend([this.markerQueryCityValue.lng, this.markerQueryCityValue.lat]);
+    }
 
     if (newBounds.getNorthEast() && newBounds.getSouthWest()) {
       const currentBounds = this.map.getBounds();

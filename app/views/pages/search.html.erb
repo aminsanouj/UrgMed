@@ -14,7 +14,8 @@
     <div class="container-map"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
-      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"
+      data-map-marker-query-city-value="<%= @marker_query_city.to_json %>">
     </div>
   </div>
 

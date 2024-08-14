@@ -11,31 +11,34 @@ class PagesController < ApplicationController
     @search_query_city = params[:query_city].presence
     @open_now = params[:open_now] == 'true'
     @tags = params[:tags]&.split(',') || []
-
     @professionals = Professional.all
 
-    # Filtrer par ville et coordonnée
     if @search_query_city.present?
       @search_query_coordinates = Geocoder.coordinates(@search_query_city)
       if @search_query_coordinates.present?
         @professionals = @professionals.near(@search_query_coordinates, 100)
-        @professionals = @professionals.search_by_city(@search_query_city)
       end
+    else
+      @search_query_city = ""
+      @search_query_coordinates = []
     end
 
-    # Filtrer par tags
     if @tags.any?
       @professionals = @professionals.search_by_speciality(@tags)
     end
 
-    # Appliquer l'offset et l'ordre avant de récupérer les résultats
     skip = params[:skip].to_i
     @professionals = @professionals.order(:id).offset(skip)
 
-    # Filtrer par "Open Now" en Ruby après avoir récupéré les résultats si @open_now est vrai
     if @open_now
-      @professionals = @professionals.to_a.select(&:open_now?) # Convertir en tableau pour filtrer
+      @professionals = @professionals.to_a.select(&:open_now?)
     end
+
+    @marker_query_city = {
+      lat: @search_query_coordinates[0],
+      lng: @search_query_coordinates[1],
+      marker_city_html: render_to_string(partial: "partials/marker_city", locals: { city: @search_query_city })
+    }
 
     @markers = @professionals.reject { |p| p.latitude.nil? || p.longitude.nil? }.map do |professional|
       {
@@ -51,8 +54,9 @@ class PagesController < ApplicationController
       format.html
       format.js {
         render json: {
+          partials: render_to_string(partial: 'professionals/professional_card', collection: @professionals, as: :professional),
           markers: @markers,
-          partials: render_to_string(partial: 'professionals/professional_card', collection: @professionals, as: :professional)
+          marker_query_city: @marker_query_city
         }
       }
     end
@@ -69,8 +73,6 @@ class PagesController < ApplicationController
 
   def contact
     if request.post?
-      # Code pour gérer les soumissions de formulaire de contact
-      # Par exemple, envoyer un email ou enregistrer les informations dans la base de données
       flash[:notice] = "Votre message a bien été envoyé !"
       redirect_to contact_path
     end
