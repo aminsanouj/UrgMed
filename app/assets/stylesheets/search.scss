@@ -64,3 +64,13 @@
   align-items: center;
   margin-bottom: 20px;
 }
+
+.marker {
+  .marker-city-icon {
+    content: url('marker_city_icon-static.png');
+
+    &:hover {
+      content: url('marker_city_icon.gif');
+    }
+  }
+}
