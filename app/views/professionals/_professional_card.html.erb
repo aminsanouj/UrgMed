@@ -7,7 +7,7 @@
         <span class="availability-badge bg-secondary float-end"></span>
       <% end %>
       <%= professional.first_name %> <%= professional.last_name %>
-      <% if @search_query_coordinates %>
+      <% if @search_query_coordinates.present? %>
         <span class="distance">
           <%= distance_between(@search_query_coordinates, professional) %>
         </span>

@@ -1,0 +1,34 @@
+<%= stylesheet_link_tag 'railsadmin', media: 'all' %>
+
+<body class="non-clickable-navbar">
+  <div class="admin-button">
+    <%= link_to 'Back to Admin', '/admin/emergency_number', class: 'btn-back-to-admin' %>
+  </div>
+
+
+  <div class="emergency-container">
+    <div class="emergency-container__left">
+      <div class="emergency-container__numbers--national">
+        <h2 class="emergency-container__numbers-title">Numéros d'urgence nationaux</h2>
+        <ul class="emergency-container__numbers-list">
+          <% if @emergency_number.is_local == false %>
+            <%= render partial: 'emergency_card', locals: { number: @emergency_number } %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+    <div class="emergency-container__right">
+      <div class="searchbar-city">
+        <%= render partial: 'partials/searchbar_city', locals: { query_city: @query_city, controller_attribute: "extract-region search geolocation autocomplete" } %>
+      </div>
+      <div class="emergency-container__numbers--local">
+        <h2 class="emergency-container__numbers-title">Numéros d'urgence locaux</h2>
+        <ul class="emergency-container__numbers-list-local">
+          <% if @emergency_number.is_local == true %>
+            <%= render partial: 'emergency_card', locals: { number: @emergency_number } %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>

@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'railsadmin', media: 'all' %>
+
+<body class="non-clickable-navbar">
+  <div class="admin-button">
+    <%= link_to 'Back to Admin', '/admin/professional', class: 'btn-back-to-admin' %>
+  </div>
+
+  <div class="container-wrapper" data-controller="tags search open-now">
+    <div class="railsadmin-container-left">
+      <div class="annuaire-wrapper" data-controller="open-now">
+        <div class="annuaire-header-container">
+          <h2 class="railsadmin-annuaire-h2">
+            Liste des professionnels autour de vous :
+          </h2>
+        </div>
+        <div class="railsadmin-annuaire-results-container">
+          <div class="railsadmin-annuaire-professionals-grid">
+            <div class="annuaire-professional-category" data-speciality="<%= @professional.speciality %>">
+              <h3 class="annuaire-h3">
+                <%= @professional.speciality.pluralize %>
+                <span class="annuaire-count">1</span>
+              </h3>
+              <div class="annuaire-professional-scroll">
+                <div class="annuaire-professional-card">
+                  <%= render partial: 'professionals/professional_card', locals: { professional: @professional } %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="railsadmin-container-right">
+      <div class="header">
+        <h2>Résultats :</h2>
+      </div>
+      <div class="container-results" data-tags-target="results" data-open-now-target="results">
+        <% if @professional %>
+          <div class="search-professional-card">
+            <%= render partial: 'professionals/professional_card', locals: { professional: @professional } %>
+          </div>
+        <% else %>
+          <p>No professional found.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</body>

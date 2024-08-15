@@ -1,0 +1,63 @@
+.non-clickable-navbar .navbar a {
+  pointer-events: none;
+}
+
+.railsadmin-annuaire-results-container {
+  width: 342.5px;
+  height: 525.5px;
+}
+
+.railsadmin-annuaire-h2 {
+  margin-bottom: 15px;
+}
+
+.railsadmin-container-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  margin-left: 40px;
+}
+
+.railsadmin-container-right {
+  width: 469.27px;
+  height: 610px;
+  margin-left: 30px;
+  flex: 1;
+  background-color: #add8e6;
+  padding: 20px 20px 10px;
+  margin-bottom: 20px;
+  margin-right: 20px;
+}
+
+.admin-button {
+  margin: 20px 0;
+  text-align: left;
+  margin-left: 30px;
+}
+
+.btn-back-to-admin {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #0D6EFD;
+  border: 1px solid #0D6EFD;
+  border-radius: 5px;
+  text-decoration: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
+}
+
+.btn-back-to-admin:hover {
+  background-color: #0b5ed7;
+  border-color: #0b5ed7;
+  transform: scale(1.03);
+}
+
+.btn-back-to-admin:active {
+  background-color: #0a58ca;
+  border-color: #0a58ca;
+  transform: scale(1.02);
+}

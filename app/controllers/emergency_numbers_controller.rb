@@ -6,5 +6,6 @@ class EmergencyNumbersController < ApplicationController
   end
 
   def show
+    @emergency_number = EmergencyNumber.find(params[:id])
   end
 end
