@@ -5,10 +5,12 @@
 .railsadmin-annuaire-results-container {
   width: 342.5px;
   height: 525.5px;
+  margin-left: 200px;
 }
 
 .railsadmin-annuaire-h2 {
   margin-bottom: 15px;
+  margin-left: 200px;
 }
 
 .railsadmin-container-left {
@@ -17,6 +19,7 @@
   flex-direction: column;
   margin-bottom: 20px;
   margin-left: 40px;
+  margin-top: -60px;
 }
 
 .railsadmin-container-right {
@@ -28,12 +31,17 @@
   padding: 20px 20px 10px;
   margin-bottom: 20px;
   margin-right: 20px;
+  margin-top: -60px;
 }
 
+.emergency-container__right {
+  margin-top: -75px;
+}
 .admin-button {
   margin: 20px 0;
   text-align: left;
   margin-left: 30px;
+  position: relative;
 }
 
 .btn-back-to-admin {
