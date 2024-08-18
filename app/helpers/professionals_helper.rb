@@ -14,12 +14,25 @@ module ProfessionalsHelper
 
   def sorted_opening_hours(opening_hours)
     order = %w(Lundi Mardi Mercredi Jeudi Vendredi Samedi Dimanche)
-    sorted_hours = Hash[order.zip(order.map { |day| opening_hours[day] })]
-    sorted_hours.map { |day, hours| [day, format_opening_hours(hours)] }.to_h
+    sorted_hours = order.map do |day|
+      opening_hours.find { |h| h.keys.include?(day) && h[day].any?(&:present?) } || { day => [] }
+    end
+    sorted_hours.reject { |day_hash| day_hash.values.flatten.empty? }
+                .map { |day_hash| [day_hash.keys.first, format_opening_hours(day_hash.values.first)] }.to_h
   end
 
   def format_opening_hours(hours)
-    hours.map { |h| "#{h.split('-')[0]} à #{h.split('-')[1]}" }.join(', ')
+    hours.reject(&:empty?).map do |h|
+      h.split(',').map do |range|
+        start_time, end_time = range.split('-')
+        formatted_range = "#{start_time.sub(':', 'h')}-#{end_time.sub(':', 'h')}"
+        format_24h_opening_hours(formatted_range)
+      end.join(', ')
+    end.join(', ')
+  end
+
+  def format_24h_opening_hours(range)
+    range == "00h00-24h00" ? "24h/24h" : range
   end
 
   def fetch_professionals(speciality)
