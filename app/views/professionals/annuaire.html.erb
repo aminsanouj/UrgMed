@@ -14,7 +14,7 @@
       <% specialities = Professional::SPECIALITIES %>
       <% specialities.each do |speciality| %>
         <div class="annuaire-professional-category" data-speciality="<%= speciality %>">
-          <% professionals = fetch_professionals(speciality) %>
+          <% professionals = fetch_professionals(@professionals, speciality) %>
           <h3 class="annuaire-h3"><%= speciality.pluralize %>
             <span class="annuaire-count hidden"><%= professionals.count %></span>
           </h3>

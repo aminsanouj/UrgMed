@@ -35,9 +35,7 @@ module ProfessionalsHelper
     range == "00h00-24h00" ? "24h/24h" : range
   end
 
-  def fetch_professionals(speciality)
-    professionals = @query_city.present? ? Professional.search_by_speciality(speciality).search_by_city(@query_city) : Professional.search_by_speciality(speciality)
-    professionals = professionals.select(&:open_now?) if @open_now
-    professionals
+  def fetch_professionals(professionals, speciality)
+    professionals.select { |p| p.speciality.include?(speciality) }
   end
 end
