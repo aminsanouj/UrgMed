@@ -41,6 +41,7 @@ RailsAdmin.config do |config|
       field :postal_code
       field :city
       field :opening_hours, :text do
+        help "Lundi : 08h00-17h00\nMardi : 08h00-17h00 etc."
         formatted_value do
           bindings[:object].process_opening_hours
         end
@@ -49,20 +50,62 @@ RailsAdmin.config do |config|
   end
 
   config.model 'EmergencyNumber' do
+    create do
+      field :name
+      field :phone_number
+      field :description
+      field :is_local, :enum do
+        enum do
+          [['Oui', true], ['Non', false]]
+        end
+      end
+      field :region, :enum do
+        enum do
+          [
+            'Auvergne-Rhône-Alpes', 'Bourgogne-Franche-Comté', 'Bretagne', 'Centre-Val de Loire',
+            'Corse', 'Grand Est', 'Hauts-de-France', 'Île-de-France', 'Normandie', 'Nouvelle-Aquitaine',
+            'Occitanie', 'Pays de la Loire', 'Provence-Alpes-Côte d\'Azur'
+          ]
+        end
+      end
+      field :call_price do
+        help 'Ex : 0,35€/min'
+      end
+    end
+
     list do
       field :name
       field :phone_number
       field :region
       field :is_local
+      field :call_price do
+        formatted_value do
+          value.present? ? '✓' : ''
+        end
+      end
     end
 
     edit do
       field :name
       field :phone_number
       field :description
-      field :is_local
-      field :region
-      field :call_price
+      field :is_local, :enum do
+        enum do
+          [['Oui', true], ['Non', false]]
+        end
+      end
+      field :region, :enum do
+        enum do
+          [
+            'Auvergne-Rhône-Alpes', 'Bourgogne-Franche-Comté', 'Bretagne', 'Centre-Val de Loire',
+            'Corse', 'Grand Est', 'Hauts-de-France', 'Île-de-France', 'Normandie', 'Nouvelle-Aquitaine',
+            'Occitanie', 'Pays de la Loire', 'Provence-Alpes-Côte d\'Azur'
+          ]
+        end
+      end
+      field :call_price do
+        help 'Ex : 0,35€/min'
+      end
     end
   end
 end

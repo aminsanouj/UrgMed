@@ -12,7 +12,8 @@ class Professional < ApplicationRecord
 
   # Callbacks
   before_save :process_opening_hours, if: :format_valid?
-  after_validation :geocode, if: -> { will_save_change_to_street? || will_save_change_to_postal_code? || will_save_change_to_city? }
+  geocoded_by :full_address
+  after_validation :geocode, if: :will_save_change_to_street? || :will_save_change_to_postal_code? || :will_save_change_to_city?
 
   # Scopes
   pg_search_scope :search_by_speciality,
