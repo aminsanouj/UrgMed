@@ -1,3 +1,4 @@
+=begin
 # db/seeds.rb
 
 # Effacer les enregistrements existants
@@ -589,3 +590,4 @@ Professional.create!([
 ])
 
 puts "Seeds created successfully! 🌱"
+=end

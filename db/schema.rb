@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_12_035903) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_20_171535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_12_035903) do
     t.boolean "is_local", default: false
     t.string "region"
     t.string "call_price"
+    t.string "department"
   end
 
   create_table "professionals", force: :cascade do |t|

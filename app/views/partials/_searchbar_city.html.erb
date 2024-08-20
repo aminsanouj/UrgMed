@@ -4,6 +4,8 @@
   </div>
   <input type="text" id="search-bar" name="query_city" value="<%= params[:query_city] %>" placeholder="Entrez votre adresse actuelle" data-autocomplete-target="input" data-search-target="input" data-extract-city-target="input" data-extract-region-target="input">
   <%= hidden_field_tag :open_now, params[:open_now] %>
+  <%= hidden_field_tag :department, nil, data: { extract_region_target: 'department' } %>
+  <%= hidden_field_tag :region, nil, data: { extract_region_target: 'region' } %>
   <button type="button" data-action="click->autocomplete#handleSearch click->search#submitForm">
     <%= image_tag 'search_icon.svg', class: 'search-icon', alt: 'Search' %>
   </button>

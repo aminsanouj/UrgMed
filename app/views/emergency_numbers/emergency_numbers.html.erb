@@ -3,7 +3,7 @@
     <div class="emergency-container__numbers--national">
       <h2 class="emergency-container__numbers-title">Numéros d'urgence nationaux</h2>
       <ul class="emergency-container__numbers-list">
-        <% @emergency_numbers.where(is_local: false).each do |number| %>
+        <% @national_numbers.each do |number| %>
           <%= render partial: 'emergency_card', locals: { number: number } %>
         <% end %>
       </ul>
