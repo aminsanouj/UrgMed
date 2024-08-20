@@ -23,13 +23,6 @@ class Professional < ApplicationRecord
                   },
                   ignoring: :accents
 
-  pg_search_scope :search_by_city,
-                  against: [:city, :postal_code],
-                  using: {
-                    tsearch: { prefix: true, any_word: true }
-                  },
-                  ignoring: :accents
-
   # Methods
   def full_address
     [street, postal_code, city].join(', ')
