@@ -61,11 +61,12 @@ RailsAdmin.config do |config|
       end
       field :region, :enum do
         enum do
-          [
-            'Auvergne-Rhône-Alpes', 'Bourgogne-Franche-Comté', 'Bretagne', 'Centre-Val de Loire',
-            'Corse', 'Grand Est', 'Hauts-de-France', 'Île-de-France', 'Normandie', 'Nouvelle-Aquitaine',
-            'Occitanie', 'Pays de la Loire', 'Provence-Alpes-Côte d\'Azur'
-          ]
+          EmergencyNumber::REGIONS
+        end
+      end
+      field :department, :enum do
+        enum do
+          EmergencyNumber::DEPARTMENTS
         end
       end
       field :call_price do
@@ -78,6 +79,7 @@ RailsAdmin.config do |config|
       field :phone_number
       field :region
       field :is_local
+      field :department
       field :call_price do
         formatted_value do
           value.present? ? '✓' : ''
@@ -96,11 +98,15 @@ RailsAdmin.config do |config|
       end
       field :region, :enum do
         enum do
-          [
-            'Auvergne-Rhône-Alpes', 'Bourgogne-Franche-Comté', 'Bretagne', 'Centre-Val de Loire',
-            'Corse', 'Grand Est', 'Hauts-de-France', 'Île-de-France', 'Normandie', 'Nouvelle-Aquitaine',
-            'Occitanie', 'Pays de la Loire', 'Provence-Alpes-Côte d\'Azur'
-          ]
+          EmergencyNumber::REGIONS
+        end
+      end
+      field :department, :enum do
+        enum do
+          EmergencyNumber::DEPARTMENTS
+        end
+        formatted_value do
+          bindings[:object].formatted_department
         end
       end
       field :call_price do
