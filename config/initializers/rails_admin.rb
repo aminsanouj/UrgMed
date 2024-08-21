@@ -7,6 +7,20 @@ RailsAdmin.config do |config|
 
   config.current_user_method(&:current_admin)
 
+  # Ajouter l'action d'importation
+  config.actions do
+    all
+    import # Ajoute cette ligne pour inclure l'action d'importation
+  end
+
+  # Configuration globale pour RailsAdminImport
+  config.configure_with(:import) do |import_config|
+    import_config.logging = true  # Activer la journalisation des importations
+    import_config.line_item_limit = 1000  # Limite de lignes par importation
+    import_config.update_if_exists = true  # Mettre à jour les enregistrements existants si une correspondance est trouvée
+    import_config.rollback_on_error = true  # Annuler l'importation en cas d'erreur
+  end
+
   # Configuration des modèles
   config.model 'Professional' do
     create do
@@ -46,6 +60,13 @@ RailsAdmin.config do |config|
           bindings[:object].process_opening_hours
         end
       end
+    end
+
+    # Configuration spécifique pour l'importation
+    import do
+      include_all_fields
+      exclude_fields :id, :latitude, :longitude, :created_at, :updated_at
+      mapping_key [:first_name, :last_name, :phone_number]
     end
   end
 
@@ -112,6 +133,13 @@ RailsAdmin.config do |config|
       field :call_price do
         help 'Ex : 0,35€/min'
       end
+    end
+
+    # Configuration spécifique pour l'importation
+    import do
+      include_all_fields
+      exclude_fields :id, :created_at, :updated_at
+      mapping_key [:name, :phone_number, :region]
     end
   end
 end

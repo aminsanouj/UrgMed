@@ -34,7 +34,10 @@
   </p>
   <p class="card-text">
     <strong>Site Web:</strong>
-    <%= link_to @professional.website, @professional.website, target: "_blank", title: "Visitez le site web", class: "btn btn-link site-web-link" if @professional.website %>
+    <% if @professional.website.present? %>
+      <% website_url = @professional.website.starts_with?("http://", "https://") ? @professional.website : "http://#{@professional.website}" %>
+      <%= link_to website_url, website_url, target: "_blank", title: "Visitez le site web", class: "btn btn-link site-web-link" %>
+    <% end %>
   </p>
   <div class="button-group mt-3">
     <%= link_to "Itinéraire", "https://www.google.com/maps/dir/?api=1&destination=#{@professional.full_address.gsub(' ', '+')}", class: "btn btn-primary btn-sm itineraire", target: "_blank" %>

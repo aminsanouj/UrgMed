@@ -69,7 +69,7 @@ class Professional < ApplicationRecord
     elsif opening_hours.is_a?(String) && errors[:opening_hours].empty?
       self.opening_hours = opening_hours.split("\n").map do |line|
         day, hours = line.split(':').map(&:strip)
-        if hours.empty?
+        if hours.nil? || hours.empty? || hours.downcase == 'fermé'
           { day => [] }
         else
           formatted_hours = hours.split(',').map { |range| range.strip.gsub(/(\d{2})h(\d{2})/, '\1:\2') }
@@ -90,10 +90,10 @@ class Professional < ApplicationRecord
   def validate_opening_hours_format
     return unless opening_hours.is_a?(String)
 
-    valid_format = /\A(?:Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche)\s*:\s*(?:(?:\d{2}h\d{2}-\d{2}h\d{2})(?:\s*,\s*\d{2}h\d{2}-\d{2}h\d{2})*)?\z/
+    valid_format = /\A(?:Lundi|Mardi|Mercredi|Jeudi|Vendredi|Samedi|Dimanche)\s*:\s*(?:(?:\d{2}h\d{2}-\d{2}h\d{2})(?:\s*,\s*\d{2}h\d{2}-\d{2}h\d{2})*|Fermé)?\z/
 
     unless opening_hours.split("\n").all? { |line| line.strip.gsub(/\s+/, ' ').match?(valid_format) }
-      errors.add(:opening_hours, "doit être au format Ex : 'Lundi : 08h00-17h00, Mardi 08h00-17h00 etc.'")
+      errors.add(:opening_hours, "doit être au format Ex : 'Lundi : 08h00-17h00, Mardi 08h00-17h00 etc.' ou 'Dimanche : Fermé'")
     end
   end
 
