@@ -22,16 +22,14 @@
     <strong>Adresse :</strong> <%= @professional.full_address %>
   </p>
   <p class="card-text">
-    <strong>Horaires :</strong>
-    <% first_work_day_found = false %>
+    <strong>Horaires :</strong><br>
     <% sorted_opening_hours(@professional.opening_hours).each do |(day, hours)| %>
       <% if hours.present? %>
-        <span class="opening-hours-day <%= 'first-day' unless first_work_day_found %>"><%= day %> :</span>
-        <span class="opening-hours-hours <%= 'first-hours' unless first_work_day_found %>"><%= hours %></span><br>
-        <% first_work_day_found = true %>
+        <span class="opening-hours-day"><%= day %> :</span>
+        <span class="opening-hours-hours"><%= hours %></span><br>
       <% end %>
     <% end %>
-  </p>
+</p>
   <p class="card-text">
     <strong>Site Web:</strong>
     <% if @professional.website.present? %>

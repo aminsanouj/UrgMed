@@ -67,12 +67,21 @@ textarea.contact-form-control {
 }
 
 .notification {
-  background-color: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
   border-radius: 0.25rem;
   padding: 0.75rem 1.25rem;
   margin-bottom: 1rem;
   opacity: 1;
   transition: opacity 1s ease-out; /* Ajoutez une transition d'opacité */
+}
+
+.notification.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.notification.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
 }

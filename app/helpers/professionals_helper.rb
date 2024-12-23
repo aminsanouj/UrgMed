@@ -23,11 +23,25 @@ module ProfessionalsHelper
 
   def format_opening_hours(hours)
     hours.reject(&:empty?).map do |h|
-      h.split(',').map do |range|
+      ranges = h.split(',').map do |range|
         start_time, end_time = range.split('-')
         formatted_range = "#{start_time.sub(':', 'h')}-#{end_time.sub(':', 'h')}"
-        format_24h_opening_hours(formatted_range)
-      end.join(', ')
+        formatted_range
+      end
+
+      # Merge ranges that start and end with "00h00"
+      merged_ranges = []
+      i = 0
+      while i < ranges.length
+        if ranges[i].start_with?("00h00-") && ranges[i].end_with?("-00h00")
+          merged_ranges << ranges[i][6..-7]
+        else
+          merged_ranges << ranges[i]
+        end
+        i += 1
+      end
+
+      merged_ranges.join(', ')
     end.join(', ')
   end
 
