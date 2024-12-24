@@ -30,7 +30,9 @@ module ProfessionalsHelper
       end.join(', ')
     end.join(', ')
 
-    night_shift(formatted_hours)
+    formatted_hours = night_shift(formatted_hours)
+    formatted_hours.gsub!(/(\d{2})h00/, '\1h')
+    formatted_hours
   end
 
   def format_24h_opening_hours(range)
