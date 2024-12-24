@@ -22,31 +22,30 @@ module ProfessionalsHelper
   end
 
   def format_opening_hours(hours)
-    hours.reject(&:empty?).map do |h|
-      ranges = h.split(',').map do |range|
+    formatted_hours = hours.reject(&:empty?).map do |h|
+      h.split(',').map do |range|
         start_time, end_time = range.split('-')
         formatted_range = "#{start_time.sub(':', 'h')}-#{end_time.sub(':', 'h')}"
-        formatted_range
-      end
-
-      # Merge ranges that start and end with "00h00"
-      merged_ranges = []
-      i = 0
-      while i < ranges.length
-        if ranges[i].start_with?("00h00-") && ranges[i].end_with?("-00h00")
-          merged_ranges << ranges[i][6..-7]
-        else
-          merged_ranges << ranges[i]
-        end
-        i += 1
-      end
-
-      merged_ranges.join(', ')
+        format_24h_opening_hours(formatted_range)
+      end.join(', ')
     end.join(', ')
+
+    night_shift(formatted_hours)
   end
 
   def format_24h_opening_hours(range)
     range == "00h00-24h00" ? "24h/24h" : range
+  end
+
+  def night_shift(formatted_hours)
+    ranges = formatted_hours.split(', ')
+    if ranges.first.start_with?('00h00') && ranges.last.end_with?('24h00')
+      start_time = ranges[1].split('-').first
+      end_time = ranges[-2].split('-').last
+      "#{start_time.sub(':', 'h')}-#{end_time.sub(':', 'h')}"
+    else
+      formatted_hours
+    end
   end
 
   def fetch_professionals(professionals, speciality)
