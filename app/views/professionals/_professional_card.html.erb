@@ -1,4 +1,4 @@
-<div id="professional-<%= professional.id %>" class="card search-professional-card" data-controller="professional" data-professional-id="<%= professional.id %>" data-open-now="<%= professional.open_now? %>">
+<div id="professional-<%= professional.id %>" class="card search-professional-card <%= I18n.transliterate(professional.speciality).downcase.gsub(' ', '-') %>" data-controller="professional" data-professional-id="<%= professional.id %>" data-open-now="<%= professional.open_now? %>">
   <div class="card-body">
     <h5 class="card-title">
       <% if professional.open_now? %>

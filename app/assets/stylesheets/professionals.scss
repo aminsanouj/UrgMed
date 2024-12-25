@@ -10,6 +10,22 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
   }
 
+  &[class*="medecin"] {
+    border-left: 4px solid #42a5f5; /* Couleur bleue pour Médecin */
+  }
+
+  &.pharmacie {
+    border-left: 4px solid #81c784; /* Couleur verte pour Pharmacie */
+  }
+
+  &.dentiste {
+    border-left: 4px solid #ba68c8; /* Couleur violette pour Dentiste */
+  }
+
+  &.urgences {
+    border-left: 4px solid #ffa726; /* Couleur orange pour Urgences */
+  }
+
   .card-body {
     position: relative;
     padding: 15px;
@@ -44,6 +60,9 @@
         font-size: 0.9rem;
         color: #777;
         margin-left: auto; /* Aligne la distance à droite */
+        white-space: nowrap;
+        align-self: flex-start;
+        margin-top: 4px;
       }
 
       .distance.with-close-button {
@@ -72,11 +91,11 @@
       .opening-hours-day {
         display: inline-block;
         width: 100px; /* Ajustez cette valeur selon vos besoins */
-        margin-left: 3px;
+        margin-left: 2px;
       }
 
       .opening-hours-hours {
-        margin-left: -19px;
+        margin-left: -21px;
       }
 
       .site-web-link {
