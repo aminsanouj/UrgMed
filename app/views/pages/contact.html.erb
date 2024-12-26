@@ -2,9 +2,14 @@
   <h2 class="contact-form-header">Contactez-nous</h2>
 
   <% if flash[:contact_notice] %>
-    <div id="notification" class="notification">
+    <div id="notification" class="notification <%= flash[:contact_notice_type] %>">
       <%= flash[:contact_notice] %>
     </div>
+    <script>
+      setTimeout(function() {
+        document.getElementById('notification').style.display = 'none';
+      }, 5000);
+    </script>
   <% end %>
 
   <%= form_with url: contact_path, local: true, html: { class: 'contact-form-fields' } do |form| %>
